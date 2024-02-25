@@ -1,0 +1,40 @@
+.main {
+  //position: relative;
+  height: calc(var(--vh, 1vh) * 100);
+  background-image: url("../../img/Main/cabinet_A.png");
+  background-position-x: left;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  .sandwich_btn {
+    float: right;
+    margin-top: 40px;
+    margin-right: 20px;
+  }
+
+  .diarys {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 430px;
+    width: 250px;
+
+    .diary_btn {
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      justify-content: center;
+      width: 185px;
+      height: 80px;
+      transform: skewX(33deg) skewY(-7deg);
+
+      .diary_img {
+        position: absolute;
+        width: 230px;
+        transform: skewX(-33deg) skewY(7deg);
+      }
+    }
+  }
+}

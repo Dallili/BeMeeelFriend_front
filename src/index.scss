@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&display=swap');
+@import "utils";
+
+$main_color: #FE614C !global;
+$white: #ffffff !global;
+
+html, body {
+  margin: 0;
+  //임시로 app 돌아가는 화면이랑 구분하려고 설정함
+  background-color: $white;
+  font-family: 'Noto Sans KR', sans-serif;
+  // 러버밴딩 방지
+  overscroll-behavior-y: none;
+}
+
+#root {
+  overflow: auto;
+  width: 100vw;
+  @include tablet{
+    max-width: 600px;
+  }
+  @include desktop{
+    max-width: 500px;
+  }
+  //기기별 화면 높이 계산해서 불필요한 스크롤 방지
+  height: calc(var(--vh, 1vh) * 100);
+  //웹 상에서 화면이 중간에 오도록 설정
+  margin: 0 auto;
+  background-color: $white;
+}
+
+//스크롤바 기본 설정
+::-webkit-scrollbar{
+  width: 10px;
+  height: 10px;
+}
+
+//스크롤바 색
+::-webkit-scrollbar-thumb {
+  background: #ffffff;
+  border: none;
+  border-radius: 12px 12px 12px 12px;
+}
+
+//스크롤바 뒷 배경 색
+::-webkit-scrollbar-track {
+  background: #D9D9D9;
+}
+
+

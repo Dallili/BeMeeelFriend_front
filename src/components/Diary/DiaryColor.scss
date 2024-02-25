@@ -1,0 +1,64 @@
+.diary_color {
+  padding-top: 70px;
+  padding-bottom: 20px;
+
+  .instruction {
+    padding: 65px 0 80px 0;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 800;
+  }
+  .color_choice {
+    margin-bottom: 60px;
+
+    .diary {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 80px;
+
+      .square {
+        width: 200px;
+        height: 250px;
+        background-color: black;
+      }
+    }
+
+    .palette {
+      display: flex;
+      align-items: center;
+      margin: 0 20px;
+
+      .back_btn {
+        display: flex;
+        border: none;
+        background-color: transparent;
+
+        .back_img {
+          width: 30px;
+          height: 30px;
+        }
+      }
+      .right_btn {
+        transform: rotate(180deg);
+      }
+
+
+      .colors{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 70vw;
+        height: 80px;
+        overflow: hidden;
+
+        .color {
+          width: 30px;
+          height: 30px;
+          margin: 0 10px;
+          border-radius: 50%;
+          filter: drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.15));
+        }
+      }
+    }
+  }
+}

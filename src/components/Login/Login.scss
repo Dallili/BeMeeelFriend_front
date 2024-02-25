@@ -1,0 +1,86 @@
+@import '../../utils';
+
+.login {
+  height: calc(var(--vh, 1vh) * 100);
+  background-color: #FE614C;
+
+  .logo_box {
+    display: flex;
+    justify-content: flex-end;
+    padding: 130px 50px 15px 0;
+
+    .loginLogo_img {
+      @include mobile {
+        width: 47vw;
+      }
+      @include tablet {
+        height: calc(var(--vh, 1vh) * 5);
+      }
+      @include desktop {
+        height: calc(var(--vh, 1vh) * 10);
+      }
+    }
+  }
+
+  .text_box {
+    padding-bottom: 70px;
+
+    p {
+      margin: -2px 0px;
+      padding-right: 55px;
+      text-align: end;
+      color: white;
+      font-size: 28px;
+      font-weight: 550;
+    }
+  }
+
+  .input_box {
+    display: flex;
+    flex-direction: column;
+    padding: 0 50px;
+
+    .login_input {
+      height: 55px;
+      margin-top: 18px;
+      padding-left: 15px;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      background-color: #ffffff;
+    }
+
+    .login_input:focus {
+      outline: none;
+    }
+
+    .login_input::placeholder {
+      color: #FF8B7B;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 18px;
+      font-weight: 550;
+    }
+  }
+
+  .login_btn {
+    margin-top: 50px;
+    padding: 0 50px;
+  }
+
+  .login_s_btns{
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 55px;
+
+    .login_s_btn {
+      border: none;
+      color: white;
+      font-family: 'Noto Sans KR', sans-serif;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 400;
+      background-color: transparent;
+      cursor: pointer;
+    }
+  }
+}

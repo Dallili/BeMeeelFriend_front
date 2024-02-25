@@ -1,0 +1,20 @@
+@import '../../../utils';
+
+.progress {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 0;
+
+  .progress_bar {
+    @include mobile {
+      width: 81vw;
+    }
+    @include tablet {
+      width: calc(var(--vw, 1vw) * 68);
+    }
+    @include desktop {
+      height: calc(var(--vh, 1vh) * 3.7);
+    }
+  }
+}

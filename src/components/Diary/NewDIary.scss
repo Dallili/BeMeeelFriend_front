@@ -1,0 +1,140 @@
+@import "../../_utils";
+
+@mixin diary_btn {
+  width: 60%;
+  height: 65px;
+  border: none;
+  color: #D6CBCB;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  background-color: #FFF2F2;
+  box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.15);
+}
+
+.new_diary {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-top: 70px;
+
+  .question_text {
+    display: flex;
+    justify-content: center;
+    padding: 60px 0;
+    font-size: 16px;
+    font-weight: 800;
+
+    @include smallMobile {
+      padding: 35px 0;
+      font-size: 15px;
+    }
+  }
+
+  .newDiary_btns {
+    height: 130px;
+
+    .newDiary_btn_L{
+      @include diary_btn;
+      position: relative;
+      text-align: left;
+      padding-left: 30px;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+    .newDiary_btn_R{
+      @include diary_btn;
+      display: inline-block;
+      position: absolute;
+      right: 0;
+      padding-left: 60px;
+      margin-top: 50px;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+      text-align: right;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .newDiary_btn_L_left {
+      padding-left: 30px;
+      width: 65%;
+      text-align: left;
+      color: black;
+      font-weight: 800;
+      background-color: #FFB4AA;
+      z-index: 300;
+    }
+    .newDiary_btn_R_right{
+      padding-right: 30px;
+      width: 70%;
+      text-align: right;
+      color: black;
+      font-weight: 800;
+      background-color: #FFB4AA;
+      z-index: 300;
+    }
+  }
+
+  .newDiary_explain {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    //하단에 고정할 시 고려
+    //left: 0;
+    //bottom: 0;
+    //width: 100%;
+    //height: 50%;
+    margin-top: 40px;
+    @include smallMobile {
+      margin-top: 20px;
+    }
+
+    .circle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background-color: white;
+      filter: drop-shadow(0px 8px 24px rgba(0, 0, 0, 0.15));
+      z-index: 200;
+    }
+
+    .explain_bg {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 70px;
+      height: auto;
+      padding: 63px 50px;
+      background-color: #FF8B7B;
+      @include smallMobile {
+        top: 80px;
+        padding: 35px 30px 20px 30px;
+      }
+
+      .title {
+        margin-top: 30px;
+        font-size: 15px;
+        font-weight: 600;
+      }
+      .explain {
+        padding: 0 60px;
+        margin: 20px 0 40px 0;
+        font-size: 15px;
+        font-weight: 400;
+        text-align: center;
+        word-break: keep-all;
+        @include smallMobile {
+          font-size: 13px;
+          margin-bottom: 15px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+.splashScreen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(var(--vh, 1vh) * 100);
+    background-color: #FE614C;
+    gap: 5px;
+}
+
+.logo_img {
+    width: 270px;
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+.splash_text {
+    color: #FFF2F2;
+    font-size: 15px;
+    font-weight: 500;
+}
+

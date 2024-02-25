@@ -1,0 +1,17 @@
+.btn_label{
+  display: flex;
+
+  .picUpload_btn {
+    width: 50px;
+    height: 50px;
+    margin-left: 32px;
+    cursor: pointer;
+  }
+
+  .file_url {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    font-size: 14px;
+  }
+}

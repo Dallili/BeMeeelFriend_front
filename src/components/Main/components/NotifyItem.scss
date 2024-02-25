@@ -1,0 +1,40 @@
+@mixin notifyItem {
+  display: flex;
+  align-items: center;
+  padding-left: 25px;
+  padding-right: 25px;
+  height: 90px;
+  background-color: #FFE9E6;
+
+  .color_circle {
+    margin-right: 15px;
+    width: 55px;
+    height: 55px;
+    background-color: white;
+    border-radius: 50%;
+  }
+
+  .colorCircle_true {
+    background-image: url("../../../img/Main/smile.png");
+  }
+
+  .notify_content {
+    .notify_text {
+      font-size: 15px;
+    }
+    .notify_date {
+      margin-top: 5px;
+      color: #676767;
+      font-size: 12px;
+    }
+  }
+}
+
+.not_clicked {
+  @include notifyItem;
+}
+
+.clicked {
+  @include notifyItem;
+  background-color: white;
+}

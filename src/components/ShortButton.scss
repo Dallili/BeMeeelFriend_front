@@ -1,0 +1,19 @@
+.short_btn {
+    width: 100%;
+    height: 35px;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.short_btn_positive {
+    background-color: #FE614C;
+}
+
+.short_btn_negative {
+    background-color: #747474;
+}

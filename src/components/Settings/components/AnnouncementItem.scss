@@ -1,0 +1,25 @@
+.announcement_item{
+    padding: 28px 30px;
+    border-bottom: #F5F5F5 solid 1px;
+
+    .title_pin {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .announcement_title {
+        font-size: 17px;
+        font-weight: 500;
+    }
+
+    .announcement_date {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+}
+
+
+
+
+
+

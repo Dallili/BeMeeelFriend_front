@@ -1,0 +1,62 @@
+@import "../../_utils";
+
+@mixin friendNewDiary_btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40vw;
+  padding: 150px 28px;
+  border: none;
+  border-radius: 10px;
+  color: #D6CBCB;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #FFF2F2;
+  filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
+  word-break: keep-all;
+  @include smallMobile {
+    padding: 80px 28px;
+  }
+}
+
+.withFriend_newDiary {
+  padding-top: 70px;
+  padding-bottom: 20px;
+
+  .instruction {
+    padding: 65px 0;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 800;
+    @include smallMobile {
+      padding: 35px 0;
+    }
+  }
+
+  .friendNewDiary_btns {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 65px;
+
+    @include smallMobile {
+      margin-bottom: 40px;
+    }
+
+    .friendNewDiary_btn_L {
+      @include friendNewDiary_btn;
+      margin-left: 40px;
+      margin-right: 10px;
+    }
+    .friendNewDiary_btn_R {
+      @include friendNewDiary_btn;
+      margin-left: 10px;
+      margin-right: 40px;
+    }
+
+    .btnL_left, .btnR_right{
+      color: black;
+      background-color: #FFB4AA;
+    }
+  }
+}
