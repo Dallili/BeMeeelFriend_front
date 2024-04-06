@@ -1,23 +1,26 @@
 import './NewDIary.scss';
 import {useState} from "react";
 import LongButton from "../LongButton";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useOutletContext} from "react-router-dom";
 
 const NewDiary = () => {
+    const {setNewDiaryInfo} = useOutletContext();
     const navigate = useNavigate();
     const [withWho, setWithWho] = useState("friend");
     const [isClicked, setIsClicked] = useState("left");
     const withFriend = () => {
         setWithWho("friend");
         setIsClicked("left");
+        setNewDiaryInfo(withWho);
     }
     const withStranger = () => {
         setWithWho("stranger");
         setIsClicked("right");
+        setNewDiaryInfo(withWho);
     }
 
-    const goWithFriend = () => navigate('/newdiary/with-friend');
-    const goWithStranger = () => navigate('/newdiary/with-new-friend');
+    const goWithFriend = () => navigate('/newdiary/friend');
+    const goWithStranger = () => navigate('/newdiary/new-friend');
 
     return (
         <div className="new_diary">
@@ -38,7 +41,7 @@ const NewDiary = () => {
                             height: "75px",
                             filter: "drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.15))",
                             borderRadius: "25px",
-                        }} onClick={goWithFriend} text="익명의 친구와 만들게요" type="positive" />
+                        }} onClick={goWithFriend} text="지인과 만들게요" type="positive" />
                     </div>
                 </div>
             ) : (

@@ -1,20 +1,29 @@
 import './WithSbNewDiary.scss';
 import NextBtn from "./components/NextBtn";
 import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useOutletContext} from "react-router-dom";
+import CreateDiaryDone from "./CreateDiaryDone";
 
 const WithFriendNewDiary = () => {
+    const {setInvite} = useOutletContext();
     const navigate = useNavigate();
     const [clicked, setClicked] = useState("left");
-    const [imgBlack, setImgBlack] = useState(true)
+    const [imgBlack, setImgBlack] = useState(true);
+    const [diaryDone, setDiaryDone]= useState("");
     const leftClicked = () => {
         setClicked("left");
         setImgBlack(true);
+        setInvite("inviting");
     };
 
     const rightClicked = () => {
         setClicked("right");
         setImgBlack(false);
+        setInvite("invited");
+    };
+
+    const showDiaryDone = () => {
+        setDiaryDone("friend");
     };
 
     const goChooseColor = () => navigate('/newdiary/color');
@@ -57,8 +66,9 @@ const WithFriendNewDiary = () => {
             { clicked === "left" ? (
                 <NextBtn text="다음 단계로 넘어가기" onClick={goChooseColor}/>
                 ) : (
-                <NextBtn text="일기장 만들기" onClick={goChooseColor}/>
+                <NextBtn text="일기장 만들기" onClick={showDiaryDone}/>
             )}
+            { diaryDone !== "" && <CreateDiaryDone who={diaryDone}/>}
         </div>
     );
 };

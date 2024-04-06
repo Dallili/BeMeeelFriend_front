@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Route, Routes} from "react-router-dom";
+import {Route, RouterProvider, Routes} from "react-router-dom";
 
 import SplashScreen from "./components/SplashScreen";
 
@@ -33,11 +33,20 @@ import WithFriendNewDiary from "./components/Diary/WithFriendNewDiary";
 import WithStrangerNewDiary from "./components/Diary/WithStrangerNewDiary";
 import DiaryColor from "./components/Diary/DiaryColor";
 
+import HistoryCabinetPage from "./pages/Main/HistoryCabinetPage";
+import DisabledDiaryPage from "./pages/Diarys/DisabledDiaryPage";
+import DeleteDiaryPage from "./pages/Diarys/DeleteDiaryPage";
+import ReadDiary from "./components/Diary/ReadDiary";
+import ReadDiaryPage from "./pages/Diarys/ReadDiaryPage";
+import WriteDiaryPage from "./pages/Diarys/WriteDiaryPage";
+import SendDiaryPage from "./pages/Diarys/SendDiaryPage";
+import EmotionReport from "./pages/Diarys/EmotionReport";
+
 
 function App() {
     // 스플래시 스크린
     const [showSplash, setShowSplash] = useState(sessionStorage.getItem('splashShown'));
-git
+
     useEffect(() => {
         if(showSplash === null) {
             const timer = setTimeout(()=> {
@@ -98,10 +107,22 @@ git
                     {/*일기장 생성*/}
                     <Route path="/newdiary" element={<CreateDiaryPage/>}>
                         <Route index="true" element={<NewDiary />} />
-                        <Route path="with-friend" element={<WithFriendNewDiary/>} />
-                        <Route path="with-new-friend" element={<WithStrangerNewDiary/>} />
+                        <Route path="friend" element={<WithFriendNewDiary/>} />
+                        <Route path="new-friend" element={<WithStrangerNewDiary/>} />
                         <Route path="color" element={<DiaryColor/>} />
                     </Route>
+
+                    <Route path="/deactivated-diary" element={<DisabledDiaryPage />} />
+                    <Route path="/delete-diary" element={<DeleteDiaryPage />} />
+                    <Route path="/read-diary/:diaryID" element={<ReadDiaryPage />} />
+                    <Route path="/read-diary/:diaryID?type=history" element={<ReadDiaryPage />} />
+                    <Route path="/read-diary/:diaryID?type=deactivated" element={<ReadDiaryPage />} />
+                    <Route path="/write-diary/:diaryID" element={<WriteDiaryPage/>} />
+                    <Route path="/send-diary/:diaryID" element={<SendDiaryPage/>} />
+                    <Route path="/emotion-report" element={<EmotionReport />}/>
+
+                    {/*히스토리 캐비넷*/}
+                    <Route path="/history" element={<HistoryCabinetPage />} />
 
                     {/* 설정 페이지 */}
                     <Route path="/settings" element={<SettingsMenuPage />} />

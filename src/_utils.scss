@@ -1,4 +1,4 @@
-$smallMobile: 380px;
+$smallMobile: 391px;
 $mobile: 767px;
 $tablet: 1023px;
 $desktop:1024px;
@@ -21,8 +21,26 @@ $desktop:1024px;
   }
 }
 
+@mixin iPad_pro{
+  @media (min-width: $tablet) and (max-width: $desktop) {
+    @content;
+  }
+}
+
 @mixin desktop{
   @media (min-width: $desktop) {
+    @content;
+  }
+}
+
+@mixin longHeight {
+  @media (min-height: 670px) {
+    @content;
+  }
+}
+
+@mixin shortHeight {
+  @media (max-height: 669px) {
     @content;
   }
 }

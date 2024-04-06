@@ -20,12 +20,12 @@
   }
 }
 
-.withFriend_newDiary {
+.withFriend_newDiary, .withStranger_newDiary {
   padding-top: 70px;
   padding-bottom: 20px;
 
   .instruction {
-    padding: 65px 0;
+    padding: 65px 0 25px 0;
     text-align: center;
     font-size: 16px;
     font-weight: 800;
@@ -34,10 +34,17 @@
     }
   }
 
+  .instruction_small {
+    position: relative;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 400;
+  }
+
   .friendNewDiary_btns {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 65px;
+    margin: 65px 0;
 
     @include smallMobile {
       margin-bottom: 40px;
@@ -57,6 +64,55 @@
     .btnL_left, .btnR_right{
       color: black;
       background-color: #FFB4AA;
+    }
+  }
+
+  .selected_num {
+    position: absolute;
+    right: 15px;
+    top: 60px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .select_interests {
+    height: 350px;
+    padding: 30px 20px 20px 20px;
+    margin-top: 70px;
+    margin-bottom: 20px;
+    background-color: #FEFAFA;
+    overflow: auto;
+
+    .interests{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+
+      .interest {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 40px;
+
+        .interest_circle {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background-color: white;
+          filter: drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.1));
+        }
+        .interest_text {
+          margin-top: 10px;
+          font-size: 12px;
+          font-weight: 400;
+        }
+
+        .interest_circle_clicked {
+          background-color: #FFD7D2;
+        }
+        .interest_text_clicked {
+          color: #FE614C;
+        }
+      }
     }
   }
 }

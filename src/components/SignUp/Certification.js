@@ -1,9 +1,10 @@
 import './SignUp.scss';
 import {useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ProgressBar from "./components/ProgressBar";
 import SignupLabel from "./components/SignupLabel";
 import LongButton from "../LongButton";
+import {useInput} from "../../hooks/useInput";
 
 const Certification = () => {
     const navigate = useNavigate();
@@ -11,17 +12,38 @@ const Certification = () => {
     const [done, isDone] = useState(false);
     const [phoneNum, setPhoneNum] = useState('');
 
-    const ButtonChange = (e) => {
-        const text = e.target.value;
-        setPhoneNum(text);
-        if(text.length < 11 ) {
-            isDone(false);
-        } else if (text.length === 11){
+    const validator = (e) => {
+        let regExp =  /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+        setPhoneNum(e.target.value);
+        if (regExp.test(e.target.value)) {
             isDone(true);
         } else {
-            e.value = e.value.slice(0,10);
+            isDone(false);
         }
     };
+
+    const email = useInput(phoneNum, validator);
+
+    // useEffect(() => {
+    //     console.log(email.value);
+    //     if (email.value !== null) {
+    //         isDone(true);
+    //     } else {
+    //         isDone(false);
+    //     }
+    // }, [email.value]);
+
+    // const ButtonChange = (e) => {
+    //     const text = e.target.value;
+    //     setPhoneNum(text);
+    //     if(text.length < 11 ) {
+    //         isDone(false);
+    //     } else if (text.length === 11){
+    //         isDone(true);
+    //     } else {
+    //         e.value = e.value.slice(0,10);
+    //     }
+    // };
 
     const goCodeVerify = () => navigate('/signup/verify');
 
@@ -33,14 +55,14 @@ const Certification = () => {
                     marginTop:"-10px",
                     fontSize: "13px",
                     color:"gray",
-            }}>인증 코드를 전송 받을 전화번호를 입력해주세요.</div>
+            }}>인증 코드를 전송 받을 메일 주소를 입력해주세요.</div>
             <div className="numInput_box">
                 <input
                     className="phonenum_input"
-                    maxLength='5'
-                    type="number"
+                    maxLength='50'
+                    type="text"
                     value={phoneNum}
-                    onChange={ButtonChange}
+                    onChange={validator}
                 />
             </div>
             <div className="signup_btn">

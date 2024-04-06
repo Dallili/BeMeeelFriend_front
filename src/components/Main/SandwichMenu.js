@@ -22,6 +22,8 @@ const SandwichMenu = ({menuClose}) => {
         close();
     };
 
+    const goDeactivated = () => navigate('/deactivated-diary');
+
     return (
         <>
             <div className="overlay" onClick={menuClose}></div>
@@ -44,8 +46,8 @@ const SandwichMenu = ({menuClose}) => {
                         <div className="line"></div>
                     </div>
                     <MenuItem title="일기장 생성" item="addDiary_btn" onClick={goCreateDiary}/>
-                    <MenuItem title="일기장 비활성화" item="deactivate_btn"/>
-                    <MenuItem title="비활성화된 일기장 읽기" item="deactivateRead_btn" />
+                    {/*<MenuItem title="일기장 비활성화" item="deactivate_btn" on/>*/}
+                    <MenuItem title="비활성화된 일기장 읽기" item="deactivateRead_btn" onClick={goDeactivated}/>
                 </div>
                 <div className="menu_list">
                     <div className="menuList_line">

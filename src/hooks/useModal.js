@@ -1,23 +1,24 @@
 import {useState} from "react";
 
-// const OPTION = {
-//     show: false,
-//     title: "",
-//     onSubmit: () => {},
-//     onClose: () => {},
-//     element: null
-// }
-
 const useModal = () => {
-    const [isOpen, setIsOPen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     const open = () => {
-        setIsOPen(true);
+        setIsOpen(true);
     };
     const close = () => {
-        setIsOPen(false);
+        setIsOpen(false);
     };
 
-    return {isOpen, open, close};
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const yes = () => {
+        setIsModalOpen(true);
+    };
+
+    const no = () => {
+        setIsModalOpen(false);
+    };
+
+    return {isOpen, open, close, isModalOpen, yes, no};
 };
 
 export default useModal;

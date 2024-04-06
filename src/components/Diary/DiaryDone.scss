@@ -1,0 +1,261 @@
+@import '../../utils';
+
+.createDiaryDone, .diaryPreparing, .sendDiaryDone, .emotion_report {
+  height: calc(var(--vh, 1vh) * 100);
+  .overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    background-color: #FE614C;
+  }
+
+  .done_popup {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    width: calc(var(--vw, 1vw) * 100);
+    height: calc(var(--vh, 1vh) * 100);
+    background-image: url("../../img/Diarys/done_background.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    z-index: 1000;
+
+    .img_box {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-top: 20px;
+      @include shortHeight{
+        margin-top: 10px;
+      }
+      img {
+        width: 270px;
+        @include shortHeight {
+          width: 250px;
+        }
+      }
+      .envelope_img {
+        width: 250px;
+        @include shortHeight{
+          width: 150px;
+        }
+        @include  smallMobile{
+          width: 150px;
+        }
+      }
+      .done_img {
+        margin-top: 50px;
+        margin-bottom: 120px;
+        @include smallMobile{
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .done_titles {
+      display: flex;
+      flex-direction: column;
+      img {
+        width: 120px;
+        margin-left: -50px;
+        margin-bottom: -5px;
+        @include smallMobile{
+          margin-left: -20px;
+          width: 100px;
+        }
+      }
+      .done_title_emotion {
+        font-family: 'Black Han Sans', sans-serif;
+        font-size: 2.9rem;
+        font-weight: 500;
+        @include smallMobile {
+          font-size: 2.7rem;
+        }
+      }
+    }
+    .done_title {
+      text-align: center;
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 40px;
+      font-weight: 500;
+    }
+
+    .done_explains {
+      .done_explain {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 800;
+      }
+      @include smallMobile {
+        //margin-top: 20px;
+      }
+    }
+
+
+
+    .invitation {
+      width: 100%;
+
+      .invitation_explain {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        .invitation_title {
+          font-size: 20px;
+          font-weight: 800;
+        }
+
+        .invitation_text {
+          margin-top: 10px;
+          font-size: 13px;
+          font-weight: 500;
+        }
+
+        .invitation_input {
+          width: 275px;
+          height: 45px;
+          margin-top: 10px;
+          margin-bottom: 25px;
+          padding-left: 10px;
+          border: none;
+          border-radius: 10px;
+          background-color: #FF9F92;
+        }
+
+        .invitation_input:focus {
+          outline: none;
+        }
+
+        .invitation_code {
+          width: 275px;
+          height: 80px;
+          margin-top: 10px;
+          margin-bottom: 15px;
+          padding-left: 10px;
+          border: none;
+          border-radius: 10px;
+          text-align: center;
+          font-size: 16px;
+          font-weight: 600;
+          background-color: #FF9F92;
+          @include shortHeight{
+            height: 60px;
+            margin-bottom: 10px;
+          }
+        }
+
+        .invitation_btn {
+          width: 80px;
+          height: 30px;
+          border: none;
+          border-radius: 20px;
+          color: white;
+          background-color: #FE614C;
+          font-family: 'Noto Sans KR', sans-serif;
+          font-size: 13px;
+          font-weight: 300;
+        }
+      }
+    }
+    .go_btn {
+      position: absolute;
+      bottom: 100px;
+      width: 180px;
+      height: 40px;
+      padding: 7px 15px;
+      justify-content: center;
+      border: none;
+      border-radius: 15px;
+      color: white;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      background-color: #FE614C;
+    }
+
+    .doneCancel_btn {
+      display: flex;
+      position: absolute;
+      top: calc(var(--vh, 1vh) * 93);
+      justify-content: center;
+      height: 30px;
+      .cancel_btn {
+        width: 30px;
+        height: 30px;
+      }
+      @include smallMobile {
+        bottom: 3vh;
+      }
+      @include longHeight {
+        bottom: -15vh;
+      }
+    }
+
+    .emotions{
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+      margin-top: 10px;
+      margin-bottom: 100px;
+      @include smallMobile{
+        margin-bottom: 30px;
+      }
+      .emotion {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        color: white;
+        font-size: 1.4rem;
+        @include smallMobile {
+          font-size: 1.2rem;
+        }
+        .emotion_bar {
+          -webkit-appearance: none;
+          height: 4.5vh;
+          width: 65vw;
+        }
+        progress::-webkit-progress-bar {
+          border-radius: 15px;
+          background-color: white;
+        }
+        progress::-webkit-progress-value {
+          border-radius: 15px;
+          background-color: #FFE68D;
+        }
+        .color2::-webkit-progress-value {
+            background-color: #9DD5B0;
+        }
+        .color3::-webkit-progress-value {
+          background-color: #8CD0CA;
+        }
+        .color4::-webkit-progress-value {
+          background-color: #9A6A6A;
+        }
+        .color5::-webkit-progress-value {
+          background-color: #9580A5;
+        }
+        .color6::-webkit-progress-value {
+          background-color: #E47A6C;
+        }
+      }
+    }
+    .done_blank {
+      width: 100%;
+      height: 30px;
+    }
+  }
+}
+

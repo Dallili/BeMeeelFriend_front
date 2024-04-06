@@ -1,15 +1,20 @@
 import './DiaryColor.scss';
 import NextBtn from "./components/NextBtn";
 import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import CreateDiaryDone from "./CreateDiaryDone";
+import {useOutletContext} from "react-router-dom";
+import {createDiary} from "../../api/diary";
 
 const DiaryColor = () => {
     const diaryColors1 = ["#ffff3f", "#4CB", "#FFC4DD", "#FD1E1E", "#4E99DE"];
     const diaryColors2 = ["#D5D5D5", "#BE5108", "#4CB", "#ffff3f", "#4CB"];
+    const {setColor} = useOutletContext();
     const [colors, setColors]= useState(diaryColors1);
     const [diaryColor, setDiaryColor] = useState(diaryColors1[0]);
-    // const [currentClick, setCurrentClick] = useState();
+    const [currentClick, setCurrentClick] = useState(["0"]);
+    const [prevClick, setPrevClick] = useState(["1"]);
 
+    const [diaryID, setDiaryID] = useState();
     const clickNext = () => {
         if (JSON.stringify(colors) === JSON.stringify(diaryColors1)) {
             setColors(diaryColors2);
@@ -18,25 +23,33 @@ const DiaryColor = () => {
         }
     }
 
-    const navigate = useNavigate();
-    const goDone = () => navigate('/done');
+    const [diaryDone, setDiaryDone]= useState("");
 
-    // 컬러 선택 시 하나만 테두리 표시
-    // const colorClick = (e) => {
-    //     setCurrentClick(e.target.id);
-    // }
-    //
-    // useEffect((e) => {
+    const createNewDiary = () => {
+        const succeed = createDiary();
+
+        if(succeed){
+            setDiaryID(succeed);
+            showDiaryDone();
+        }
+    };
+
+    const showDiaryDone = () => {
+        setDiaryDone("me");
+    };
+
+    // useEffect(() => {
     //     if (currentClick !== null) {
-    //         const current = document.getElementById(currentClick);
+    //         const current = document.getElementById(currentClick[0]);
     //         current.style.border = "solid black 3px";
     //     }
     //     if (prevClick !== null) {
-    //         const prev = document.getElementById(prevClick);
-    //         prev.style.border = '0';
+    //         const prev = document.getElementById(prevClick[0]);
+    //         prev.style.border = "none";
     //     }
-    //     setPrevClick(currentClick);
-    //     }, [currentClick],);
+    //     const unselected = currentClick.splice(0, 1);
+    //     setPrevClick([...prevClick, unselected]);
+    //     }, [currentClick, prevClick]);
 
     return (
         <div className="diary_color">
@@ -50,19 +63,25 @@ const DiaryColor = () => {
                 <div className="palette">
                     <button className="back_btn" onClick={clickNext}><img src={require('../../img/smallback_btn.png')} alt="backBtn" className="back_img"/></button>
                     <div className="colors">
-                        {colors.map((it) =>
+                        {colors.map((it, i) =>
                             <div className="color"
                                  style={{
                                     backgroundColor:`${it}`,
                                  }}
-                                 onClick={ () => setDiaryColor(it)}
+                                 id={i}
+                                 onClick={() => {
+                                     setDiaryColor(it);
+                                     setCurrentClick([...currentClick, `${i}`]);
+                                     setColor(it);
+                                 }}
                             />
                         )}
                     </div>
                     <button className="back_btn right_btn" onClick={clickNext}><img src={require('../../img/smallback_btn.png')} alt="backBtn" className="backImg"/></button>
                 </div>
             </div>
-            <NextBtn text="일기장 만들기" onClick={goDone} />
+            <NextBtn text="일기장 만들기" onClick={createNewDiary} />
+            { diaryDone !== "" && <CreateDiaryDone who={diaryDone} diaryID={diaryID}/>}
         </div>
     );
 }
