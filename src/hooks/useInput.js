@@ -6,7 +6,7 @@ export const useInput = (initialValue, validator) => {
     const {
       target: { value },
     } = event;
-    let willUpdate = true;
+    let willUpdate = false;
     if (typeof validator === "function") {
       willUpdate = validator(value);
     }

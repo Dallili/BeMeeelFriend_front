@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Route, RouterProvider, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 
 import SplashScreen from "./components/SplashScreen";
 
@@ -36,16 +36,16 @@ import DiaryColor from "./components/Diary/DiaryColor";
 import HistoryCabinetPage from "./pages/Main/HistoryCabinetPage";
 import DisabledDiaryPage from "./pages/Diarys/DisabledDiaryPage";
 import DeleteDiaryPage from "./pages/Diarys/DeleteDiaryPage";
-import ReadDiary from "./components/Diary/ReadDiary";
 import ReadDiaryPage from "./pages/Diarys/ReadDiaryPage";
 import WriteDiaryPage from "./pages/Diarys/WriteDiaryPage";
 import SendDiaryPage from "./pages/Diarys/SendDiaryPage";
 import EmotionReport from "./pages/Diarys/EmotionReport";
+import PrivateRoute from "./router/PrivateRoute";
 
 
 function App() {
-    // 스플래시 스크린
     const [showSplash, setShowSplash] = useState(sessionStorage.getItem('splashShown'));
+
 
     useEffect(() => {
         if(showSplash === null) {
@@ -53,7 +53,6 @@ function App() {
                 setShowSplash('false');
                 sessionStorage.setItem('splashShown', 'true');
             }, 2000);
-
             return () => clearTimeout(timer);
         }
     }, [showSplash]);
@@ -64,20 +63,11 @@ function App() {
         document.documentElement.style.setProperty('--vw', `${vw}px`);
         document.documentElement.style.setProperty('--vh', `${vh}px`);
     }
+
     useEffect(() => {
         setScreenSize();
+        sessionStorage.setItem("userToken", "123");
     });
-
-    const [isLogin, setIsLogin] = useState(false);
-
-    useEffect(() => {
-        if(sessionStorage.getItem('user_id') === null) {
-            console.log('로그인 X');
-        } else {
-            // 로그인 상태 변경
-            setIsLogin(true);
-        }
-    }, []);
 
   return (
     <div className="App">
@@ -100,42 +90,44 @@ function App() {
                     </Route>
                     <Route path="/welcome" element={<Welcome />} />
 
-                    {/*메인 페이지: 메인 캐비넷*/}
-                    <Route path="/" element={<MainPage />} />
-                    {/*알림 페이지*/}
-                    <Route path="/notify" element={<NotifyPage />} />
-                    {/*일기장 생성*/}
-                    <Route path="/newdiary" element={<CreateDiaryPage/>}>
-                        <Route index="true" element={<NewDiary />} />
-                        <Route path="friend" element={<WithFriendNewDiary/>} />
-                        <Route path="new-friend" element={<WithStrangerNewDiary/>} />
-                        <Route path="color" element={<DiaryColor/>} />
+                    <Route element={<PrivateRoute />}>
+                        {/*메인 페이지: 메인 캐비넷*/}
+                        <Route path="/" element={<MainPage />} />
+                        {/*알림 페이지*/}
+                        <Route path="/notify" element={<NotifyPage />} />
+                        {/*일기장 생성*/}
+                        <Route path="/newdiary" element={<CreateDiaryPage/>}>
+                            <Route index="true" element={<NewDiary />} />
+                            <Route path="friend" element={<WithFriendNewDiary/>} />
+                            <Route path="new-friend" element={<WithStrangerNewDiary/>} />
+                            <Route path="color" element={<DiaryColor/>} />
+                        </Route>
+
+                        <Route path="/deactivated-diary" element={<DisabledDiaryPage />} />
+                        <Route path="/delete-diary" element={<DeleteDiaryPage />} />
+                        <Route path="/read-diary/:diaryID" element={<ReadDiaryPage />} />
+                        <Route path="/read-diary/:diaryID?type=history" element={<ReadDiaryPage />} />
+                        <Route path="/read-diary/:diaryID?type=deactivated" element={<ReadDiaryPage />} />
+                        <Route path="/write-diary/:diaryID" element={<WriteDiaryPage/>} />
+                        <Route path="/send-diary/:diaryID" element={<SendDiaryPage/>} />
+                        <Route path="/emotion-report" element={<EmotionReport />}/>
+
+                        {/*히스토리 캐비넷*/}
+                        <Route path="/history" element={<HistoryCabinetPage />} />
+
+                        {/* 설정 페이지 */}
+                        <Route path="/settings" element={<SettingsMenuPage />} />
+                        <Route path="/settings/editprofile" element={<ProfileEditPage />}/>
+                        <Route path="/settings/changepassword" element={<PasswordChangePage />}/>
+                        <Route path="/settings/announcement" element={<AnnouncementPage />}>
+                            <Route index="true" element={<AnnouncementList />} />
+                            <Route path=":id" element={<AnnouncementDetailPage />} />
+                        </Route>
+                        <Route path="/settings/inquiry" element={<InquiryPage />} />
+                        <Route path="/settings/guide" element={<UserGuidePage />}/>
+                        <Route path="/settings/userreport" element={<UserReportPage />} />
+                        <Route path="/settings/withdrawal" element={<WithdrawalPage />} />
                     </Route>
-
-                    <Route path="/deactivated-diary" element={<DisabledDiaryPage />} />
-                    <Route path="/delete-diary" element={<DeleteDiaryPage />} />
-                    <Route path="/read-diary/:diaryID" element={<ReadDiaryPage />} />
-                    <Route path="/read-diary/:diaryID?type=history" element={<ReadDiaryPage />} />
-                    <Route path="/read-diary/:diaryID?type=deactivated" element={<ReadDiaryPage />} />
-                    <Route path="/write-diary/:diaryID" element={<WriteDiaryPage/>} />
-                    <Route path="/send-diary/:diaryID" element={<SendDiaryPage/>} />
-                    <Route path="/emotion-report" element={<EmotionReport />}/>
-
-                    {/*히스토리 캐비넷*/}
-                    <Route path="/history" element={<HistoryCabinetPage />} />
-
-                    {/* 설정 페이지 */}
-                    <Route path="/settings" element={<SettingsMenuPage />} />
-                    <Route path="/settings/editprofile" element={<ProfileEditPage />}/>
-                    <Route path="/settings/changepassword" element={<PasswordChangePage />}/>
-                    <Route path="/settings/announcement" element={<AnnouncementPage />}>
-                        <Route index="true" element={<AnnouncementList />} />
-                        <Route path=":id" element={<AnnouncementDetailPage />} />
-                    </Route>
-                    <Route path="/settings/inquiry" element={<InquiryPage />} />
-                    <Route path="/settings/guide" element={<UserGuidePage />}/>
-                    <Route path="/settings/userreport" element={<UserReportPage />} />
-                    <Route path="/settings/withdrawal" element={<WithdrawalPage />} />
                 </Routes>
             </div>
         )}

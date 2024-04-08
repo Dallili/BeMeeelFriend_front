@@ -1,33 +1,36 @@
 import axios from "axios";
-import {useEffect} from "react";
+const API_URL = process.env["REACT_APP_API_URL"];
+const token = process.env["REACT_APP_TOKEN"];
+const userToken = sessionStorage.getItem("userToken");
 
-export const axiosInstance = axios.create({
-    baseURL: 'http://ec2-3-17-227-166.us-east-2.compute.amazonaws.com',
+export let axiosInstance;
+axiosInstance = axios.create({
+    baseURL: `${API_URL}`,
     withCredentials: true,
+    headers: {
+        Authorization: `Bearer ${token}`,
+        'Access-Control-Allow-credentials': "true"
+    }
 });
 
 // 다이어리 개별 일기 내용 요청
 export const getDiaryPage = async(diaryID) => {
     try {
-        await axiosInstance.get(`/entries/list/${diaryID}`)
-            .then((response) => {
-                console.log('데이터 받기 완료');
-                return response.data
-            })
+        const response = await axiosInstance.get(`/entries/list/${diaryID}`);
+        console.log('데이터 받기 완료');
+        return response.data
     } catch(e) {
-        console.log(e);
+        alert("일기장 조회 실패");
     }
 }
 
 // 새 일기 작성
 export const postDiary = async (content) => {
     try {
-        await axiosInstance.post('/entries/', content)
-            .then((response) => {
-                console.log(response.data)
-            })
-    }catch(error) {
-            console.log('error');
+        const response = await axiosInstance.post('/entries/', content);
+        console.log(response.data);
+    } catch(error) {
+        console.log('error');
     }
 };
 
@@ -35,9 +38,6 @@ export const postDiary = async (content) => {
 export const putDiary = async (content, entryID) => {
     try {
         await axiosInstance.put(`/entries/${entryID}`, content)
-            .then((response) => {
-
-            })
     }catch(error) {
         console.log('error');
     }
@@ -47,14 +47,12 @@ export const putDiary = async (content, entryID) => {
 // 메인 페이지 일기장 조회
 export const getDiary = async(userID) => {
     try {
-        await axiosInstance.get('/diaries/replied', {
+        const response = await axiosInstance.get('/diaries/replied', {
             params: {
                 loginUserID: userID
             }
         })
-            .then((response) => {
-                return response.data
-            })
+        return response.data
     } catch (e) {
         console.log(e);
     }
@@ -68,7 +66,6 @@ export const getDeactivated = async (userID) => {
                 userID: userID
             }
         })
-            .then()
     } catch(error) {
         console.log(error);
     }
@@ -76,15 +73,13 @@ export const getDeactivated = async (userID) => {
 
 export const getActivated = async(userID) => {
     try {
-        await axiosInstance.get('/diaries', {
+        const response = await axiosInstance.get('/diaries', {
             params: {
                 status: true,
                 userID: userID
             }
         })
-            .then((res)=>{
-                console.log(res);
-            })
+        console.log(response);
     } catch (error){
         console.log(error);
     }
@@ -93,12 +88,10 @@ export const getActivated = async(userID) => {
 // 일기 전달
 export const sendDiaryPage = async (entryID, setSendDiary) => {
     try {
-        await axiosInstance.patch(`/entries/${entryID}`)
-            .then((response) => {
-                if (response.result === "일기 전달 성공") {
-                    setSendDiary(true);
-                }
-            })
+        const response = await axiosInstance.patch(`/entries/${entryID}`);
+        if (response.result === "일기 전달 성공") {
+            setSendDiary(true);
+        }
     }catch(error){
         console.log(error);
     }
@@ -106,8 +99,7 @@ export const sendDiaryPage = async (entryID, setSendDiary) => {
 
 export const deleteDiary = async(diaryID) => {
     try {
-        await axiosInstance.delete(`/diaries/${diaryID}`)
-            .then()
+        await axiosInstance.delete(`/diaries/${diaryID}`);
     } catch(error) {
         console.log(error);
     }
@@ -115,7 +107,7 @@ export const deleteDiary = async(diaryID) => {
 
 export const deactivateDiary = async(diaryID) => {
     try{
-        await axiosInstance.patch(`/diaries/${diaryID}/isActivated`)
+        await axiosInstance.patch(`/diaries/${diaryID}/isActivated`);
     } catch (e) {
         console.log(e);
     }

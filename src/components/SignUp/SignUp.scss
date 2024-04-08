@@ -245,12 +245,14 @@
 
   .label_box {
     display: flex;
-    margin-left: 5px;
+    //margin-left: 5px;
   }
 
   .small_rule {
-    margin-top: -10px;
-    margin-left: 5px;
+    margin-top: -5px;
+    @include smallMobile{
+      font-size: 0.8rem;
+    }
   }
 
   .rule_boxes {
@@ -258,25 +260,37 @@
     margin-left: 5px;
     padding-top: 20px;
     border-top: #E5E5E5 solid 1px;
-
+    @include smallMobile{
+      margin-top: 30px;
+    }
     .rule_box {
       margin-bottom: 50px;
+      @include smallMobile{
+        margin-bottom: 30px;
+      }
 
       .big_rule {
         font-size: 15px;
         font-weight: 700;
         margin-bottom: 6px;
+        @include smallMobile{
+          font-size: 0.8rem;
+        }
       }
       .small_rule {
         color: #747474;
-        font-size: 12px;
+        font-size: 0.8rem;
         font-weight: 600;
+        @include smallMobile{
+          font-size: 0.7rem;
+        }
       }
       .paragraph_rule {
         width: 100%;
         padding: 0;
         text-align: left;
         line-height: 140%;
+        word-break: keep-all;
       }
     }
   }

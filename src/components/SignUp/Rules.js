@@ -2,11 +2,17 @@ import './SignUp.scss';
 import ProgressBar from "./components/ProgressBar";
 import SignupLabel from "./components/SignupLabel";
 import LongButton from "../LongButton";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useOutletContext} from "react-router-dom";
+import {signUp} from "../../api/user";
 
 const Rules = () => {
     const navigate = useNavigate();
-    const goWelcome = () => navigate('/welcome');
+    const {userInfo, setUserInfo} = useOutletContext();
+
+    const goWelcome = async () => {
+        await signUp(userInfo);
+        navigate('/welcome');
+    }
 
     return (
         <div className="signup">
@@ -25,7 +31,7 @@ const Rules = () => {
                 </div>
                 <div className="rule_box">
                     <div className="big_rule">안전을 위해 개인 정보는 언제나 조심해주세요.</div>
-                    <p className="small_rule paragraph_rule">비밀친구에서는 익명의 파트너와도 교환 일기를 작성할 수 있어요.<br/>
+                    <p className="small_rule paragraph_rule">비밀친구에서는 익명의 파트너와도 교환 일기를 작성할 수 있어요.
                         잘 모르는 파트너와 일기를 교환할 때에는, 본인을 특정할 수 있는 개인 정보가 일기에 포함되진 않았는지 주의해주세요!</p>
                 </div>
                 <div className="rule_box">

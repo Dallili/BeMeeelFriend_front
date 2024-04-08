@@ -3,7 +3,7 @@ import ProgressBar from "./components/ProgressBar";
 import SignupLabel from "./components/SignupLabel";
 import LongButton from "../LongButton";
 import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useOutletContext} from "react-router-dom";
 
 const IdPassword = () => {
     // 버튼 활성화
@@ -11,34 +11,12 @@ const IdPassword = () => {
     // 경고창 관련
     const [isTrue, setIsTrue] = useState(true);
     const [noticeText, setNoticeText] = useState("");
-    // 아이디 패스워드 저장
-    const [id, setId] = useState('');
-    const [isIdTrue, setIsIdTrue] = useState(false);
+    // 패스워드 저장
     const [password, setPassword] = useState('');
     const [isPassTrue, setIsPassTrue] = useState(false);
     const [passwordCheck, setPasswordCheck] = useState('');
 
-    // 알파벳, 숫자 8자리 이상 15까지
-    let idCheckEx = /^[A-Za-z0-9]{8,15}$/;
-    const idCheck = (id) => {
-        return idCheckEx.test(id);
-    }
-
-    // 기존 id랑 중복 체크, 특수문자 사용 금지
-    const onIdInputHandler = (e) => {
-        const getId = e.target.value;
-        setId(getId);
-
-        if (idCheck(getId)){
-            setIsTrue(true);
-            setIsIdTrue(true);
-        } else {
-            setNoticeText("조건에 맞게 작성해주세요.");
-            setIsTrue(false);
-            setIsDone(false);
-            setIsIdTrue(false);
-        }
-    }
+    const {userInfo, setUserInfo} = useOutletContext();
 
     // 패스워드 일치 확인
     // 영문자 숫자 특수문자 섞어서 8자리 이상
@@ -78,29 +56,26 @@ const IdPassword = () => {
 
     const navigate = useNavigate();
 
-    const goProfile = () => navigate('/signup/profile');
+    const goProfile = () => {
+        setUserInfo({
+            ...userInfo,
+            password:password
+        })
+        navigate('/signup/profile');
+    }
 
     return (
         <div className="signup">
             <ProgressBar num="2" />
-            <SignupLabel text="아이디/패스워드"/>
-            <div className="id_box">
-                <label className="large_label">아이디</label>
-                <div className="idInput_box">
-                    <input className="id_input" id="id" type="text" placeholder="8글자 이상 16글자 미만"
-                        onChange={onIdInputHandler} value={id}
-                    />
-                    <label className="small_label">알파벳과 숫자만 사용할 수 있습니다.</label>
-                </div>
-            </div>
+            <SignupLabel text="비밀번호 설정"/>
             <div className="password_box">
                 <label className="large_label">비밀번호</label>
                 <div className="passwordInput_box">
                     <input className="password_input" id="pass1" name="newPass" value={password} type="text" placeholder="8글자 이상 26글자 미만"
-                        onChange={onPassInputHandler} disabled={!isIdTrue}
+                        onChange={onPassInputHandler}
                     />
                     <input className="password_input" id="pass2" name="newPassCheck" value={passwordCheck} type="text" placeholder="비밀번호 재입력"
-                        onChange={onCheckPassInputHandler} disabled={!isIdTrue}
+                        onChange={onCheckPassInputHandler}
                     />
                 </div>
             </div>

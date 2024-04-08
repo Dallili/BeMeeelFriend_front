@@ -26,16 +26,18 @@ const CodeCerification = () => {
             e.value = e.value.slice(0,8);
         }
     };
+
     const noticeDelete = () => {
         setIsTrue(false);
         setInput("");
-    }
+    };
+
     const sendCodeAgain = () => {
-        setNoticeText("인증코드를 재전송해드렸습니다.\n문자를 확인해주세요.");
+        setNoticeText("인증코드를 재전송해드렸습니다.\n이메일을 확인해주세요.");
         // 클릭할 경우 다시 인증번호 보내줌
         setTimeout(() => noticeDelete(),1000);
         setTimeout(() => setIsTrue(true),4000);
-    }
+    };
 
     const codeCheck = () => {
         if(input !== correctCode) {
@@ -45,8 +47,7 @@ const CodeCerification = () => {
         } else {
             goIdPassword();
         }
-
-    }
+    };
 
     return (
         <div className="signup">
@@ -66,12 +67,11 @@ const CodeCerification = () => {
                     <LongButton text="인증하기" type="positive" onClick={codeCheck}/>
                     :
                     <LongButton text="인증하기" type="disabled" isDisabled="true" />
-
                 }
             </div>
             <div className="explain_box">
                 <button className="explain_btn" onClick={sendCodeAgain}>
-                    혹시 문자로 인증코드가 오지 않았나요?
+                    혹시 인증코드가 오지 않았나요?
                 </button>
             </div>
             { isTrue === false ?

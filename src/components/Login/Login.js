@@ -2,6 +2,7 @@ import './Login.scss';
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import LongButton from "../LongButton";
+import {login} from "../../api/user";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -18,15 +19,12 @@ const Login = () => {
     }
 
     // 로그인 버튼 클릭 시 서버로 아이디, 패스워드 전달
-    const onClickLogin = (e) => {
-        // axios.post('', , {
-        //     params: {
-        //         'user_id': id,
-        //         'user_pw': pw
-        //     })
-        //     .then
-        //     .catch()
-        // }
+    const onClickLogin = async (e) => {
+        const data= {
+            email:id,
+            password:pw
+        }
+        await login(data);
     }
 
     const goSignUp = () => navigate('/signup');

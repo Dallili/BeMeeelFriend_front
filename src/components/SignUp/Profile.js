@@ -2,8 +2,8 @@ import './SignUp.scss';
 import ProgressBar from "./components/ProgressBar";
 import SignupLabel from "./components/SignupLabel";
 import LongButton from "../LongButton";
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useState} from "react";
+import {useNavigate, useOutletContext} from "react-router-dom";
 
 function makeRandomNum() {
     return Math.floor(Math.random() * 9);
@@ -11,7 +11,8 @@ function makeRandomNum() {
 
 const Profile = () => {
     const navigate = useNavigate();
-    const randomNicknames = ["비 내리는 정원의 정원사", "할머니의 안경", "떠나간 유람선", "하와이안 피자", "반짝이는 마녀", "흑백 세상의 유니콘", "세상에서 가장 느린 거북이", "눈부신 태양", "네모난 지구", "번갯불에 구운 완두콩"];
+    const {userInfo, setUserInfo} = useOutletContext();
+    const randomNicknames = ["비 내리는 정원의 정원사", "골동품 상점 주인의 안경", "떠나간 유람선", "하와이안 피자와 핑크 바지", "반짝이는 마녀", "흑백 세상의 유니콘", "세상에서 가장 빠른 거북이", "눈 부신 태양의 신", "네모난 지구", "번갯불에 구운 완두콩"];
     const randomNum = makeRandomNum();
 
     const [done, setIsDone] = useState(false);
@@ -20,6 +21,7 @@ const Profile = () => {
         woman: false,
         man: false,
     });
+    const [gender, setGender] = useState("");
 
     const onNicknameInputHandler = (e) => {
         setNickName(e.target.value);
@@ -49,18 +51,27 @@ const Profile = () => {
                 woman: true,
                 man: false,
             });
+            setGender("F");
         } else {
             setIsChecked({
                 woman: false,
                 man: true,
             });
+            setGender("M");
         }
         if (nickName !== "") {
             setIsDone(true);
         }
     }
 
-    const goBirthday = () => navigate('/signup/birthday');
+    const goBirthday = () => {
+        setUserInfo({
+            ...userInfo,
+            nickname:nickName,
+            gender:gender,
+        })
+        navigate('/signup/birthday');
+    }
 
     return (
         <div className="signup">

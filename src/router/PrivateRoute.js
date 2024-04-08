@@ -1,22 +1,11 @@
-import {Redirect, Route} from "react-router-dom";
+import {Navigate, Outlet} from "react-router-dom";
 
+const isLogin = !!sessionStorage.getItem("userToken");
 
-const PrivateRoute = ({component: Component, ...rest}) => {
+const PrivateRoute = () => {
     return (
-        <Route
-            {...rest}
-            render = {props =>
-                localStorage.getItem('user_id')?(
-                    <Component {...props} />
-                ) : (
-                    <Redirect to={{
-                            pathname: '',
-                            state: {from: props.location}
-                        }}
-                    />
-                )}
-        />
-    );
+        isLogin ? <Outlet/> : <Navigate to="/login" />
+    )
 };
 
 export default PrivateRoute;
