@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "http-proxy-middleware": "^3.0.0"
   },
   "proxy": "http://ec2-3-17-227-166.us-east-2.compute.amazonaws.com"
