@@ -11,7 +11,9 @@ jobs:
         node-version: [ 16.x ]
 
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout source code.
+        uses: actions/checkout@master
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -36,10 +38,8 @@ jobs:
         with:
           args: --acl public-read --delete
         env:
+          AWS_S3_BUCKET: ${{secrets.AWS_PRODUCTION_BUCKET_NAME}}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-2
           CI: false
-        run: |
-          aws s3 sync \
-            --region us-east-2 \
-            build s3://secretfriend-test \
