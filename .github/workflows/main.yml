@@ -44,4 +44,4 @@ jobs:
           aws-s3-bucket: ${{ secrets.AWS_S3_BUCKET }}
         run: |
           aws s3 sync \
-            s3://secretfriend-test \
+            s3://secretfriend-test/ \
