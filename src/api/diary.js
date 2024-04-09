@@ -1,16 +1,15 @@
 import axios from "axios";
 const API_URL = process.env["REACT_APP_API_URL"];
 // const token = process.env["REACT_APP_TOKEN"];
-const userToken ='eyJhbGciOiJIUzI1NiJ9.eyJtZW1iZXJJRCI6MSwiZW1haWwiOiJtaW5qaUB0ZXN0LmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzEyNjUxMTg5LCJleHAiOjE4MjA2NTExODl9.T9GHAlX4hQQiY4V6MuvLdNI4sgdp7v8oO469XQx1e6g'
+const userToken ='eyJhbGciOiJIUzI1NiJ9.eyJtZW1iZXJJRCI6MSwiZW1haWwiOiJtaW5qaUB0ZXN0LmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzEyNjYwMDA0LCJleHAiOjE4MjA2NjAwMDR9.WWX04VSLeVxpgNVqXo6N4nV4CzGQMo4sqUOpBXmAaqI'
 // const userToken = sessionStorage.getItem("userToken");
 
 export let axiosInstance;
 axiosInstance = axios.create({
     baseURL: `${API_URL}`,
-    withCredentials: true,
     headers: {
         Authorization: `Bearer ${userToken}`,
-        'Access-Control-Allow-credentials': "true"
+        'Access-Control-Allow-credentials': true
     }
 });
 
