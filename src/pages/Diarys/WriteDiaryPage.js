@@ -3,7 +3,7 @@ import WriteDiary from "../../components/Diary/WriteDiary";
 import BottomNav from "../../components/BottomNav";
 import {useEffect, useReducer, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import {diaryPost, postDiary, putDiary} from "../../api/diary";
+import {postDiary, putDiary} from "../../api/entry";
 import {getDiaryPageData, reducer} from "../../api/diaryData";
 
 const WriteDiaryPage = () => {

@@ -8,7 +8,7 @@ import {createDiary} from "../../api/diary";
 const DiaryColor = () => {
     const diaryColors1 = ["#ffff3f", "#4CB", "#FFC4DD", "#FD1E1E", "#4E99DE"];
     const diaryColors2 = ["#D5D5D5", "#BE5108", "#4CB", "#ffff3f", "#4CB"];
-    const {setColor} = useOutletContext();
+    const {color, setColor} = useOutletContext();
     const [colors, setColors]= useState(diaryColors1);
     const [diaryColor, setDiaryColor] = useState(diaryColors1[0]);
     const [currentClick, setCurrentClick] = useState(["0"]);
@@ -25,11 +25,14 @@ const DiaryColor = () => {
 
     const [diaryDone, setDiaryDone]= useState("");
 
-    const createNewDiary = () => {
-        const succeed = createDiary();
+    const createNewDiary = async () => {
+        const succeed = await createDiary({
+            userID: sessionStorage.getItem("userID"),
+            color: diaryColor
+        });
 
-        if(succeed){
-            setDiaryID(succeed);
+        if(!succeed){
+            setDiaryID(succeed.diaryID);
             showDiaryDone();
         }
     };
@@ -81,7 +84,7 @@ const DiaryColor = () => {
                 </div>
             </div>
             <NextBtn text="일기장 만들기" onClick={createNewDiary} />
-            { diaryDone !== "" && <CreateDiaryDone who={diaryDone} diaryID={diaryID}/>}
+            { diaryDone !== "" && <CreateDiaryDone who={diaryDone} diaryID={diaryID} color={diaryColor}/>}
         </div>
     );
 }

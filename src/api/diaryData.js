@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
-import {getActivated, getDiary, getDiaryPage, postDiary, putDiary} from "./diary";
+import {getActivated, getDiary, postDiary, putDiary} from "./diary";
+import {getDiaryPage} from "./entry";
 
 
 export const getDiaryPageData = (diaryID) => {

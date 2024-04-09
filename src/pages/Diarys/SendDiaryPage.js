@@ -4,7 +4,7 @@ import SendDiary from "../../components/Diary/SendDiary";
 import {useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {getDiaryPageData} from "../../api/diaryData";
-import {sendDiaryPage} from "../../api/diary";
+import {sendDiaryPage} from "../../api/entry";
 
 
 const SendDiaryPage = () => {

@@ -1,21 +1,42 @@
 import './DiaryDone.scss';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {getMatchingCode} from "../../api/user";
+import {getMatchingCode, patchMatchingCode} from "../../api/matching";
 
-const CreateDiaryDone = ({who, stranger, diaryID}) => {
+const CreateDiaryDone = ({who, stranger, diaryID, color}) => {
     const navigate = useNavigate();
     const [invitationCode, setInvitationCode] = useState("");
 
     //유저 초대코드 받아와서 설정
-    const myInvitationCode = "AFD#@RSFDJSFL@LFDS";
-    // const myCode = getMatchingCode(diaryID);
+    // const myInvitationCode = "AFD#@RSFDJSFL@LFDS";
+    let myCode;
+    useEffect(() => {
+        myCode = async () => {
+            await getMatchingCode(diaryID, {
+                userID: sessionStorage.getItem("userID"),
+                color: color
+            });
+        }
+    }, []);
 
     const onInputHandler = (e) => {
         setInvitationCode(e.target.value);
-    }
+    };
 
     const goMain = () => navigate('/');
+
+    const sendMatchingCode = async () => {
+        const result = await patchMatchingCode({
+            code: invitationCode,
+            userID: sessionStorage.getItem("userID")
+        })
+        if (result === true){
+            goMain();
+        }
+
+    };
+
+
     return (
         <div className="createDiaryDone">
             <div className="overlay"></div>
@@ -43,7 +64,7 @@ const CreateDiaryDone = ({who, stranger, diaryID}) => {
                                 <div className="invitation_explain">
                                     <div className="invitation_title">친구를 <span style={{color:"#227573", textDecoration:"#FC715F 5px underline"}}>초대하기</span> 위해서,</div>
                                     <div className="invitation_text">아래의 초대 코드를 친구에게 공유해주세요.</div>
-                                    <input className="invitation_code" disabled="true" value={myInvitationCode} />
+                                    <input className="invitation_code" disabled="true" value={myCode} />
                                     <button className="invitation_btn">복사</button>
                                 </div>
                             ):(
@@ -51,7 +72,7 @@ const CreateDiaryDone = ({who, stranger, diaryID}) => {
                                     <div className="invitation_title">친구에게 <span style={{color:"#227573", textDecoration:"#FC715F 5px underline"}}>초대를 받았다면</span>,</div>
                                     <div className="invitation_text">공유받은 초대코드를 아래 입력란에 제출해주세요.</div>
                                     <input className="invitation_input" onChange={onInputHandler}/>
-                                    <button className="invitation_btn">제촐</button>
+                                    <button className="invitation_btn" onClick={sendMatchingCode}>제촐</button>
                                 </div>
                             )}
                         </div>
