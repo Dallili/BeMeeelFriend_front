@@ -38,8 +38,8 @@ const MainPage = () => {
                 {isOpen && <SandwichMenu menuClose={close}/>}
                 <div className="diarys">
                     {diary.length === 1 ? (
-                        <div className="diary_bg" onClick={clicked}>
-                            <img  src={require('../../img/Main/book_mask.png')} alt="bg" className="fill" style={{filter:`opacity(.6) drop-shadow(0 0 0 ${diaryColor[0]}`}}/>
+                        <div className="diary_bg" onClick={clicked} style={{border:"solid"}}>
+                            <img src={require('../../img/Main/book_mask.png')} alt="bg" className="fill" style={{filter:`opacity(.6) drop-shadow(0 0 0 ${diaryColor[0]}`}}/>
                             <div className="diary_line">
                                 <img src={require('../../img/Main/book_line.png')} alt="diary" className="line" />
                             </div>

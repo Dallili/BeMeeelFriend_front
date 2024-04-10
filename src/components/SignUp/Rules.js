@@ -8,7 +8,7 @@ import {signUp} from "../../api/user";
 const Rules = () => {
     const navigate = useNavigate();
     const {userInfo, setUserInfo} = useOutletContext();
-
+    console.log(userInfo)
     const goWelcome = async () => {
         await signUp(userInfo);
         navigate('/welcome');

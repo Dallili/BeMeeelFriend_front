@@ -1,11 +1,17 @@
 import {axiosInstance} from "./diary";
 
 export const signUp = async (data) => {
-    const user = data.email
     try {
         await axiosInstance.post('/members', data);
+        const response = await axiosInstance.post('/members/login', {
+            email: data.email,
+            password: data.password
+        });
+        const token = response.data;
+        const user = response.data.memberID;
+        sessionStorage.setItem("userToken", token);
         sessionStorage.setItem("userID", user);
-        window.location.replace('/');
+        window.location.replace("/welcome");
     } catch(e) {
         alert("회원가입 오류 발생");
     }
@@ -15,13 +21,13 @@ export const login = async (data) => {
     const user = data.email
     try {
         const response = await axiosInstance.post('/members/login', data);
-        const token = response.data.token;
+        const token = response.data;
         // 토큰 저장
         sessionStorage.setItem("userToken", token);
         sessionStorage.setItem("userID", user);
         window.location.replace("/");
     } catch(e) {
-        alert("로그인 오류 발생");
+        alert(e);
     }
 }
 

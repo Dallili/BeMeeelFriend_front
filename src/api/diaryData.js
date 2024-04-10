@@ -5,35 +5,6 @@ import {getDiaryPage} from "./entry";
 
 export const getDiaryPageData = (diaryID) => {
     const response = getDiaryPage(diaryID);
-    // console.log(init)
-    // const [response, setResponse] = useState();
-    // const response = init;
-    // const response =
-    //     {
-    //         "total": 2,
-    //         "unsent": [
-    //             {
-    //                 "entryID": 13,
-    //                 "writer": "user1",
-    //                 "date": "2024-03-27 16:08:34",
-    //                 "content": "일기 텍스트..."
-    //             }
-    //         ],
-    //         "sent": [
-    //             {
-    //                 "entryID": 11,
-    //                 "writer": "user1",
-    //                 "sendAt": "2024-03-31 00:26:58",
-    //                 "content": "수정된 일기"
-    //             },
-    //             {
-    //                 "entryID": 12,
-    //                 "writer": "user1",
-    //                 "sendAt": "2024-03-31 00:27:22",
-    //                 "content": "일기 텍스트..."
-    //             }
-    //         ]
-    //     }
     const sentData = response.sent;
     const unsentData = response.unsent;
     const diaryNum = response.total;

@@ -37,13 +37,13 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-60%, -28%);
+      height: 200px;
+      transform: translate(-60%, -20%);
       cursor: pointer;
 
-      .diary_bg{
-        //clip-path: polygon(1% 65%, 68% 30%, 100% 66%, 31% 100%);
-        //background-color: white;
+      .diary_bg {
         position: relative;
+        height: fit-content;
 
         .fill {
           width: 220px;

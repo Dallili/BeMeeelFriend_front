@@ -1,15 +1,17 @@
 import axios from "axios";
-const API_URL = process.env["REACT_APP_API_URL"];
+// const API_URL = process.env["REACT_APP_API_URL"];
 // const token = process.env["REACT_APP_TOKEN"];
-const userToken ='eyJhbGciOiJIUzI1NiJ9.eyJtZW1iZXJJRCI6MSwiZW1haWwiOiJtaW5qaUB0ZXN0LmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzEyNjYwMDA0LCJleHAiOjE4MjA2NjAwMDR9.WWX04VSLeVxpgNVqXo6N4nV4CzGQMo4sqUOpBXmAaqI'
-// const userToken = sessionStorage.getItem("userToken");
+// const userToken ='eyJhbGciOiJIUzI1NiJ9.eyJtZW1iZXJJRCI6MSwiZW1haWwiOiJtaW5qaUB0ZXN0LmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzEyNjYwMDA0LCJleHAiOjE4MjA2NjAwMDR9.WWX04VSLeVxpgNVqXo6N4nV4CzGQMo4sqUOpBXmAaqI'
+const userToken = sessionStorage.getItem("userToken");
 
 export let axiosInstance;
 axiosInstance = axios.create({
-    baseURL: `${API_URL}`,
+    // baseURL: `${API_URL}`,
     headers: {
         Authorization: `Bearer ${userToken}`,
-        'Access-Control-Allow-credentials': true
+        mode: 'cors',
+        credentials: 'include',
+        'Access-Control-Allow-credentials': "true"
     }
 });
 
@@ -47,7 +49,7 @@ export const getDiary = async(userID) => {
     try {
         const response = await axiosInstance.get('/diaries/replied', {
             params: {
-                loginUserID: userID
+                loginMemberID: userID
             }
         })
         return response.data
