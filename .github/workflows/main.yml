@@ -44,6 +44,6 @@ jobs:
           aws-s3-bucket: ${{ secrets.AWS_S3_BUCKET }}
         with:
           folder: build
-        run: |
+        uses: |
           aws s3 sync \
             ./ s3://secretfriend-test/ \
