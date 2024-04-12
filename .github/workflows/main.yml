@@ -19,7 +19,7 @@ jobs:
       - name: Create env file
         run: |
           touch .env
-          echo REACT_APP_API_URI=${{ secrets.REACT_APP_API_URI }} >> .env
+          echo "REACT_APP_API_URI=${{ secrets.REACT_APP_API_URI }}" >> .env
           cat .env
 
       - name: Npm Install
@@ -39,9 +39,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
 
-      - name: Upload to S3
+      - name: Deploy
         env:
           aws-s3-bucket: ${{ secrets.AWS_S3_BUCKET }}
+        with:
+          folder: build
         run: |
           aws s3 sync \
             ./ s3://secretfriend-test/ \
