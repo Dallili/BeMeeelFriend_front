@@ -38,6 +38,7 @@ jobs:
         uses: reggionick/s3-deploy@v3
         with:
           folder: build
-          aws-s3-bucket: ${{ env.AWS_S3_BUCKET }}
+          bucket: ${{ secrets.AWS_S3_BUCKET }}
+          bucket-region: us-east-2
           delete-removed: true
           no-cache: true

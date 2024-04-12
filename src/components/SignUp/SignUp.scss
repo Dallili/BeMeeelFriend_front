@@ -76,17 +76,22 @@
     box-shadow: #FEF5F5 0 0 20px 15px;
   }
 
+  .labels {
+    display: flex;
+    flex-direction: column;
+  }
   .large_label {
     min-width: 40px;
     margin-top: 4px;
-    margin-left: 5px;
     font-size: 19px;
     font-weight: 700;
+    @include smallMobile {
+      font-size: 16px;
+    }
   }
 
   .small_label {
-    margin-top: 5px;
-    margin-bottom: 15px;
+    margin: 5px 0 15px 4px;
     font-size: 12px;
     font-weight: 400;
   }

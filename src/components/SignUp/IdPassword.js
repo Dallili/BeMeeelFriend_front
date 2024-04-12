@@ -2,7 +2,7 @@ import './SignUp.scss';
 import ProgressBar from "./components/ProgressBar";
 import SignupLabel from "./components/SignupLabel";
 import LongButton from "../LongButton";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate, useOutletContext} from "react-router-dom";
 
 const IdPassword = () => {
@@ -28,31 +28,41 @@ const IdPassword = () => {
     const onPassInputHandler = (e) => {
         const getPass = e.target.value;
         setPassword(getPass);
-
-        if (passCheck(getPass)){
-            setIsTrue(true);
-            setIsPassTrue(true);
-        } else {
-            setNoticeText("조건에 맞게 작성해주세요.");
-            setIsTrue(false);
-            setIsDone(false);
-            setIsPassTrue(false);
-        }
     };
 
     const onCheckPassInputHandler = (e) => {
         const getCheckPass = e.target.value;
         setPasswordCheck(getCheckPass);
+    };
 
-        if (isPassTrue && password === getCheckPass){
+    useEffect(() => {
+        const validatePassword = (password) => {
+            return password && passCheck(password);
+        };
+
+        const checkPasswordMatch = (password, passwordCheck) => {
+            return password === passwordCheck;
+        };
+
+        if (validatePassword(password)){
+            setIsTrue(true);
+            setIsPassTrue(true);
+        } else if (password && !passCheck(password)){
+            setNoticeText("조건에 맞게 작성해주세요.");
+            setIsTrue(false);
+            setIsDone(false);
+            setIsPassTrue(false);
+        }
+
+        if (isPassTrue && password && passwordCheck && checkPasswordMatch(password, passwordCheck)){
             setIsTrue(true);
             setIsDone(true);
-        } else {
+        } else if (password && passwordCheck && password !== passwordCheck) {
             setNoticeText("입력하신 비밀번호가 서로 일치하지 않습니다.\n입력을 다시 한번 확인해주세요.");
             setIsTrue(false);
             setIsDone(false);
         }
-    };
+        }, [password, passwordCheck]);
 
     const navigate = useNavigate();
 
@@ -69,7 +79,10 @@ const IdPassword = () => {
             <ProgressBar num="2" />
             <SignupLabel text="비밀번호 설정"/>
             <div className="password_box">
-                <label className="large_label">비밀번호</label>
+                <div className="labels">
+                    <label className="large_label">비밀번호</label>
+                    {/*<label className="small_label" style={{fontSize:"10px"}}>알파벳, 숫자, <br/>특수기호!@#$%^* 포함</label>*/}
+                </div>
                 <div className="passwordInput_box">
                     <input className="password_input" id="pass1" name="newPass" value={password} type="text" placeholder="8글자 이상 26글자 미만"
                         onChange={onPassInputHandler}
