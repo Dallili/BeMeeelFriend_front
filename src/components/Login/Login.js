@@ -21,8 +21,8 @@ const Login = () => {
     // 로그인 버튼 클릭 시 서버로 아이디, 패스워드 전달
     const onClickLogin = async (e) => {
         const data= {
-            email:id,
-            password:pw
+            "email":`${id}`,
+            "password":`${pw}`
         }
         await login(data);
     }
