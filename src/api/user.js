@@ -1,9 +1,10 @@
 import {axiosInstance} from "./diary";
+const API_URL = process.env["REACT_APP_API_URL"];
 
 export const signUp = async (data) => {
     try {
-        await axiosInstance.post('/members', data);
-        const response = await axiosInstance.post('/members/login', {
+        await axiosInstance.post(`${API_URL}/members`, data);
+        const response = await axiosInstance.post(`${API_URL}/members/login`, {
             email: data.email,
             password: data.password
         });
@@ -19,7 +20,7 @@ export const signUp = async (data) => {
 
 export const login = async (data) => {
     try {
-        const response = await axiosInstance.post('/members/login', data);
+        const response = await axiosInstance.post(`${API_URL}/members/login`, data);
         const token = response.data;
         // const user = response.data.memberID;
         console.log(response.data)
@@ -34,7 +35,7 @@ export const login = async (data) => {
 
 export const logOut = async (token) => {
     try {
-        await axiosInstance.post('/members/logout');
+        await axiosInstance.post(`${API_URL}/members/logout`);
         sessionStorage.removeItem("userToken");
         sessionStorage.removeItem("userID");
         window.location.replace("/login");
@@ -46,7 +47,7 @@ export const logOut = async (token) => {
 export const getUserInfo = async () => {
     const memberID = sessionStorage.getItem("userID");
     try {
-        const res = await axiosInstance.get(`/members/${memberID}`);
+        const res = await axiosInstance.get(`${API_URL}/members/${memberID}`);
         return res.data
     } catch (e){
         alert("유저 정보 조회 실패");
