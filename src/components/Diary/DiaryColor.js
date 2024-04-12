@@ -27,7 +27,7 @@ const DiaryColor = () => {
 
     const createNewDiary = async () => {
         const succeed = await createDiary({
-            userID: sessionStorage.getItem("userID"),
+            memberID: sessionStorage.getItem("userID"),
             color: diaryColor
         });
 
@@ -35,6 +35,7 @@ const DiaryColor = () => {
             setDiaryID(succeed.diaryID);
             showDiaryDone();
         }
+        showDiaryDone();
     };
 
     const showDiaryDone = () => {

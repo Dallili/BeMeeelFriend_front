@@ -6,11 +6,9 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {getDeactivatedDiary} from "../../api/diaryData";
 
-const DeactivatedDiary = () => {
+const DeactivatedDiary = ({diarys, diaryNum}) => {
     const navigate = useNavigate();
-    const diarys = getDeactivatedDiary().diaries;
 
-    const diaryNum = getDeactivatedDiary().total;
     const {isOpen, open, close} = useModal();
     const {isModalOpen, yes, no} = useModal();
     const [diaryID, setDiaryID] = useState();

@@ -3,7 +3,6 @@ import BottomNav from "../../components/BottomNav";
 import Header from "../../components/Header";
 import {useEffect, useState} from "react";
 import {useLocation, useNavigate, useParams, useSearchParams} from "react-router-dom";
-import {getDiaryPage} from "../../api/diary";
 import {getDiaryPageData} from "../../api/diaryData";
 
 const ReadDiaryPage = () => {
@@ -17,7 +16,13 @@ const ReadDiaryPage = () => {
 
     // 일기 데이터 가져옴
     const { sentData, unsentData } = getDiaryPageData(diaryID);
-    console.log(sentData);
+    // const getDiaryPageData = async (diaryID) => {
+    //     const response = await getDiaryPage(diaryID);
+    //     const sentData = response.data.sent;
+    //     const unsentData = response.data.unsent;
+    //     const diaryNum = response.total;
+    //     return { sentData, unsentData }
+    // };
 
     // // 일기 읽기에서 기본으로 가장 최근 일기 내용 보여줌
     const [pageNum, setPageNum] = useState(sentData.length > 0 ? sentData.length - 1 : -2);

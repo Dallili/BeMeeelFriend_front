@@ -4,65 +4,63 @@ import {getDiaryPage} from "./entry";
 
 
 export const getDiaryPageData = (diaryID) => {
-    const response = getDiaryPage(diaryID);
+    // const response = await getDiaryPage(diaryID);
+    const response =
+    {
+        "total": 2,
+        "unsent": [
+            {
+                "entryID": 12,
+                "writer": "user1",
+                "sendAt": "2024-03-31 00:27:22",
+                "content": "오늘은 화창한 날씨에 햇볕이 부드럽게 내리쬐는 아름다운 날이었다. 나는 이 환상적인 날을 놓치지 않기 위해 정원에 나가 꽃을 심기로 마음먹었다.\n" +
+                    "\n" +
+                    "아침에 일어나자마자 신선한 공기를 마시며 정원으로 향했다. 이미 준비된 식물과 꽃씨들이 나를 기다리고 있었다. 나는 마음에 드는 꽃들을 선택하고 어떻게 정원을 꾸밀지 계획을 세우며 설레임과 기대가 가득했다.\n" +
+                    "\n" +
+                    "첫 번째로 땅을 파고 비료를 넣어 꽃이 자라기에 좋은 환경을 만들었다. 손에 물기가 스며들면서 땅의 식물들과 소통하고 있다는 느낌이 들어 기분이 상쾌했다. 이제 꽃을 심기 위해 구석구석을 돌아다니며 위치를 정하고, 각 꽃마다 적절한 간격을 유지하며 심었다.\n" +
+                    "\n" +
+                    "꽃을 심는 과정에서 손이 더러워지고 땀이 솟아나기는 했지만, 그 모든 것이 행복한 노력으로 다가왔다. 정원에 새로운 생명이 싹트는 모습을 지켜보면서 나만의 작은 세계가 생겨나는 듯한 느낌에 흐뭇함을 느꼈다.\n" +
+                    "\n" +
+                    "꽃을 심는 동안 주변에서는 새들의 지저귐과 바람이 부드럽게 불어와 마음을 안정시켜주었다. 정원 속에서 나만의 시간을 가지면서 일상의 소란과 스트레스를 잠시 잊게 되었다. 마치 마음의 휴양지를 발견한 것 같았다.\n" +
+                    "\n" +
+                    "꽃을 모두 심은 뒤에는 정원을 돌아다니며 나무와 식물들에게 물을 주었다. 각각의 식물들이 건강하게 자라길 바라며 마치 작은 아이들을 돌보듯 신경을 썼다. 이렇게 꽃을 키우고 돌보는 일은 마치 나만의 작은 세계를 만들어가는 것과도 같았다.\n"
+            }
+    ],
+        "sent": [
+        {
+            "entryID": 11,
+            "writer": "user1",
+            "sendAt": "2024-03-31 00:26:58",
+            "content": "수정된 일기"
+        },
+        {
+            "entryID": 12,
+            "writer": "user1",
+            "sendAt": "2024-03-31 00:27:22",
+            "content": "오늘은 화창한 날씨에 햇볕이 부드럽게 내리쬐는 아름다운 날이었다. 나는 이 환상적인 날을 놓치지 않기 위해 정원에 나가 꽃을 심기로 마음먹었다.\n" +
+                "\n" +
+                "아침에 일어나자마자 신선한 공기를 마시며 정원으로 향했다. 이미 준비된 식물과 꽃씨들이 나를 기다리고 있었다. 나는 마음에 드는 꽃들을 선택하고 어떻게 정원을 꾸밀지 계획을 세우며 설레임과 기대가 가득했다.\n" +
+                "\n" +
+                "첫 번째로 땅을 파고 비료를 넣어 꽃이 자라기에 좋은 환경을 만들었다. 손에 물기가 스며들면서 땅의 식물들과 소통하고 있다는 느낌이 들어 기분이 상쾌했다. 이제 꽃을 심기 위해 구석구석을 돌아다니며 위치를 정하고, 각 꽃마다 적절한 간격을 유지하며 심었다.\n" +
+                "\n" +
+                "꽃을 심는 과정에서 손이 더러워지고 땀이 솟아나기는 했지만, 그 모든 것이 행복한 노력으로 다가왔다. 정원에 새로운 생명이 싹트는 모습을 지켜보면서 나만의 작은 세계가 생겨나는 듯한 느낌에 흐뭇함을 느꼈다.\n" +
+                "\n" +
+                "꽃을 심는 동안 주변에서는 새들의 지저귐과 바람이 부드럽게 불어와 마음을 안정시켜주었다. 정원 속에서 나만의 시간을 가지면서 일상의 소란과 스트레스를 잠시 잊게 되었다. 마치 마음의 휴양지를 발견한 것 같았다.\n" +
+                "\n" +
+                "꽃을 모두 심은 뒤에는 정원을 돌아다니며 나무와 식물들에게 물을 주었다. 각각의 식물들이 건강하게 자라길 바라며 마치 작은 아이들을 돌보듯 신경을 썼다. 이렇게 꽃을 키우고 돌보는 일은 마치 나만의 작은 세계를 만들어가는 것과도 같았다.\n"
+        }
+    ]
+    }
+    // const sentData = response.data.sent;
+    // const unsentData = response.data.unsent;
     const sentData = response.sent;
     const unsentData = response.unsent;
     const diaryNum = response.total;
     return { sentData, unsentData }
 };
 
-export const getMainDiary = (userID) => {
-    // const diaries =  getDiary(userID);
-    const diaries = {
-        "diaries": [
-            {
-                "diaryID": "diary8",
-                "userID": "user8",
-                "partnerID": "user10",
-                "updatedBy": "user8",
-                "updatedAt": "2024-03-26 15:52:15",
-                "color": "#000000",
-                "activated": true
-            }
-        ]
-    }
-    return diaries;
-};
 
-export const getDeactivatedDiary = () => {
-    // const [response, setResponse] = useState(getDeactivated);
-    const deactivatedDiaries = {
-            "total": 1,
-            "diaries": [
-            {
-                "diaryID": "diary10",
-                "userID": "user10",
-                "partnerID": "user12",
-                "updatedBy": "new user",
-                "updatedAt": "2024-03-26 21:18:33",
-                "color": "#000000",
-                "activated": false
-            }
-        ]
-    }
-    return deactivatedDiaries
-}
 
-export const getActivatedDiary = () => {
-    // const [response, setResponse] = useState(getActivated());
-    const activatedDiaries = {
-            "total": 1,
-            "diaries": [
-            {
-                "diaryID": "diary12",
-                "userID": "user12",
-                "partnerID": "user14",
-                "updatedBy": "user12",
-                "updatedAt": "2024-03-26 15:52:15",
-                "color": "#000000",
-                "activated": true
-            }
-        ]
-    }
-    return activatedDiaries.diaries
-}
+
+
+

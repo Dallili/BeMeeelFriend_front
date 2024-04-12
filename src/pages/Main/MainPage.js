@@ -4,6 +4,8 @@ import useModal from "../../hooks/useModal";
 import SandwichMenu from "../../components/Main/SandwichMenu";
 import {useNavigate, useParams} from "react-router-dom";
 import {getMainDiary} from "../../api/diaryData";
+import {useEffect, useState} from "react";
+import {getDiary} from "../../api/diary";
 
 const MainPage = () => {
     // 샌드위치 메뉴
@@ -17,17 +19,43 @@ const MainPage = () => {
         yes();
     };
 
-    const userID = "user12"
+    const [diary, setDiary] = useState([
+        {
+            "diaryID": "diary8",
+            "userID": "user8",
+            "partnerID": "user10",
+            "updatedBy": "user8",
+            "updatedAt": "2024-03-26 15:52:15",
+            "color": "#000000",
+            "activated": true
+        },
+    ]);
 
-    const diary = getMainDiary(userID).diaries;
-
-
-    const diaryColor = [diary.map((it, index) => diary[index].color)];
-
+    const [diaryColor, setDiaryColor] = useState(diary && diary.map((it) => it.color));
 
     const navigate = useNavigate();
-
     const goHistory = () => navigate('/history');
+
+    const [userID, setUserID] = useState(localStorage.getItem("userID"));
+    const getMainDiary = async (userID) => {
+        const diaries = await getDiary(userID).diaries;
+        setDiary(diaries)
+        // setDiary([
+        //     {
+        //         "diaryID": "diary8",
+        //         "userID": "user8",
+        //         "partnerID": "user10",
+        //         "updatedBy": "user8",
+        //         "updatedAt": "2024-03-26 15:52:15",
+        //         "color": "#000000",
+        //         "activated": true
+        //     }
+        // ]);
+    };
+
+    // useEffect(() => {
+    //     getMainDiary(userID);
+    // }, []);
 
     return (
         <div className="main">
@@ -37,14 +65,14 @@ const MainPage = () => {
                 </div>
                 {isOpen && <SandwichMenu menuClose={close}/>}
                 <div className="diarys">
-                    {diary.length === 1 ? (
-                        <div className="diary_bg" onClick={clicked} style={{border:"solid"}}>
+                    {diary && diary.length === 1 ? (
+                        <div className="diary_bg" onClick={clicked}>
                             <img src={require('../../img/Main/book_mask.png')} alt="bg" className="fill" style={{filter:`opacity(.6) drop-shadow(0 0 0 ${diaryColor[0]}`}}/>
                             <div className="diary_line">
                                 <img src={require('../../img/Main/book_line.png')} alt="diary" className="line" />
                             </div>
                         </div>
-                    ): diary.length === 2 ? (
+                    ): diary && diary.length === 2 ? (
                         <div className="diary_bg" onClick={clicked}>
                             <img src={require('../../img/Main/book_mask0.png')} alt="bg" className="fill0" style={{filter:`opacity(.4) drop-shadow(0 0 0 ${diaryColor[0]}`}}/>
                             <div className="diary_line" style={{paddingTop:"33px", paddingLeft:"12px"}}>
@@ -58,7 +86,7 @@ const MainPage = () => {
                             </div>
 
                         </div>
-                    ): diary.length === 3 ? (
+                    ): diary && diary.length === 3 ? (
                         <div className="diary_bg" onClick={clicked}>
                             <img src={require('../../img/Main/book_mask0.png')} alt="bg" className="fill0" style={{filter:`opacity(.5) drop-shadow(0 0 0 ${diaryColor[0]}`}}/>
                             <div className="diary_line" style={{paddingTop:"33px", paddingLeft:"12px"}}>

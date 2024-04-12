@@ -27,10 +27,37 @@ const DeleteDiaryPage = () => {
     }
     const noDelete = () => setIsClicked(false);
 
+    const [response, setResponse] = useState([]);
+    const [total, setTotal] = useState(1);
+
+    const getDeactivatedDiary = () => {
+        // const res = await getDeactivated();
+        // const diary = res.diaries;
+        // const num = res.total;
+        // setResponse(diary);
+        // setTotal(num);
+
+        const deactivatedDiaries = [
+            {
+                "diaryID": "diary10",
+                "userID": "user10",
+                "partnerID": "user12",
+                "updatedBy": "new user",
+                "updatedAt": "2024-03-26 21:18:33",
+                "color": "#000000",
+                "activated": false
+            }];
+        setResponse(deactivatedDiaries);
+    };
+
+    useEffect(() => {
+        getDeactivatedDiary();
+    }, []);
+
     return (
         <div className="deleteDiary">
             <Header text="일기장 선택" type="delete" onClick={yesDelete}/>
-            <DeleteDiary isAllClicked={isAllClicked} setSelectedNum={setSelectedNum} selectedNum={selectedNum} allSelect={allSelect} isClicked={isClicked} onClick={noDelete}/>
+            <DeleteDiary diarys={response} diaryNum={total} isAllClicked={isAllClicked} setSelectedNum={setSelectedNum} selectedNum={selectedNum} allSelect={allSelect} isClicked={isClicked} onClick={noDelete}/>
             <BottomNav type="delete" num={selectedNum} onClick={selectAll} allSelect={allSelect}/>
         </div>
     );

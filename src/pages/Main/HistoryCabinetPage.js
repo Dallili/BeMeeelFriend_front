@@ -2,7 +2,8 @@ import './MainPage.scss';
 import useModal from "../../hooks/useModal";
 import SandwichMenu from "../../components/Main/SandwichMenu";
 import {useNavigate} from "react-router-dom";
-import {getActivatedDiary} from "../../api/diaryData";
+import {useEffect, useState} from "react";
+import DiaryPreparing from "../../components/Diary/DiaryPreparing";
 
 const HistoryCabinetPage = () => {
     const navigate = useNavigate();
@@ -10,13 +11,46 @@ const HistoryCabinetPage = () => {
     const {isOpen, open, close} = useModal();
     const {isModalOpen, yes, no} = useModal();
 
-    const diary = getActivatedDiary();
+    const [diary, setDiary] = useState([
+        {
+            "diaryID": "diary8",
+            "userID": "user8",
+            "partnerID": "user10",
+            "updatedBy": "user8",
+            "updatedAt": "2024-03-26 15:52:15",
+            "color": "#000000",
+            "activated": true
+        }
+    ]);
+
     const diaryColor = [diary.map((it, index) => diary[index].color)];
     const clicked = () => {
         yes();
     };
     const goMain = () => navigate('/');
     const goAllDiaries = () => navigate('/deactivated-diary');
+
+    const getActivatedDiary = (userID) => {
+        // const diaries = await getActivated(userID).diaries;
+        // setDiaries(diaries)
+        setDiary([
+                {
+                    "diaryID": "diary12",
+                    "userID": "user12",
+                    "partnerID": "user14",
+                    "updatedBy": "user12",
+                    "updatedAt": "2024-03-26 15:52:15",
+                    "color": "#000000",
+                    "activated": true
+                }
+            ]);
+    };
+
+    useEffect(() => {
+        getActivatedDiary();
+    }, []);
+
+
     return (
         <div className="historyCabinet">
             <div className="item_box">
@@ -86,7 +120,10 @@ const HistoryCabinetPage = () => {
                         <div className="modal diarySelect_modal">
                             <div className="modal_text">일기장 선택</div>
                             {diary.map((it, index) => (
-                                <div key={index} className="diary_select" onClick={()=> navigate(`/read-diary/${diary[index].diaryID}?type=history`)}>{diary[index].partnerID}</div>
+                                <div key={index} className="diary_select" onClick={diary[index].partnerID === null ?
+                                    diary[index].color === "#000000" ? <DiaryPreparing who="stranger" />
+                                    : <DiaryPreparing />
+                                    : ()=> navigate(`/read-diary/${diary[index].diaryID}?type=history`)}>{diary[index].partnerID}</div>
                             ))}
                             <div className="close_btn" onClick={no}>닫기</div>
                         </div>

@@ -28,7 +28,7 @@ const Birthday = () => {
     const goRulesNoBirthday = () => {
         setUserInfo({
             ...userInfo,
-            birthday:'0000-00-00'
+            birthday:''
         })
         navigate('/signup/rules');
     }

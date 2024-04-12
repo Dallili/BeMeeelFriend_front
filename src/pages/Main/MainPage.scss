@@ -37,8 +37,7 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      height: 200px;
-      transform: translate(-60%, -20%);
+      transform: translate(-60%, -28%);
       cursor: pointer;
 
       .diary_bg {
@@ -263,9 +262,9 @@
   background-repeat: no-repeat;
   .item_box {
     .diary_bg:hover {
-      box-shadow: 0 0 30px rgb(255, 255, 204);
-      background-color: rgba(255, 255, 204, 0.4);
-      border-radius: 20px;
+      box-shadow: 0 0 80px rgb(252, 252, 6);
+      background-color: rgba(248, 248, 83, 0.4);
+      border-radius: 80%;
       transform: scale(1);
     }
   }

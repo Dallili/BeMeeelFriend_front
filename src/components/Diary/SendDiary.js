@@ -12,7 +12,8 @@ const SendDiary = ({date, content, sendDiary, goSendDiary}) => {
 
     const {isModalOpen, yes, no} = useModal();
 
-    const dateAndTime = date.split(' ');
+    // const dateAndTime = date.split(' ');
+    const date1 = new Date().toLocaleDateString()
 
     const onDeactivate = () => {
         deactivateDiary(diaryID);
@@ -28,14 +29,15 @@ const SendDiary = ({date, content, sendDiary, goSendDiary}) => {
             <div className="date_box">
                 <img src={require('../../img/Diarys/calendar_icon.png')} alt="icon"/>
                 <div style={{display:"flex", flexDirection:"column"}}>
-                    <div className="date">{dateAndTime[0]}</div>
-                    <div className="time">{dateAndTime[1]}</div>
+                    {/*<div className="date">{dateAndTime[0]}</div>*/}
+                    {/*<div className="time">{dateAndTime[1]}</div>*/}
+                    <div className="date">{date1}</div>
                 </div>
             </div>
             <div className="diaryInput_box">
-                <div className="diary_input">
-                    {content}
-                </div>
+                <textarea className="diary_input" value={content} disabled="true">
+
+                </textarea>
             </div>
             {isModalOpen && <DiaryModal onClick={no} onClick2={onDeactivate} text1="해당 일기장을 비활성화 하시겠습니까?" text2="비활성화한 일기장은" text3="다시 복구할 수 없습니다." btn="비활성화" />}
             {sendDiary && <SendDiaryDone />}

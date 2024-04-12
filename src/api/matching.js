@@ -1,5 +1,6 @@
 import {axiosInstance} from "./diary";
 
+// 매칭 코드 조회
 export const getMatchingCode = async (diaryID) => {
     try {
         const response = await axiosInstance.get(`/matches/${diaryID}`);
@@ -21,10 +22,11 @@ export const patchMatchingCode = async (data) => {
     }
 }
 
+// 랜덤 매칭 요청
 export const postRandomMatching = async (data) => {
     try {
         const res = await axiosInstance.post('/matches/unknown', data);
-        return true
+        return res.data
     } catch (e) {
         alert("매칭 전송 실패");
         return false

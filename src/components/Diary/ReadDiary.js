@@ -51,9 +51,7 @@ const ReadDiary = ({date, content, sendDiary, type, goSendDiary}) => {
                 </div>
             </div>
             <div className="diaryInput_box">
-                <div className="diary_input">
-                    {content}
-                </div>
+                <textarea className="diary_input" value={content} disabled="true"></textarea>
             </div>
             {isModalOpen && <DiaryModal onClick={no} onClick2={onDeactivate} text1="해당 일기장을 비활성화 하시겠습니까?" text2="비활성화한 일기장은" text3="다시 복구할 수 없습니다." btn="비활성화" />}
             {isOpen && <DiaryModal onClick={close} onClick2={onDelete} text1="해당 일기장을 삭제 하시겠습니까?" text2="삭제한 일기장은" text3="다시 복구할 수 없습니다." btn="삭제" />}

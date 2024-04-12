@@ -6,9 +6,7 @@ import DiaryModal from "./DiaryModal";
 import {getDeactivatedDiary} from "../../api/diaryData";
 import {deleteDiary} from "../../api/diary";
 
-const DeleteDiary = ({isAllClicked, setSelectedNum, selectedNum, allSelect, isClicked, onClick}) => {
-    const diarys = getDeactivatedDiary().diaries;
-    const diaryNum = getDeactivatedDiary().total;
+const DeleteDiary = ({diarys, diaryNum, isAllClicked, setSelectedNum, selectedNum, allSelect, isClicked, onClick}) => {
     const [selectedDiaries, setSelectedDiaries] = useState([]);
     const [deleteReady, setDeleteReady] = useState(true);
 
@@ -50,7 +48,7 @@ const DeleteDiary = ({isAllClicked, setSelectedNum, selectedNum, allSelect, isCl
 
     // 만약에 여러 개를 한 번에 지운다면?
     const onDeleteDiary = () => {
-        selectedDiaries.map((it) => deleteDiary(diarys[selectedDiaries[it]].diaryID))
+        selectedDiaries.map(async (it) => await deleteDiary(diarys[selectedDiaries[it]].diaryID))
     }
 
     // if( allSelect === true) {

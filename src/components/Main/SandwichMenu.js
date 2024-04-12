@@ -3,11 +3,14 @@ import MenuItem from "./components/MenuItem";
 import Modal from "../Modal";
 import useModal from "../../hooks/useModal";
 import {useNavigate} from "react-router-dom";
+import {getUserInfo} from "../../api/user";
 
 const SandwichMenu = ({menuClose}) => {
     // 사용자 정보 받아와서 넘겨주기
+    // const userData= getUserInfo();
+    // const name = userData.nickname;
     const name = "반짝이는 마녀";
-    const num = 0;
+    const num = 1;
     const navigate = useNavigate();
 
     const goCreateDiary = () => navigate('/newdiary');
@@ -46,7 +49,6 @@ const SandwichMenu = ({menuClose}) => {
                         <div className="line"></div>
                     </div>
                     <MenuItem title="일기장 생성" item="addDiary_btn" onClick={goCreateDiary}/>
-                    {/*<MenuItem title="일기장 비활성화" item="deactivate_btn" on/>*/}
                     <MenuItem title="비활성화된 일기장 읽기" item="deactivateRead_btn" onClick={goDeactivated}/>
                 </div>
                 <div className="menu_list">

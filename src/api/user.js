@@ -7,7 +7,7 @@ export const signUp = async (data) => {
             email: data.email,
             password: data.password
         });
-        const token = response.data;
+        const token = response.data.token;
         const user = response.data.memberID;
         sessionStorage.setItem("userToken", token);
         sessionStorage.setItem("userID", user);
@@ -18,13 +18,14 @@ export const signUp = async (data) => {
 }
 
 export const login = async (data) => {
-    const user = data.email
     try {
         const response = await axiosInstance.post('/members/login', data);
         const token = response.data;
+        // const user = response.data.memberID;
+        console.log(response.data)
         // 토큰 저장
         sessionStorage.setItem("userToken", token);
-        sessionStorage.setItem("userID", user);
+        // sessionStorage.setItem("userID", user);
         window.location.replace("/");
     } catch(e) {
         alert(e);
@@ -42,7 +43,8 @@ export const logOut = async (token) => {
     }
 }
 
-export const getUserInfo = async (memberID) => {
+export const getUserInfo = async () => {
+    const memberID = sessionStorage.getItem("userID");
     try {
         const res = await axiosInstance.get(`/members/${memberID}`);
         return res.data

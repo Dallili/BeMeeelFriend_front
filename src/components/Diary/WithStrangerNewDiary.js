@@ -11,7 +11,7 @@ const WithStrangerNewDiary = () => {
     const [selectedNum, setSelectedNum] = useState(0);
     const [currentClick, setCurrentClick] = useState([]);
     const [prevClick, setPrevClick] = useState([]);
-    const interests = ["학생", "대학생", "직장인", "드라마", "덕질", "게임", "면허", "mbti", "영화", "댄스", "운동", "공부", "시험", "취준", "수다"];
+    const interests = ["대학생", "직장인", "드라마", "덕질", "게임", "면허", "mbti", "영화", "댄스", "운동", "공부", "시험", "취준", "수다"];
     const [diaryDone, setDiaryDone] = useState("");
 
     const interestSelect = (e) => {
@@ -68,8 +68,9 @@ const WithStrangerNewDiary = () => {
         if(result === true) {
             showDiaryDone();
         } else {
-
+            showDiaryDone();
         }
+
     };
 
     const showDiaryDone = () => {

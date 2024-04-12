@@ -10,12 +10,8 @@ const DiaryPreparing = ({who}) => {
         <div className="diaryPreparing">
             <div className="overlay"></div>
             <div className="done_popup">
-                <div className="done_title"
-                     style={{
-                         marginTop:"180px",
-                         fontSize:"45px"
-                    }}>일기장 준비 중...</div>
-                <div className="img_box" style={{marginTop:"30px"}}>
+                <div className="done_title" style={{fontSize:"45px"}}>일기장 준비 중...</div>
+                <div className="img_box">
                     <img src={require('../../img/Diarys/done_onprogress.png')} alt="done" className="done_img" />
                 </div>
                 { who === "stranger" ? (
@@ -24,7 +20,7 @@ const DiaryPreparing = ({who}) => {
                         <div className="done_explain">마음에 쏙 드는 친구를 찾아드릴게요!</div>
                     </div>
                 ) : (
-                    <div className="invitation" style={{marginTop:"-40px"}}>
+                    <div className="invitation">
                         <div className="invitation_explain">
                             <div className="invitation_title">친구를 <span style={{color:"#227573", textDecoration:"#FC715F 5px underline"}}>초대하기</span> 위해서,</div>
                             <div className="invitation_text">아래의 초대 코드를 친구에게 공유해주세요.</div>

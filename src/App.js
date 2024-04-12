@@ -66,7 +66,6 @@ function App() {
 
     useEffect(() => {
         setScreenSize();
-        sessionStorage.setItem("userToken", "123");
     });
 
   return (

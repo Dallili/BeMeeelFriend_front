@@ -5,7 +5,7 @@ import {getMatchingCode, patchMatchingCode} from "../../api/matching";
 
 const CreateDiaryDone = ({who, stranger, diaryID, color}) => {
     const navigate = useNavigate();
-    const [invitationCode, setInvitationCode] = useState("");
+    const [invitationCode, setInvitationCode] = useState("3fa85f64-5717-4562-b3fc-2c963f66afa6");
 
     //유저 초대코드 받아와서 설정
     // const myInvitationCode = "AFD#@RSFDJSFL@LFDS";
