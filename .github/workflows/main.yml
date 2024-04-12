@@ -3,6 +3,14 @@ on:
   push:
     branches:
       - main
+
+env:
+  aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  aws-region: us-east-2
+  aws-s3-bucket: ${{ secrets.AWS_S3_BUCKET }}
+  REACT_APP_API_URI: ${{ secrets.REACT_APP_API_URI }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,12 +23,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-
-      - name: Create env file
-        run: |
-          touch .env
-          echo "REACT_APP_API_URI=${{ secrets.REACT_APP_API_URI }}" >> .env
-          cat .env
 
       - name: Npm Install
         run: |
@@ -35,15 +37,14 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
 
-      - name: Deploy
-        env:
-          aws-s3-bucket: ${{ secrets.AWS_S3_BUCKET }}
+      - name: Deploy_S3
+        uses: reggionick/s3-deploy@v3
         with:
           folder: build
-        uses: |
-          aws s3 sync \
-            ./ s3://secretfriend-test/ \
+          aws-s3-bucket: ${{ env.AWS_S3_BUCKET }}
+          delete-removed: true
+          no-cache: true
