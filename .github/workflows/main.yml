@@ -46,6 +46,10 @@ jobs:
         with:
           folder: build
           bucket: ${{ secrets.AWS_S3_BUCKET }}
+          dist-id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
           bucket-region: us-east-2
+          invalidation: /
           delete-removed: true
           no-cache: true
+          private: true
+          files-to-include: '{.*/**,**}'
