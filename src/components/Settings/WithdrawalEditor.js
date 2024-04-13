@@ -5,7 +5,7 @@ import './WithdrawalEditor.scss'
 import {useState} from "react";
 
 const WithdrawalEditor = () => {
-    const [password, setPassword] = useState();
+    const [password, setPassword] = useState('');
     const onInputHandler = (e) => {
         setPassword(e.target.value);
     }
