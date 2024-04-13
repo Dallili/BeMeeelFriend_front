@@ -9,7 +9,6 @@ env:
   aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   aws-region: us-east-2
   aws-s3-bucket: ${{ secrets.AWS_S3_BUCKET }}
-  REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
 
 jobs:
   build:
@@ -23,6 +22,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+
+      - name: .env setting
+        run: |
+          echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}" >> .env
 
       - name: Npm Install
         run: |
