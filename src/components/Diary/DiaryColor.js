@@ -14,7 +14,7 @@ const DiaryColor = () => {
     const [currentClick, setCurrentClick] = useState(["0"]);
     const [prevClick, setPrevClick] = useState(["1"]);
 
-    const [diaryID, setDiaryID] = useState();
+    const [diaryID, setDiaryID] = useState('');
     const clickNext = () => {
         if (JSON.stringify(colors) === JSON.stringify(diaryColors1)) {
             setColors(diaryColors2);

@@ -10,7 +10,7 @@ const CodeCerification = () => {
     const goIdPassword = () => navigate('/signup/detail', { replace: true });
 
     const [done, isDone] = useState(false);
-    const [input, setInput] = useState();
+    const [input, setInput] = useState('');
     const [isTrue, setIsTrue] = useState(true);
     const [noticeText, setNoticeText] = useState("");
     const correctCode = '12345678';

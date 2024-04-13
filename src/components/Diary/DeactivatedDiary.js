@@ -11,7 +11,7 @@ const DeactivatedDiary = ({diarys, diaryNum}) => {
 
     const {isOpen, open, close} = useModal();
     const {isModalOpen, yes, no} = useModal();
-    const [diaryID, setDiaryID] = useState();
+    const [diaryID, setDiaryID] = useState('');
     const goReadDiary = () => navigate(`/read-diary/${diaryID}?type=deactivated`);
     const goDeleteDiary = () => navigate('/delete-diary');
 

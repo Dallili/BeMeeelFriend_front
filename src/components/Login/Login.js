@@ -10,6 +10,7 @@ const Login = () => {
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
 
+    console.log(process.env.REACT_APP_SERVER_URL)
     const idInputHandler = (e) => {
         setId(e.target.value);
     }
