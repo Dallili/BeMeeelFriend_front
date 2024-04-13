@@ -3,7 +3,6 @@ const userToken = sessionStorage.getItem("userToken");
 
 export let axiosInstance;
 axiosInstance = axios.create({
-    baseURL: process.env.REACT_APP_SERVER_URL,
     defaults: {
         withCredentials: true,
         headers: {
@@ -14,6 +13,8 @@ axiosInstance = axios.create({
     }
 });
 
+axiosInstance.defaults.baseURL = process.env.REACT_APP_SERVER_URL;
+
 // 일기 생성
 export const createDiary = async (data) => {
     try {
@@ -23,7 +24,7 @@ export const createDiary = async (data) => {
         alert("일기장 생성 실패");
         return "fail"
     }
-}
+};
 
 export const deleteDiary = async (diaryID) => {
     try {
@@ -32,7 +33,7 @@ export const deleteDiary = async (diaryID) => {
     } catch(error) {
         console.log(error);
     }
-}
+};
 
 export const deactivateDiary = async (diaryID) => {
     try{
@@ -41,7 +42,7 @@ export const deactivateDiary = async (diaryID) => {
     } catch (e) {
         console.log(e);
     }
-}
+};
 
 
 // 일기장 조회
@@ -57,7 +58,7 @@ export const getDiary = async (userID) => {
     } catch (e) {
         alert("일기장 불러오기 오류");
     }
-}
+};
 
 export const getDeactivated = async (userID) => {
     try {
@@ -86,4 +87,4 @@ export const getActivated = async (userID) => {
     } catch (error){
         console.log(error);
     }
-}
+};
