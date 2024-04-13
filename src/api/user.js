@@ -4,7 +4,7 @@ const API_URL = process.env["REACT_APP_API_URL"];
 export const signUp = async (data) => {
     try {
         await axiosInstance.post(`${API_URL}/members`, data);
-        const response = await axiosInstance.post(`http://ec2-3-17-227-166.us-east-2.compute.amazonaws.com/members/login`, {
+        const response = await axiosInstance.post(`https://api.secretfriends.shop/members/login`, {
             email: data.email,
             password: data.password
         });
@@ -20,7 +20,7 @@ export const signUp = async (data) => {
 
 export const login = async (data) => {
     try {
-        const response = await axiosInstance.post(`${API_URL}/members/login`, data);
+        const response = await axiosInstance.post(`https://api.secretfriends.shop/members/login`, data);
         const token = response.data;
         // const user = response.data.memberID;
         console.log(response.data)

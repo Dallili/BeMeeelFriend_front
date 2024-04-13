@@ -62,7 +62,11 @@ const IdPassword = () => {
             setIsTrue(false);
             setIsDone(false);
         }
-        }, [password, passwordCheck]);
+
+        if (isPassTrue && checkPasswordMatch(password, passwordCheck)) {
+            setIsDone(true);
+        }
+        }, [password, passwordCheck, isPassTrue]);
 
     const navigate = useNavigate();
 
