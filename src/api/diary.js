@@ -1,19 +1,15 @@
 import axios from "axios";
-const API_URL = process.env["REACT_APP_API_URL"];
 const userToken = sessionStorage.getItem("userToken");
 
 export let axiosInstance;
 axiosInstance = axios.create({
-    // baseURL: `${API_URL}`,
+    baseURL: `${process.env.REACT_APP_API_URL}`,
     defaults: {
         withCredentials: true,
         headers: {
             common: {
                 Authorization: `Bearer ${userToken}`,
             }
-            // mode: 'cors',
-            // credentials: 'include',
-            // 'Access-Control-Allow-credentials': "true"
         },
     }
 });
