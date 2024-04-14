@@ -1,15 +1,16 @@
 .overlay {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 999;
-  background-color: rgba(0, 0, 0, 0.4);
+  height: calc(var(--vh, 1vh) * 100);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .overlay_diary {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -119,6 +120,9 @@
   font-weight: 600;
   word-break: keep-all;
   cursor: pointer;
+}
+.diary_select:hover {
+  text-decoration: underline solid 4px #D6CBCB;
 }
 
 .close_btn {

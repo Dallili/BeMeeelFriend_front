@@ -33,7 +33,7 @@ const ReadDiary = ({date, content, sendDiary, type, goSendDiary}) => {
             ): type === "deactivated" ? (
                 <div className="indexes">
                     <div className="index left index_clicked" onClick={() => navigate(`/read-diary/${diaryID}?type=deactivated`, {state:"refresh"})}>일기 보기</div>
-                    <div className="index center"></div>
+                    {/*<div className="index center" style={{visibility:"hidden"}}></div>*/}
                     <div className="index right" onClick={open}>일기 삭제</div>
                 </div>
             ): (

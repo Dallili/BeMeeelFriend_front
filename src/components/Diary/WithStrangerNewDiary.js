@@ -11,7 +11,7 @@ const WithStrangerNewDiary = () => {
     const [selectedNum, setSelectedNum] = useState(0);
     const [currentClick, setCurrentClick] = useState([]);
     const [prevClick, setPrevClick] = useState([]);
-    const interests = ["대학생", "직장인", "드라마", "덕질", "게임", "면허", "mbti", "영화", "댄스", "운동", "공부", "시험", "취준", "수다"];
+    const interests = ["일상", "고민", "수다", "덕질", "음식", "드라마", "운동", "영화", "댄스", "게임", "공부", "시험", "취준", "학생", "직장인"];
     const [diaryDone, setDiaryDone] = useState("");
 
     const interestSelect = (e) => {
@@ -45,6 +45,7 @@ const WithStrangerNewDiary = () => {
                 const current = document.getElementById(currentClick[i]);
                 current.style.backgroundColor = "#FFD7D2";
                 current.style.color = "#FE614C";
+                current.textContent = `${i + 1}`;
             }
         }
         if (prevClick !== null) {
@@ -52,6 +53,7 @@ const WithStrangerNewDiary = () => {
                 const prev = document.getElementById(prevClick[i]);
                 prev.style.backgroundColor = "white";
                 prev.style.color = "black";
+                prev.textContent = "";
             }
         }
     }, [currentClick, prevClick]);
@@ -95,10 +97,10 @@ const WithStrangerNewDiary = () => {
                     )}
                 </div>
             </div>
-            { selectedNum > 0 ? (
+            { selectedNum === 3 ? (
                 <NextBtn text="매칭 요청하기" onClick={sendRandomMatching}/>
             ):(
-                <NextBtn style={{backgroundColor:"#F5F5F5"}} text="매칭 요청하기" />
+                <NextBtn style={{backgroundColor:"#dedede"}} text="매칭 요청하기" />
             )}
             { diaryDone !== "" && <CreateDiaryDone stranger={true}/>}
         </div>

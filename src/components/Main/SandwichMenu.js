@@ -9,6 +9,7 @@ const SandwichMenu = ({menuClose}) => {
     // 사용자 정보 받아와서 넘겨주기
     // const userData= getUserInfo();
     // const name = userData.nickname;
+    // const gender = userData.gender;
     const name = "반짝이는 마녀";
     const num = 1;
     const navigate = useNavigate();

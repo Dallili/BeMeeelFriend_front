@@ -7,7 +7,7 @@ $white: #ffffff !global;
 html, body {
   margin: 0;
   //임시로 app 돌아가는 화면이랑 구분하려고 설정함
-  background-color: $white;
+  background-color: #ffeae9;
   font-family: 'Noto Sans KR', sans-serif;
   // 러버밴딩 방지
   overscroll-behavior-y: none;
@@ -15,14 +15,7 @@ html, body {
 
 #root {
   overflow: auto;
-  width: 100vw;
-  @include tablet{
-    max-width: 600px;
-  }
-  @include desktop{
-    max-width: 500px;
-    min-width: 350px;
-  }
+  max-width: 500px;
   //기기별 화면 높이 계산해서 불필요한 스크롤 방지
   height: calc(var(--vh, 1vh) * 100);
   //웹 상에서 화면이 중간에 오도록 설정

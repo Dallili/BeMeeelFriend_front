@@ -67,7 +67,7 @@ const HistoryCabinetPage = () => {
                             </div>
                         </div>
                     ): diary.length === 2 ? (
-                        <div className="diary_bg" onClick={clicked}>
+                        <div className="diary_bg diaries" onClick={clicked}>
                             <img src={require('../../img/Main/book_mask0.png')} alt="bg" className="fill0" style={{filter:`opacity(.4) drop-shadow(0 0 0 ${diaryColor[0]}`}}/>
                             <div className="diary_line" style={{paddingTop:"33px", paddingLeft:"12px"}}>
                                 <img src={require('../../img/Main/book_line0.png')} alt="diary" className="line line0" />
@@ -81,7 +81,7 @@ const HistoryCabinetPage = () => {
 
                         </div>
                     ): diary.length === 3 ? (
-                        <div className="diary_bg" onClick={clicked}>
+                        <div className="diary_bg diaries" onClick={clicked}>
                             <img src={require('../../img/Main/book_mask0.png')} alt="bg" className="fill0" style={{filter:`opacity(.5) drop-shadow(0 0 0 ${diaryColor[0]}`}}/>
                             <div className="diary_line" style={{paddingTop:"33px", paddingLeft:"12px"}}>
                                 <img src={require('../../img/Main/book_line0.png')} alt="diary" className="line line0" />
@@ -105,7 +105,7 @@ const HistoryCabinetPage = () => {
                     )}
                 </div>
                 <div className="hourglass">
-                    <div className="item_btn" onClick={goMain}>
+                    <div className="item_btn goHome_btn" onClick={goMain}>
                         Home
                     </div>
                 </div>

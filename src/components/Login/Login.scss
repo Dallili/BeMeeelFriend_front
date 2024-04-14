@@ -10,14 +10,16 @@
     padding: 130px 50px 15px 0;
 
     .loginLogo_img {
-      @include mobile {
-        width: 47vw;
-      }
-      @include tablet {
-        height: calc(var(--vh, 1vh) * 5);
+      @include notDesktop {
+        @include mobile {
+          width: 47vw;
+        }
+        @include tablet {
+          height: calc(var(--vh, 1vh) * 5);
+        }
       }
       @include desktop {
-        height: calc(var(--vh, 1vh) * 10);
+        height: calc(var(--vh, 1vh) * 7);
       }
     }
   }

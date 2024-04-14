@@ -1,18 +1,17 @@
 @import '../../utils';
 
 .overlay{
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 999;
-  background-color: rgba(0, 0, 0, 0.2);
-  @include tablet {
-    background-color: rgba(0, 0, 0, 0);
-  }
-  @include desktop {
-    background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.5);
+  @include notDesktop {
+    @include tablet {
+      background-color: rgba(0, 0, 0, 0);
+    }
   }
 }
 .sandwich_menu {

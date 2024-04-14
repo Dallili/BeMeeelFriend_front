@@ -98,8 +98,7 @@ const DeleteDiary = ({diarys, diaryNum, isAllClicked, setSelectedNum, selectedNu
     // }, [currentClick, prevClick]);
 
     return (
-        <>
-            <div className="delete_diary">
+        <div className="delete_diary">
             {diarys.map((diary, index) => (
                 <div key={index} className="diary">
                     {/*<img src={require('../../img/diary_icon.svg')} alt="diary" className="diary_img"/>*/}
@@ -122,7 +121,6 @@ const DeleteDiary = ({diarys, diaryNum, isAllClicked, setSelectedNum, selectedNu
                 <DiaryModal onClick={onClick} onClick2={onDeleteDiary} text1="일기장을 영구적으로 삭제하시겠습니까?" text2="삭제한 일기장은" text3="다시 복구할 수 없습니다." btn="삭제" />
             }
         </div>
-        </>
     );
 };
 

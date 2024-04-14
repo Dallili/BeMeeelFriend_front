@@ -24,10 +24,10 @@ const DeactivatedDiary = ({diarys, diaryNum}) => {
     }
 
     return (
-        <>
-        <div className="select_btn" onClick={open}>
-            <img src={require('../../img/Diarys/select_btn.png')} alt="btn"/>
-        </div>
+        <div className="deactivated_diary">
+            <div className="select_btn" onClick={open}>
+                <img src={require('../../img/Diarys/select_btn.png')} alt="btn"/>
+            </div>
             {isOpen && diaryNum !== 0 && (
                 <>
                     <div className="select_btn" onClick={close}>
@@ -39,7 +39,6 @@ const DeactivatedDiary = ({diarys, diaryNum}) => {
                     </div>
                 </>
             )}
-        <div className="deactivated_diary">
             {diaryNum === 0 ? (
                 <div className="nodiary_text">비활성화 된 일기장이 없습니다.</div>
             ):(
@@ -72,7 +71,6 @@ const DeactivatedDiary = ({diarys, diaryNum}) => {
                 </>
             )}
         </div>
-        </>
     );
 };
 

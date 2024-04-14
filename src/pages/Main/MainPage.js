@@ -28,7 +28,7 @@ const MainPage = () => {
             "updatedAt": "2024-03-26 15:52:15",
             "color": "#000000",
             "activated": true
-        },
+        }
     ]);
 
     const [diaryColor, setDiaryColor] = useState(diary && diary.map((it) => it.color));
@@ -73,7 +73,7 @@ const MainPage = () => {
                             </div>
                         </div>
                     ): diary && diary.length === 2 ? (
-                        <div className="diary_bg" onClick={clicked}>
+                        <div className="diary_bg diaries" onClick={clicked}>
                             <img src={require('../../img/Main/book_mask0.png')} alt="bg" className="fill0" style={{filter:`opacity(.4) drop-shadow(0 0 0 ${diaryColor[0]}`}}/>
                             <div className="diary_line" style={{paddingTop:"33px", paddingLeft:"12px"}}>
                                 <img src={require('../../img/Main/book_line0.png')} alt="diary" className="line line0" />
@@ -87,7 +87,7 @@ const MainPage = () => {
 
                         </div>
                     ): diary && diary.length === 3 ? (
-                        <div className="diary_bg" onClick={clicked}>
+                        <div className="diary_bg diaries" onClick={clicked}>
                             <img src={require('../../img/Main/book_mask0.png')} alt="bg" className="fill0" style={{filter:`opacity(.5) drop-shadow(0 0 0 ${diaryColor[0]}`}}/>
                             <div className="diary_line" style={{paddingTop:"33px", paddingLeft:"12px"}}>
                                 <img src={require('../../img/Main/book_line0.png')} alt="diary" className="line line0" />

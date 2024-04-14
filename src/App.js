@@ -41,6 +41,9 @@ import WriteDiaryPage from "./pages/Diarys/WriteDiaryPage";
 import SendDiaryPage from "./pages/Diarys/SendDiaryPage";
 import EmotionReport from "./pages/Diarys/EmotionReport";
 import PrivateRoute from "./router/PrivateRoute";
+import DiaryDonePage from "./pages/Diarys/DiaryDonePage";
+import SendDiaryDone from "./components/Diary/SendDiaryDone";
+import RegisterCode from "./components/Diary/RegisterCode";
 
 
 function App() {
@@ -89,7 +92,7 @@ function App() {
                     </Route>
                     <Route path="/welcome" element={<Welcome />} />
 
-                    <Route element={<PrivateRoute />}>
+                    {/*<Route element={<PrivateRoute />}>*/}
                         {/*메인 페이지: 메인 캐비넷*/}
                         <Route path="/" element={<MainPage />} />
                         {/*알림 페이지*/}
@@ -100,6 +103,7 @@ function App() {
                             <Route path="friend" element={<WithFriendNewDiary/>} />
                             <Route path="new-friend" element={<WithStrangerNewDiary/>} />
                             <Route path="color" element={<DiaryColor/>} />
+                            <Route path="register-code" element={<RegisterCode />} />
                         </Route>
 
                         <Route path="/deactivated-diary" element={<DisabledDiaryPage />} />
@@ -126,7 +130,7 @@ function App() {
                         <Route path="/settings/guide" element={<UserGuidePage />}/>
                         <Route path="/settings/userreport" element={<UserReportPage />} />
                         <Route path="/settings/withdrawal" element={<WithdrawalPage />} />
-                    </Route>
+                    {/*</Route>*/}
                 </Routes>
             </div>
         )}

@@ -1,9 +1,8 @@
 @import '../../utils';
 
 .createDiaryDone, .diaryPreparing, .sendDiaryDone, .emotion_report {
-  height: calc(var(--vh, 1vh) * 100);
   .overlay{
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -21,7 +20,7 @@
     left: 0;
     align-items: center;
     justify-content: center;
-    width: calc(var(--vw, 1vw) * 100);
+    width: 100%;
     height: calc(var(--vh, 1vh) * 100);
     background-image: url("../../img/Diarys/done_background.png");
     background-repeat: no-repeat;
@@ -165,9 +164,11 @@
           font-family: 'Noto Sans KR', sans-serif;
           font-size: 13px;
           font-weight: 300;
+          cursor: pointer;
         }
       }
     }
+
     .go_btn {
       position: absolute;
       bottom: 100px;
@@ -182,6 +183,7 @@
       font-size: 14px;
       font-weight: 600;
       background-color: #FE614C;
+      cursor: pointer;
     }
 
     .doneCancel_btn {
@@ -193,6 +195,7 @@
       .cancel_btn {
         width: 30px;
         height: 30px;
+        cursor: pointer;
       }
       @include smallMobile {
         bottom: 3vh;
@@ -217,14 +220,14 @@
         align-items: center;
         gap: 7px;
         color: white;
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         @include smallMobile {
           font-size: 1.2rem;
         }
         .emotion_bar {
           -webkit-appearance: none;
           height: 4.5vh;
-          width: 65vw;
+          width: calc(500px * 0.65);
         }
         progress::-webkit-progress-bar {
           border-radius: 15px;
@@ -258,3 +261,6 @@
   }
 }
 
+.emotion_report {
+  position: relative;
+}

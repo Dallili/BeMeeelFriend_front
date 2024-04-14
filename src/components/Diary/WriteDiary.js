@@ -75,7 +75,10 @@ const WriteDiary = ({isNew, setIsNew, allDelete, setAllDelete, setChangeBg, chan
             </div>
             <div className="date_box">
                 <img src={require('../../img/Diarys/calendar_icon.png')} alt="icon"/>
-                <div className="date">{date}</div>
+                <div style={{display:"flex", flexDirection:"column"}}>
+                    <div className="date">{date}</div>
+                    <div className="time" style={{visibility:"hidden"}}>time</div>
+                </div>
             </div>
             <div className="diaryInput_box">
                 <textarea className="diary_input" onChange={diaryContent} value={content.content}/>

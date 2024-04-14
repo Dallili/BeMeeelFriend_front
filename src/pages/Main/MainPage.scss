@@ -37,9 +37,12 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-60%, -28%);
+      transform: translate(-63%, -28%);
       cursor: pointer;
 
+      @include notDesktop {
+        transform: translate(-60%, -28%);
+      }
       .diary_bg {
         position: relative;
         height: fit-content;
@@ -48,59 +51,90 @@
           width: 220px;
           filter: opacity(.7) drop-shadow(0 0 0 blue);
 
-          @include smallMobile {
-            width: 180px;
-          }
-          @include tablet {
-            width: 280px;
-          }
-          @include iPad_pro {
-            width: 300px;
-          }
-        }
-
-        .fill2 {
-          @include smallMobile{
-            margin-top: 20px;
-            margin-left: -5px;
-          }
-          @include tablet {
-            width: 310px;
-            margin-top: -53px;
-          }
-          @include iPad_pro {
-            width: 320px;
-            margin-top: -55px;
-          }
-        }
-
-        .fill1 {
-          filter: opacity(.7) drop-shadow(0 0 0 blue);
-          margin-left: -5px;
-          @include smallMobile {
-            width: 180px;
-            margin-top: 20px;
-          }
-          @include tablet {
-            width: 280px;
-            margin-top: -20px;
-          }
-          @include iPad_pro {
-            width: 320px;
-            margin-top: -40px;
+          @include notDesktop {
+            @include smallMobile {
+              width: 170px;
+            }
+            @include mobile {
+              width: 195px;
+            }
+            @include tablet {
+              width: 280px;
+            }
+            @include iPad_pro {
+              width: 300px;
+            }
           }
         }
 
         .fill0 {
+          width: 225px;
           filter: opacity(.7) drop-shadow(0 0 0 blue);
-          @include smallMobile {
-            width: 180px;
+
+          @include notDesktop {
+            @include smallMobile {
+              width: 180px;
+            }
+            @include mobile {
+              width: 195px;
+            }
+            @include tablet {
+              width: 280px;
+            }
+            @include iPad_pro {
+              width: 320px;
+            }
           }
-          @include tablet {
-            width: 280px;
+        }
+
+        .fill1 {
+          margin-left: -5px;
+          width: 230px;
+          filter: opacity(.7) drop-shadow(0 0 0 blue);
+
+          @include notDesktop {
+            @include smallMobile {
+              width: 180px;
+              margin-top: 20px;
+            }
+            @include mobile {
+              width: 206px;
+              margin-top: 9px;
+            }
+            @include tablet {
+              width: 280px;
+              margin-top: -20px;
+            }
+            @include iPad_pro {
+              width: 320px;
+              margin-top: -40px;
+            }
           }
-          @include iPad_pro {
-            width: 320px;
+        }
+
+        .fill2 {
+          width: 223px;
+          margin-top: -3px;
+          margin-left: -5px;
+
+          @include notDesktop {
+            @include smallMobile {
+              margin-top: 20px;
+              margin-left: -5px;
+            }
+            @include mobile {
+              width: 203px;
+              margin-top: 5px;
+              margin-left: -15px;
+            }
+            @include tablet {
+              width: 310px;
+              margin-top: -53px;
+            }
+            @include iPad_pro {
+              width: 320px;
+              margin-top: -55px;
+            }
           }
         }
 
@@ -114,65 +148,105 @@
           .line {
             z-index: 999;
 
-            @include smallMobile {
-              width: 190px;
-              padding-top: 18px;
+            @include notDesktop {
+              width: 200px;
+              padding-top: 12px;
+              @include smallMobile {
+                width: 190px;
+                padding-top: 13px;
+              }
+              @include tablet {
+                width: 310px;
+                margin-top: -35px;
+                margin-left: -2px;
+              }
+              @include iPad_pro {
+                width: 330px;
+                margin-top: -40px;
+              }
             }
-            @include tablet {
-              width: 310px;
-              margin-top: -35px;
-              margin-left: -2px;
-            }
-            @include iPad_pro {
-              width: 330px;
-              margin-top: -40px;
-            }
+
           }
 
           .line0 {
-            @include smallMobile {
-              width: 172px;
-              margin-top: -6px;
-              margin-left: -3px;
-            }
-            @include tablet {
-              width: 285px;
-              padding-top: 5px;
-            }
-            @include iPad_pro {
-              width: 310px;
+            width: 210px;
+
+            @include notDesktop {
+              @include smallMobile {
+                width: 172px;
+                margin-top: -6px;
+                margin-left: -3px;
+              }
+              @include mobile {
+                width: 187px;
+                margin-left: -3px;
+              }
+              @include tablet {
+                width: 285px;
+                padding-top: 5px;
+              }
+              @include iPad_pro {
+                width: 310px;
+              }
             }
           }
+
           .line1 {
-            @include smallMobile {
-              width: 185px;
-              margin-top: 5px;
-            }
-            @include tablet {
-              padding-top: 5px;
-            }
-            @include iPad_pro {
-              padding-top: 5px;
+            width: 235px;
+            margin-top: 3px;
+
+            @include notDesktop {
+              @include smallMobile {
+                width: 185px;
+                margin-top: 5px;
+              }
+              @include mobile {
+                width: 209px;
+                margin-top: -1px;
+              }
+              @include tablet {
+                padding-top: 5px;
+              }
+              @include iPad_pro {
+                padding-top: 5px;
+              }
             }
           }
 
           .line2{
-            @include smallMobile {
-              margin-left: -5px;
-            }
-            @include tablet {
-              width: 325px;
-              margin-left: -3px;
-            }
-            @include iPad_pro {
-              width: 335px;
-              margin-top: -45px;
-              margin-left: -3px;
+            width: 230px;
+            margin-left: -5px;
+
+            @include notDesktop {
+              @include smallMobile {
+                margin-left: -5px;
+              }
+              @include mobile {
+                width: 210px;
+                margin-top: -5px;
+                margin-left: -13px;
+              }
+              @include tablet {
+                width: 325px;
+                margin-left: -3px;
+              }
+              @include iPad_pro {
+                width: 335px;
+                margin-top: -45px;
+                margin-left: -3px;
+              }
             }
           }
         }
       }
+      .diaries {
+        margin-top: -10px;
+        @include notDesktop {
+          margin-top: -10px;
+        }
+      }
     }
+
     .diary_bg:hover {
       box-shadow: 0 0 80px rgb(252, 252, 6);
       background-color: rgba(248, 248, 83, 0.4);
@@ -188,8 +262,8 @@
 
       .item_btn {
         position: absolute;
-        top: 60%;
-        left: 50%;
+        left: 58%;
+        bottom: 32%;
         transform: translate(15%);
         color: #f8e5e5;
         font-family: 'Black Han Sans', sans-serif;
@@ -198,16 +272,25 @@
         cursor: pointer;
         z-index: 999;
 
-        @include smallMobile {
-          top: 65%;
+        @include notDesktop {
+          @include smallMobile {
+            top: 65%;
+          }
+          @include mobile {
+            top: 65%;
+            left: 50%;
+          }
+          @include tablet {
+            left: 65%;
+          }
+          @include desktop {
+            top: 65%;
+            left: 61%;
+          }
         }
-        @include tablet {
-          left: 65%;
-        }
-        @include desktop {
-          top: 65%;
-          left: 61%;
-        }
+      }
+      .goHome_btn {
+        left: 63%;
       }
 
       .item_btn:hover {

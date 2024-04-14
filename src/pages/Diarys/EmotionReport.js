@@ -4,7 +4,7 @@ import {useState} from "react";
 
 const EmotionReport = ({username}) => {
     const navigate = useNavigate();
-    const goMain = () => navigate('/', {replace: true});
+    const goMain = () => window.location.replace("/");
     const [progress, setProgress] = useState([83, 37, 30, 27, 25, 18]);
 
     return (

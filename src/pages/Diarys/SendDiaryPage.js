@@ -17,16 +17,17 @@ const SendDiaryPage = () => {
     const [content, setContent] = useState(unsentData[0]);
 
     const goWriteDiary = () => navigate(`/write-diary/${diaryID}`);
+
     const handleSendDiary = () => {
-        sendDiaryPage(content.entryID, setSendDiary);
+        // await sendDiaryPage(content.entryID, setSendDiary);
+        setSendDiary(true);
     };
 
     return(
         <div className="sendDiary">
-            <Header type="back" style={{backgroundColor:"#FFACA3", border:"none"}}/>
+            <Header type="back" style={{backgroundColor:"#ffb4aa", border:"none"}}/>
             <SendDiary date={content.date} content={content.content} sendDiary={sendDiary}/>
-            <BottomNav type="send" setSendDiary={setSendDiary} goWriteDiary={goWriteDiary} />
-            {/*<BottomNav type="send" setSendDiary={handleSendDiary} goWriteDiary={goWriteDiary} />*/}
+            <BottomNav type="send" setSendDiary={handleSendDiary} goWriteDiary={goWriteDiary} />
         </div>
     );
 };

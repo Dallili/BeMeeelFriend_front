@@ -2,33 +2,72 @@ import './DiaryColor.scss';
 import NextBtn from "./components/NextBtn";
 import {useEffect, useState} from "react";
 import CreateDiaryDone from "./CreateDiaryDone";
-import {useOutletContext} from "react-router-dom";
 import {createDiary} from "../../api/diary";
 
 const DiaryColor = () => {
-    const diaryColors1 = ["#ffff3f", "#4CB", "#FFC4DD", "#FD1E1E", "#4E99DE"];
-    const diaryColors2 = ["#D5D5D5", "#BE5108", "#4CB", "#ffff3f", "#4CB"];
-    const {color, setColor} = useOutletContext();
+    // 원래 색깔, 서버에 넘겨 줘야 함
+    const diaryColors1Origin = ["#f8c600", "#4E99DE", "#FD1E1E", "#5108be","#4CB"];
+    const diaryColors2Origin = ["#D5D5D5", "#BE5108", "#E0F4D4FF", "#ff851f", "#1AFFF9FF"];
+
+    // 선택지에 보이는 색깔
+    const diaryColors1 = ["#fcfdde", "#dee7f5", "#f6d4d2",  "#d8cdee", "#E2F2EFFF"];
+    const diaryColors2 = ["#D5D5D5", "#ebdacf", "#E0F4D4FF", "#ecb6ac", "#e6fcfb"];
+
+    // 컬러 팔레트에 놓을 배열
     const [colors, setColors]= useState(diaryColors1);
-    const [diaryColor, setDiaryColor] = useState(diaryColors1[0]);
-    const [currentClick, setCurrentClick] = useState(["0"]);
-    const [prevClick, setPrevClick] = useState(["1"]);
+
+    // 실제 다이어리 색깔
+    const [diaryColor, setDiaryColor] = useState({
+        array: diaryColors1Origin,
+        color: 2
+    });
+
+    const [currentArr, setCurrentArr] = useState(diaryColors1Origin[2]);
+    const [prevClick, setPrevClick] = useState("1");
 
     const [diaryID, setDiaryID] = useState('');
+
     const clickNext = () => {
         if (JSON.stringify(colors) === JSON.stringify(diaryColors1)) {
             setColors(diaryColors2);
+            setDiaryColor({
+                ...diaryColor,
+                array: diaryColors2Origin
+            });
         } else {
             setColors(diaryColors1);
+            setDiaryColor({
+                ...diaryColor,
+                array: diaryColors1Origin
+            });
         }
     }
+
+    // 색깔 선택 시 검정 테두리
+    useEffect(() => {
+        const current = document.getElementById(diaryColor.color);
+        // current.style.border = "solid black 2px";
+        if (diaryColors2Origin.includes(currentArr) && JSON.stringify(colors) === JSON.stringify(diaryColors2)){
+            current.style.border = "solid black 2px";
+        } else if (diaryColors1Origin.includes(currentArr) && JSON.stringify(colors) === JSON.stringify(diaryColors1)) {
+            current.style.border = "solid black 2px";
+        } else {
+            current.style.border = "none";
+        }
+
+        if (prevClick !== null) {
+            const prev = document.getElementById(prevClick);
+            prev.style.border = "none";
+        }
+
+    }, [diaryColor, prevClick, currentArr, colors]);
 
     const [diaryDone, setDiaryDone]= useState("");
 
     const createNewDiary = async () => {
         const succeed = await createDiary({
             memberID: sessionStorage.getItem("userID"),
-            color: diaryColor
+            color: currentArr
         });
 
         if(!succeed){
@@ -42,27 +81,17 @@ const DiaryColor = () => {
         setDiaryDone("me");
     };
 
-    // useEffect(() => {
-    //     if (currentClick !== null) {
-    //         const current = document.getElementById(currentClick[0]);
-    //         current.style.border = "solid black 3px";
-    //     }
-    //     if (prevClick !== null) {
-    //         const prev = document.getElementById(prevClick[0]);
-    //         prev.style.border = "none";
-    //     }
-    //     const unselected = currentClick.splice(0, 1);
-    //     setPrevClick([...prevClick, unselected]);
-    //     }, [currentClick, prevClick]);
-
     return (
         <div className="diary_color">
             <div className="instruction">만들어질 일기장의 겉표지 색상을 선택해주세요!</div>
             <div className="color_choice">
                 <div className="diary">
-                    <div className="square" style={{
-                        backgroundColor:`${diaryColor}`,
-                    }}></div>
+                    <div className="diary_bg">
+                        <img src={require('../../img/Main/book_mask.png')} alt="bg" className="fill" style={{filter:`opacity(.7) drop-shadow(0 0 0 ${currentArr}`}}/>
+                        <div className="diary_line">
+                            <img src={require('../../img/Main/book_line.png')} alt="diary" className="line" />
+                        </div>
+                    </div>
                 </div>
                 <div className="palette">
                     <button className="back_btn" onClick={clickNext}><img src={require('../../img/smallback_btn.png')} alt="backBtn" className="back_img"/></button>
@@ -73,10 +102,13 @@ const DiaryColor = () => {
                                     backgroundColor:`${it}`,
                                  }}
                                  id={i}
-                                 onClick={() => {
-                                     setDiaryColor(it);
-                                     setCurrentClick([...currentClick, `${i}`]);
-                                     setColor(it);
+                                 onClick={()=> {
+                                     setPrevClick(diaryColor.color);
+                                     setDiaryColor({
+                                         ...diaryColor,
+                                         color: i
+                                     });
+                                     setCurrentArr(diaryColor.array[i]);
                                  }}
                             />
                         )}

@@ -3,8 +3,9 @@ import {useNavigate} from "react-router-dom";
 
 const SendDiaryDone = () => {
     const navigate = useNavigate();
-    const goMain = () => navigate('/', {replace: true});
+    const goMain = () => window.location.replace("/");
     const goEmotionReport = () => navigate('/emotion-report');
+
     return (
         <div className="sendDiaryDone">
             <div className="overlay"></div>
@@ -21,8 +22,8 @@ const SendDiaryDone = () => {
                     <img style={{marginLeft:"-10px"}} src={require('../../img/Diarys/done_send.png')} alt="confetti" className="confetti_img"/>
                 </div>
                 <div className="done_blank"></div>
-                <div className="done_blank"></div>
                 <button className="go_btn" onClick={goEmotionReport}>분석 결과 보러가기</button>
+                <div className="done_blank"></div>
                 <div className="done_blank"></div>
                 <div className="doneCancel_btn" >
                     <img src={require('../../img/cancel_btn.png')} alt="cancel" className="cancel_btn" onClick={goMain}/>

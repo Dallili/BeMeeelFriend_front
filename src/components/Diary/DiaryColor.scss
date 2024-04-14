@@ -1,37 +1,67 @@
+@import "../../utils";
 .diary_color {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
   padding-top: 70px;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
 
   .instruction {
-    padding: 65px 0 80px 0;
+    padding: 70px 0 120px 0;
     text-align: center;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 800;
   }
+
   .color_choice {
-    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 183px;
+
+    @include notDesktop {
+      margin-bottom: 193px;
+    }
 
     .diary {
       display: flex;
       justify-content: center;
-      margin-bottom: 80px;
+      height: 180px;
 
-      .square {
-        width: 200px;
-        height: 250px;
-        background-color: black;
+      .diary_bg {
+        position: relative;
+
+        .fill {
+          position: absolute;
+          top: 30%;
+          transform: translate(-50%, 0);
+          width: 270px;
+        }
+
+        .diary_line {
+          position: absolute;
+          top: 30%;
+          margin-top: -3px;
+          margin-left: -5px;
+          transform: translate(-50%, 0);
+          .line {
+            width: 280px;
+          }
+        }
       }
     }
 
     .palette {
       display: flex;
       align-items: center;
-      margin: 0 20px;
+      margin: 90px 40px 0 40px;
 
       .back_btn {
         display: flex;
         border: none;
         background-color: transparent;
+        cursor: pointer;
 
         .back_img {
           width: 30px;
@@ -47,6 +77,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        gap: 25px;
         width: 70vw;
         height: 80px;
         overflow: hidden;
@@ -54,9 +85,9 @@
         .color {
           width: 30px;
           height: 30px;
-          margin: 0 10px;
           border-radius: 50%;
           filter: drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.15));
+          cursor: pointer;
         }
       }
     }
