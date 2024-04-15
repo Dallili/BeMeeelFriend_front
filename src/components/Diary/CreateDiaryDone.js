@@ -1,7 +1,4 @@
 import './DiaryDone.scss';
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {getMatchingCode, patchMatchingCode} from "../../api/matching";
 
 const CreateDiaryDone = ({who, stranger, diaryID, code}) => {
     const goMain = () => window.location.replace("/");

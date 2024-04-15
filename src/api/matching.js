@@ -8,7 +8,7 @@ export const getMatchingCode = async (diaryID) => {
         return matchingCode
     } catch (e) {
         alert("매칭 코드 받기 실패");
-        return false
+        return "fail"
     }
 }
 

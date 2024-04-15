@@ -11,9 +11,12 @@ axiosInstance.defaults.baseURL = process.env.REACT_APP_SERVER_URL;
 
 export const signUp = async (data) => {
     try {
-        await axiosInstance.post(`/members`, data);
+        const res = await axiosInstance.post(`/members`, data);
+        if (res.data.message === "이미 존재하는 이메일입니다") {
+            alert("이미 존재하는 이메일입니다");
+        }
         // 회원가입 후 로그인
-        const response = await axiosInstance.post(`/members/login`, {
+        const response = await login({
             email: data.email,
             password: data.password
         });

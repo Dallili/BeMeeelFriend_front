@@ -14,6 +14,8 @@ const HistoryCabinetPage = () => {
 
     const [diary, setDiary] = useState([]);
     const [diaryColor, setDiaryColor] = useState([]);
+    const [diaryPrepare, setDiaryPrepare] = useState(false);
+    const [diaryID, setDiaryID] = useState("");
 
     const clicked = () => {
         yes();
@@ -107,14 +109,16 @@ const HistoryCabinetPage = () => {
                             <div className="modal_text">일기장 선택</div>
                             {diary.map((it, index) => (
                                 <div key={index} className="diary_select" onClick={diary[index].partnerID === null ?
-                                    diary[index].color === "#ffffff" ? <DiaryPreparing who="stranger" />
-                                    : <DiaryPreparing />
+                                    diary[index].color === "#ffffff" ? setDiaryPrepare(true)
+                                    : setDiaryPrepare(true) && setDiaryID(diary[index].diaryID)
                                     : ()=> navigate(`/read-diary/${diary[index].diaryID}?type=history`)}>{diary[index].partnerID}</div>
                             ))}
                             <div className="close_btn" onClick={no}>닫기</div>
                         </div>
                     </>
                 )}
+                { diaryPrepare && <DiaryPreparing who="stranger" />}
+                { diaryPrepare && diaryID && <DiaryPreparing diaryID={diaryID}/>}
             </div>
         </div>
     );

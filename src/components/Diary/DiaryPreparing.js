@@ -1,10 +1,30 @@
 import './DiaryDone.scss';
 import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {getMatchingCode} from "../../api/matching";
 
-const DiaryPreparing = ({who}) => {
+const DiaryPreparing = ({who, diaryID}) => {
     const navigate = useNavigate();
     const goHistory = () => navigate('/history');
-    const myInvitationCode = "AFD#@RSFDJSFL@LFDS";
+
+    const [myInvitationCode, setCode] = useState("");
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(myInvitationCode);
+    }
+
+    const getCode = async () => {
+        const res = await getMatchingCode(diaryID);
+        if (res !== "fail") {
+            setCode(res);
+        }
+    }
+
+    useEffect(() => {
+        if(who !== "stranger"){
+            getCode();
+        }
+    }, []);
 
     return (
         <div className="diaryPreparing">
@@ -25,7 +45,7 @@ const DiaryPreparing = ({who}) => {
                             <div className="invitation_title">친구를 <span style={{color:"#227573", textDecoration:"#FC715F 5px underline"}}>초대하기</span> 위해서,</div>
                             <div className="invitation_text">아래의 초대 코드를 친구에게 공유해주세요.</div>
                             <input className="invitation_code" disabled="true" value={myInvitationCode} />
-                            <button className="invitation_btn">복사</button>
+                            <button className="invitation_btn" onClick={handleCopy}>복사</button>
                         </div>
                     </div>
                 )}
