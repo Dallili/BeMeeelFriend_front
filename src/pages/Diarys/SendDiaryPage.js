@@ -29,7 +29,7 @@ const SendDiaryPage = () => {
     const goWriteDiary = () => navigate(`/write-diary/${diaryID}`);
 
     const handleSendDiary = async () => {
-        const res = await sendDiaryPage(content.entryID, setSendDiary);
+        const res = await sendDiaryPage(content.entryID);
         if (res !== "fail") {
             setSendDiary(true);
         }
