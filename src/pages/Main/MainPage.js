@@ -3,7 +3,6 @@ import '../../components/Modal.scss';
 import useModal from "../../hooks/useModal";
 import SandwichMenu from "../../components/Main/SandwichMenu";
 import {useNavigate, useParams} from "react-router-dom";
-import {getMainDiary} from "../../api/diaryData";
 import {useEffect, useState} from "react";
 import {getDiary} from "../../api/diary";
 

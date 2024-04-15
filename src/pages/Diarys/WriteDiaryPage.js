@@ -4,7 +4,6 @@ import BottomNav from "../../components/BottomNav";
 import {useEffect, useReducer, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {getDiaryPage, postDiary, putDiary} from "../../api/entry";
-import {getDiaryPageData, reducer} from "../../api/diaryData";
 
 const WriteDiaryPage = () => {
     const navigate = useNavigate();

@@ -1,4 +1,4 @@
-import {axiosInstance} from "./diary";
+import {axiosInstance} from "./user";
 
 // 다이어리 개별 일기 내용 요청
 export const getDiaryPage = async(diaryID) => {

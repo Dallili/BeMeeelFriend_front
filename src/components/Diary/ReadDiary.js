@@ -3,7 +3,7 @@ import DiaryModal from "./DiaryModal";
 import useModal from "../../hooks/useModal";
 import {useNavigate, useParams} from "react-router-dom";
 import {deactivateDiary, deleteDiary} from "../../api/diary";
-import {useState} from "react";
+
 const ReadDiary = ({date, content, sendDiary, type, goSendDiary}) => {
     const navigate = useNavigate();
 

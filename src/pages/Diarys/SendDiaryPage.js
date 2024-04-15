@@ -3,7 +3,6 @@ import Header from "../../components/Header";
 import SendDiary from "../../components/Diary/SendDiary";
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import {getDiaryPageData} from "../../api/diaryData";
 import {getDiaryPage, sendDiaryPage} from "../../api/entry";
 
 

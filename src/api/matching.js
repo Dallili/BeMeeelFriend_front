@@ -1,4 +1,4 @@
-import {axiosInstance} from "./diary";
+import {axiosInstance} from "./user";
 
 // 매칭 코드 조회
 export const getMatchingCode = async (diaryID) => {

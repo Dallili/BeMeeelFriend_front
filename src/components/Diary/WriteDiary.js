@@ -3,7 +3,6 @@ import '../Modal.scss';
 import {useEffect, useRef, useState} from "react";
 import ShortButton from "../ShortButton";
 import useModal from "../../hooks/useModal";
-import SendDiaryDone from "./SendDiaryDone";
 import DiaryModal from "./DiaryModal";
 import {useNavigate, useParams} from "react-router-dom";
 import {deactivateDiary} from "../../api/diary";

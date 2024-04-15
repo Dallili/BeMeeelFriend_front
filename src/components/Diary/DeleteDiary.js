@@ -3,7 +3,6 @@ import '../Modal.scss';
 import {useEffect, useState} from "react";
 import ShortButton from "../ShortButton";
 import DiaryModal from "./DiaryModal";
-import {getDeactivatedDiary} from "../../api/diaryData";
 import {deleteDiary} from "../../api/diary";
 
 const DeleteDiary = ({diarys, diaryNum, isAllClicked, setSelectedNum, selectedNum, allSelect, isClicked, onClick}) => {

@@ -4,7 +4,6 @@ import useModal from "../../hooks/useModal";
 import ShortButton from "../ShortButton";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {getDeactivatedDiary} from "../../api/diaryData";
 
 const DeactivatedDiary = ({diarys, diaryNum}) => {
     const navigate = useNavigate();
