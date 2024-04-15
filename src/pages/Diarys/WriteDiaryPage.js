@@ -42,6 +42,8 @@ const WriteDiaryPage = () => {
         });
         if (res === "fail") {
             alert("일기 저장 실패");
+        } else {
+            navigate(`/send-diary/${diaryID}`);
         }
     };
 
@@ -52,6 +54,8 @@ const WriteDiaryPage = () => {
         }, unsentData[0].entryID);
         if (res === "fail") {
             alert("일기 저장 실패");
+        } else {
+            navigate(`/send-diary/${diaryID}`);
         }
     };
 
@@ -62,7 +66,6 @@ const WriteDiaryPage = () => {
         } else {
             onUpdate();
         }
-        navigate(`/send-diary/${diaryID}`);
     };
 
     useEffect(() => {
