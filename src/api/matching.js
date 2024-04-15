@@ -3,7 +3,11 @@ import {axiosInstance} from "./user";
 // 매칭 코드 조회
 export const getMatchingCode = async (diaryID) => {
     try {
-        const response = await axiosInstance.get(`/matches/${diaryID}`);
+        const response = await axiosInstance.get(`/matches/{diaryID}`, {
+            params: {
+                diaryID: diaryID
+            }
+        });
         const matchingCode = response.data;
         return matchingCode
     } catch (e) {
@@ -14,11 +18,7 @@ export const getMatchingCode = async (diaryID) => {
 
 export const patchMatchingCode = async (data) => {
     try {
-        const res = await axiosInstance.patch('/matches/', {
-            params: {
-                code: data
-            }
-        });
+        const res = await axiosInstance.patch(`/matches/?code=${data}`);
         return res.data.state
     } catch (e) {
         alert("코드 전송 실패");
