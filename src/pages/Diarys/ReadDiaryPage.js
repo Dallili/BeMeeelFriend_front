@@ -95,6 +95,8 @@ const ReadDiaryPage = () => {
         }
     }
 
+    console.log(unsentData);
+
     useEffect(() => {
         getDiaryEntry();
     }, []);

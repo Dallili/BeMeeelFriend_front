@@ -12,9 +12,6 @@ const SendDiary = ({date, content, sendDiary, goSendDiary}) => {
 
     const {isModalOpen, yes, no} = useModal();
 
-    // const dateAndTime = date.split(' ');
-    const date1 = new Date().toLocaleDateString()
-
     const onDeactivate = () => {
         deactivateDiary(diaryID);
     };
@@ -29,7 +26,7 @@ const SendDiary = ({date, content, sendDiary, goSendDiary}) => {
             <div className="date_box">
                 <img src={require('../../img/Diarys/calendar_icon.png')} alt="icon"/>
                 <div style={{display:"flex", flexDirection:"column"}}>
-                    <div className="date">{date1}</div>
+                    <div className="date">{date}</div>
                     <div className="time" style={{visibility:"hidden"}}>time</div>
                 </div>
             </div>
