@@ -3,7 +3,11 @@ import {axiosInstance} from "./user";
 // 일기 생성
 export const createDiary = async (data) => {
     try {
-        const res = await axiosInstance.post(`/matches/`, data);
+        const res = await axiosInstance.post(`/matches/`, JSON.stringify(data), {
+            headers: {
+                "Content-Type": `application/json`,
+            }
+        });
         return res.data
     } catch (error) {
         alert("일기장 생성 실패");
