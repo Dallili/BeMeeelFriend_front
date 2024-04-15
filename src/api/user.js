@@ -2,17 +2,10 @@ import axios from "axios";
 const userToken = sessionStorage.getItem("userToken");
 
 export let axiosInstance;
-axiosInstance = axios.create({
-    defaults: {
-        withCredentials: true,
-        headers: {
-            common: {
-                Authorization: `Bearer ${userToken}`,
-            }
-        },
-    }
-});
+axiosInstance = axios.create();
 
+axiosInstance.defaults.withCredentials = true;
+axiosInstance.defaults.headers.common.Authorization = `Bearer ${userToken}`;
 axiosInstance.defaults.baseURL = process.env.REACT_APP_SERVER_URL;
 
 
