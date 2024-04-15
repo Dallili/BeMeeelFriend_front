@@ -108,9 +108,10 @@ const HistoryCabinetPage = () => {
                         <div className="modal diarySelect_modal">
                             <div className="modal_text">일기장 선택</div>
                             {diary.map((it, index) => (
-                                <div key={index} className="diary_select" onClick={diary[index].partnerID === null ?
-                                    diary[index].color === "#ffffff" ? setDiaryPrepare(true)
-                                    : setDiaryPrepare(true) && setDiaryID(diary[index].diaryID)
+                                <div key={index} className="diary_select"
+                                     onClick={
+                                    diary[index].partnerID === null ?
+                                    diary[index].color === "#ffffff" ? () => setDiaryPrepare(true) : () => {setDiaryPrepare(true); setDiaryID(diary[index].diaryID)}
                                     : ()=> navigate(`/read-diary/${diary[index].diaryID}?type=history`)}>{diary[index].partnerID}</div>
                             ))}
                             <div className="close_btn" onClick={no}>닫기</div>
