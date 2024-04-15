@@ -3,7 +3,7 @@ import MenuItem from "./components/MenuItem";
 import Modal from "../Modal";
 import useModal from "../../hooks/useModal";
 import {useNavigate} from "react-router-dom";
-import {getUserInfo} from "../../api/user";
+import {getUserInfo, logOut} from "../../api/user";
 import {useEffect, useState} from "react";
 import {getActivated} from "../../api/diary";
 
@@ -19,7 +19,11 @@ const SandwichMenu = ({menuClose}) => {
         const diaryNum = await getActivated();
         setNickname(res.nickname);
         setGender(res.gender);
-        setNum(diaryNum.total);
+        if (diaryNum.total === null) {
+            setNum(0);
+        } else {
+            setNum(diaryNum.total);
+        }
     }
 
     useEffect(() => {
@@ -29,9 +33,7 @@ const SandwichMenu = ({menuClose}) => {
     const {isOpen, open, close} = useModal();
 
     const logout= () => {
-        logout();
-        console.log("로그아웃 성공");
-        close();
+        logOut();
     };
 
     const navigate = useNavigate();

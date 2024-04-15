@@ -46,7 +46,7 @@ export const getActivated = async () => {
     try {
         const response = await axiosInstance.get(`/diaries/`, {
             params: {
-                status: true
+                state: true
             }
         })
         return response.data
@@ -60,7 +60,7 @@ export const getDeactivated = async (userID) => {
     try {
         const response = await axiosInstance.get(`/diaries/`,{
             params:{
-                status: false
+                state: false
             }
         })
         return response.data

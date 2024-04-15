@@ -39,7 +39,6 @@ export const login = async (data) => {
 
 export const logOut = () => {
     try {
-        // await axiosInstance.post(`/members/logout`);
         sessionStorage.removeItem("userToken");
         sessionStorage.removeItem("userID");
         window.location.replace("/login");
