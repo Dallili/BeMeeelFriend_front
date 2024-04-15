@@ -21,8 +21,8 @@ const WriteDiary = ({isNew, setIsNew, allDelete, setAllDelete, setChangeBg, chan
 
     const {diaryID} = useParams();
 
-    const onDeactivate = () => {
-        deactivateDiary(diaryID);
+    const onDeactivate = async () => {
+        await deactivateDiary(diaryID);
     };
 
     useEffect(() => {

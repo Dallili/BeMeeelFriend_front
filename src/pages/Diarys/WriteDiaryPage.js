@@ -3,7 +3,7 @@ import WriteDiary from "../../components/Diary/WriteDiary";
 import BottomNav from "../../components/BottomNav";
 import {useEffect, useReducer, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import {postDiary, putDiary} from "../../api/entry";
+import {getDiaryPage, postDiary, putDiary} from "../../api/entry";
 import {getDiaryPageData, reducer} from "../../api/diaryData";
 
 const WriteDiaryPage = () => {
@@ -13,25 +13,36 @@ const WriteDiaryPage = () => {
     const [allDelete, setAllDelete] = useState(false);
     const [changeBg, setChangeBg] = useState(false);
 
-    const {unsentData} = getDiaryPageData(diaryID);
+    const [unsentData, setUnsentData] = useState([]);
+
+    const getDiaryEntry = async () => {
+        const res = await getDiaryPage(diaryID);
+        if (res !== "fail") {
+            setUnsentData(res.unsent);
+        }
+    }
+
+    useEffect(() => {
+        getDiaryEntry();
+    }, []);
+
     const [isNew, setIsNew] = useState(unsentData.length <= 0);
 
     const [content, setContent] = useState(unsentData.length <= 0 ? {
         diaryID: diaryID,
         date: new Date().toLocaleDateString(),
-        content: " "
+        content: ""
     }: unsentData[0]);
 
-    const onCreate = (content) => {
-        postDiary({
+    const onCreate = async () => {
+        await postDiary({
             "diaryID": diaryID,
-            "writer": "user1",
             "content": content.content
         });
     };
 
-    const onUpdate = (content) => {
-        putDiary({
+    const onUpdate = async () => {
+        await putDiary({
             "entryID": unsentData[0].entryID,
             "content": content.content
         }, unsentData[0].entryID);
@@ -40,9 +51,9 @@ const WriteDiaryPage = () => {
     // 새 일기를 작성하거나 임시 저장된 일기 수정 후 저장하거나
     const onSubmit = () => {
         if (isNew) {
-            onCreate(content);
+            onCreate();
         } else {
-            onUpdate(content);
+            onUpdate();
         }
         navigate(`/send-diary/${diaryID}`);
     };

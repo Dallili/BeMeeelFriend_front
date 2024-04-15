@@ -1,10 +1,10 @@
 import BottomNav from "../../components/BottomNav";
 import Header from "../../components/Header";
 import SendDiary from "../../components/Diary/SendDiary";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {getDiaryPageData} from "../../api/diaryData";
-import {sendDiaryPage} from "../../api/entry";
+import {getDiaryPage, sendDiaryPage} from "../../api/entry";
 
 
 const SendDiaryPage = () => {
@@ -12,15 +12,28 @@ const SendDiaryPage = () => {
     const navigate = useNavigate();
     const {diaryID} = useParams();
 
+    const [unsentData, setUnsentData] = useState([]);
     // 일기 데이터 가져옴
-    const { unsentData } = getDiaryPageData(diaryID);
+    const getDiaryEntry = async () => {
+        const res = await getDiaryPage(diaryID);
+        if (res !== "fail") {
+            setUnsentData(res.unsent);
+        }
+    }
+
+    useEffect(() => {
+        getDiaryEntry();
+    }, []);
+
     const [content, setContent] = useState(unsentData[0]);
 
     const goWriteDiary = () => navigate(`/write-diary/${diaryID}`);
 
-    const handleSendDiary = () => {
-        // await sendDiaryPage(content.entryID, setSendDiary);
-        setSendDiary(true);
+    const handleSendDiary = async () => {
+        const res = await sendDiaryPage(content.entryID, setSendDiary);
+        if (res !== "fail") {
+            setSendDiary(true);
+        }
     };
 
     return(

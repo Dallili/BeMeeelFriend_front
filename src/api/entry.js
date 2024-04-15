@@ -8,6 +8,7 @@ export const getDiaryPage = async(diaryID) => {
         return response.data
     } catch(e) {
         alert("일기장 조회 실패");
+        return "fail"
     }
 }
 
@@ -15,9 +16,8 @@ export const getDiaryPage = async(diaryID) => {
 export const postDiary = async (content) => {
     try {
         const response = await axiosInstance.post('/entries/', content);
-        console.log(response.data);
     } catch(error) {
-        console.log('error');
+        return "fail"
     }
 };
 
@@ -26,19 +26,17 @@ export const putDiary = async (content, entryID) => {
     try {
         await axiosInstance.put(`/entries/${entryID}`, content)
     }catch(error) {
-        console.log('error');
+        return "fail"
     }
 };
 
 
 // 일기 전달
-export const sendDiaryPage = async (entryID, setSendDiary) => {
+export const sendDiaryPage = async (entryID) => {
     try {
-        const response = await axiosInstance.patch(`/entries/${entryID}`);
-        if (response.result === "일기 전달 성공") {
-            setSendDiary(true);
-        }
+        const res = await axiosInstance.patch(`/entries/${entryID}`);
+        return res.data
     }catch(error){
-        console.log(error);
+        return "fail"
     }
 }

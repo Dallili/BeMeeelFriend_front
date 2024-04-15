@@ -2,29 +2,19 @@ import ReadDiary from "../../components/Diary/ReadDiary";
 import BottomNav from "../../components/BottomNav";
 import Header from "../../components/Header";
 import {useEffect, useState} from "react";
-import {useLocation, useNavigate, useParams, useSearchParams} from "react-router-dom";
-import {getDiaryPageData} from "../../api/diaryData";
+import {useNavigate, useParams, useSearchParams} from "react-router-dom";
+import {getDiaryPage} from "../../api/entry";
 
 const ReadDiaryPage = () => {
     const navigate = useNavigate();
     const {diaryID} = useParams();
-    // const location = useLocation();
-    // const [newLoc, setNewLoc] = useState(location.state);
-    // console.log(newLoc)
     const [searchParams, setSearchParams] = useSearchParams();
     const type = searchParams.get("type") === "history" || searchParams.get("type") === "deactivated" ? "history": "main";
 
-    // 일기 데이터 가져옴
-    const { sentData, unsentData } = getDiaryPageData(diaryID);
-    // const getDiaryPageData = async (diaryID) => {
-    //     const response = await getDiaryPage(diaryID);
-    //     const sentData = response.data.sent;
-    //     const unsentData = response.data.unsent;
-    //     const diaryNum = response.total;
-    //     return { sentData, unsentData }
-    // };
+    const [sentData, setSentData] = useState([]);
+    const [unsentData, setUnsentData] = useState([]);
 
-    // // 일기 읽기에서 기본으로 가장 최근 일기 내용 보여줌
+    // 일기 읽기에서 기본으로 가장 최근 일기 내용 보여줌
     const [pageNum, setPageNum] = useState(sentData.length > 0 ? sentData.length - 1 : -2);
 
     const [isEnd, setIsEnd] = useState(type === "history" || type === "deactivate" ? "history" : sentData.length > 0 ? "read" : "end");
@@ -82,7 +72,6 @@ const ReadDiaryPage = () => {
         }
     };
 
-
     useEffect(() => {
         if (pageNum > -1 && pageNum < sentData.length && !(isEnd === "history")) {
             setIsEnd("read");
@@ -99,6 +88,17 @@ const ReadDiaryPage = () => {
 
     }, [pageNum]);
 
+    const getDiaryEntry = async () => {
+        const res = await getDiaryPage(diaryID);
+        if (res !== "fail") {
+            setSentData(res.sent);
+            setUnsentData(res.unsent);
+        }
+    }
+
+    useEffect(() => {
+        getDiaryEntry();
+    }, []);
 
     const goWriteOrSendDiary = () => {
         // 기존에 작성해 둔 일기가 있으면
