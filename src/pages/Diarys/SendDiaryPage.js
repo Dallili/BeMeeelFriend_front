@@ -25,7 +25,6 @@ const SendDiaryPage = () => {
         getDiaryEntry();
     }, []);
 
-    console.log(content);
     const goWriteDiary = () => navigate(`/write-diary/${diaryID}`);
 
     const handleSendDiary = async () => {

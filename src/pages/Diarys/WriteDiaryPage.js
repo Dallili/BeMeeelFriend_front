@@ -25,7 +25,6 @@ const WriteDiaryPage = () => {
         getDiaryEntry();
     }, []);
 
-    console.log(unsentData);
     console.log(unsentData[0]);
 
     const [isNew, setIsNew] = useState(unsentData.length <= 0);
