@@ -31,7 +31,7 @@ const HistoryCabinetPage = () => {
         } else {
             const diaries = res.diaries;
             setDiary(diaries);
-            setDiaryColor(diary && diary.map((it) => it.color));
+            setDiaryColor(diary.map((it) => it.color));
         }
     };
 
@@ -49,14 +49,14 @@ const HistoryCabinetPage = () => {
                 <div className="diarys">
                     {diary.length === 1 ? (
                         <div className="diary_bg" onClick={clicked}>
-                            <img  src={require('../../img/Main/book_mask.png')} alt="bg" className="fill" style={{filter:`opacity(.6) drop-shadow(0 0 0 ${diaryColor[0]}`}}/>
+                            <img  src={require('../../img/Main/book_mask.png')} alt="bg" className="fill" style={{filter:`opacity(.5) drop-shadow(0 0 0 ${diaryColor[0]}`}}/>
                             <div className="diary_line">
                                 <img src={require('../../img/Main/book_line.png')} alt="diary" className="line" />
                             </div>
                         </div>
                     ): diary.length === 2 ? (
                         <div className="diary_bg diaries" onClick={clicked}>
-                            <img src={require('../../img/Main/book_mask0.png')} alt="bg" className="fill0" style={{filter:`opacity(.4) drop-shadow(0 0 0 ${diaryColor[0]}`}}/>
+                            <img src={require('../../img/Main/book_mask0.png')} alt="bg" className="fill0" style={{filter:`opacity(.5) drop-shadow(0 0 0 ${diaryColor[0]}`}}/>
                             <div className="diary_line" style={{paddingTop:"33px", paddingLeft:"12px"}}>
                                 <img src={require('../../img/Main/book_line0.png')} alt="diary" className="line line0" />
                                 <div className="diary_line">
@@ -112,7 +112,7 @@ const HistoryCabinetPage = () => {
                                      onClick={
                                     diary[index].partnerID === null ?
                                     diary[index].color === "#ffffff" ? () => {no(); setDiaryPrepare(true)} : () => {no(); setDiaryPrepare(true); setDiaryID(diary[index].diaryID)}
-                                    : ()=> navigate(`/read-diary/${diary[index].diaryID}?type=history`)}>{diary[index].partnerID}</div>
+                                    : ()=> navigate(`/read-diary/${diary[index].diaryID}?type=history`)}>{diary[index].partnerID === null ? "준비중" : diary[index].partnerID}</div>
                             ))}
                             <div className="close_btn" onClick={no}>닫기</div>
                         </div>

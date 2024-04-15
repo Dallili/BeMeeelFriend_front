@@ -67,7 +67,7 @@ const DiaryColor = () => {
     const [code, setCode] = useState("");
 
     const createNewDiary = async () => {
-        const succeed = await createDiary(currentArr);
+        const succeed = await createDiary(diaryColor.array[diaryColor.color]);
         const user = await getUserInfo();
 
         if(succeed !== "fail"){
