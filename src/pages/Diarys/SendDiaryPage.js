@@ -35,10 +35,12 @@ const SendDiaryPage = () => {
         }
     };
 
+    const date = new Date().toLocaleDateString();
+
     return(
         <div className="sendDiary">
             <Header type="back" style={{backgroundColor:"#ffb4aa", border:"none"}}/>
-            <SendDiary date={content.date} content={content.content} sendDiary={sendDiary}/>
+            <SendDiary date={date} content={content.content} sendDiary={sendDiary}/>
             <BottomNav type="send" setSendDiary={handleSendDiary} goWriteDiary={goWriteDiary} />
         </div>
     );
