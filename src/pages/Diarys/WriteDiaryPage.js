@@ -25,6 +25,8 @@ const WriteDiaryPage = () => {
         getDiaryEntry();
     }, []);
 
+    console.log(unsentData);
+
     const [isNew, setIsNew] = useState(unsentData.length <= 0);
 
     const [content, setContent] = useState(unsentData.length <= 0 ? {
@@ -35,8 +37,8 @@ const WriteDiaryPage = () => {
 
     const onCreate = async () => {
         const res = await postDiary({
-            "diaryID": diaryID,
-            "content": content.content
+            diaryID: diaryID,
+            content: content.content
         });
         if (res === "fail") {
             alert("일기 저장 실패");
@@ -45,8 +47,8 @@ const WriteDiaryPage = () => {
 
     const onUpdate = async () => {
         const res = await putDiary({
-            "entryID": unsentData[0].entryID,
-            "content": content.content
+            entryID: unsentData[0].entryID,
+            content: content.content
         }, unsentData[0].entryID);
         if (res === "fail") {
             alert("일기 저장 실패");
@@ -55,7 +57,7 @@ const WriteDiaryPage = () => {
 
     // 새 일기를 작성하거나 임시 저장된 일기 수정 후 저장하거나
     const onSubmit = () => {
-        if (isNew) {
+        if (unsentData.length <= 0) {
             onCreate();
         } else {
             onUpdate();

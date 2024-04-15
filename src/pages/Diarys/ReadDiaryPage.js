@@ -40,8 +40,7 @@ const ReadDiaryPage = () => {
                 };
             } else {
                 return {
-                    "entryID": sentData[sentData.length - 1].entryID + 1,
-                    "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString()}`,
+                    "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
                     "content": "일기를 작성할 차례입니다."
                 };
             }

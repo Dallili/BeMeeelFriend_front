@@ -13,7 +13,7 @@ const ReadDiary = ({date, content, sendDiary, type, goSendDiary}) => {
     const {isModalOpen, yes, no} = useModal();
     const {isOpen, open, close} = useModal();
 
-    const [dateAndTime, setDateAndTime] = useState(date.content === "일기를 작성할 차례입니다." ? date.split(',') : date.split(' '));
+    const [dateAndTime, setDateAndTime] = useState(content === "일기를 작성할 차례입니다." ? date.split(',') : date.split(' '));
 
     const onDeactivate = () => {
         deactivateDiary(diaryID);
