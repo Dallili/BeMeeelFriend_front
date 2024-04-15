@@ -34,17 +34,23 @@ const WriteDiaryPage = () => {
     }: unsentData[0]);
 
     const onCreate = async () => {
-        await postDiary({
+        const res = await postDiary({
             "diaryID": diaryID,
             "content": content.content
         });
+        if (res === "fail") {
+            alert("일기 저장 실패");
+        }
     };
 
     const onUpdate = async () => {
-        await putDiary({
+        const res = await putDiary({
             "entryID": unsentData[0].entryID,
             "content": content.content
         }, unsentData[0].entryID);
+        if (res === "fail") {
+            alert("일기 저장 실패");
+        }
     };
 
     // 새 일기를 작성하거나 임시 저장된 일기 수정 후 저장하거나

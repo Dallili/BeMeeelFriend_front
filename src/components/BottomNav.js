@@ -94,7 +94,7 @@ const BottomNav = ({type, onClick, goWriteDiary, num, allSelect, setSendDiary, s
                                 <option key={i} onClick={()=>setTime(`${it}`)}>{it}</option>
                             ))}
                         </select>
-                        <div onClick={()=>setSendDiary(true)}>전달하기</div>
+                        <div onClick={setSendDiary}>전달하기</div>
                     </div>
                 </div>
             </div>

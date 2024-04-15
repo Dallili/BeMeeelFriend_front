@@ -9,7 +9,7 @@ const ReadDiaryPage = () => {
     const navigate = useNavigate();
     const {diaryID} = useParams();
     const [searchParams, setSearchParams] = useSearchParams();
-    const type = searchParams.get("type") === "history" || searchParams.get("type") === "deactivated" ? "history": "main";
+    const type = (searchParams.get("type") === "history" || searchParams.get("type") === "deactivated") ? "history": "main";
 
     const [sentData, setSentData] = useState([]);
     const [unsentData, setUnsentData] = useState([]);
@@ -26,7 +26,7 @@ const ReadDiaryPage = () => {
             "sendAt": unsentData[0].date,
             "content": unsentData[0].content
         } : {
-            "sendAt": `${new Date().toLocaleDateString()} ${new Date().toTimeString()}`,
+            "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
             "content": "일기를 작성할 차례입니다."
     });
 
@@ -41,7 +41,7 @@ const ReadDiaryPage = () => {
             } else {
                 return {
                     "entryID": sentData[sentData.length - 1].entryID + 1,
-                    "sendAt": `${new Date().toLocaleDateString()} ${new Date().toTimeString()}`,
+                    "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString()}`,
                     "content": "일기를 작성할 차례입니다."
                 };
             }

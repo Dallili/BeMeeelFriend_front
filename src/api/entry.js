@@ -38,6 +38,7 @@ export const sendDiaryPage = async (entryID) => {
         const res = await axiosInstance.patch(`/entries/${entryID}`);
         return res.data
     }catch(error){
+        alert("일기 전달 실패");
         return "fail"
     }
 }
