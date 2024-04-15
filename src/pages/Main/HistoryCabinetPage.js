@@ -111,7 +111,7 @@ const HistoryCabinetPage = () => {
                                 <div key={index} className="diary_select"
                                      onClick={
                                     diary[index].partnerID === null ?
-                                    diary[index].color === "#ffffff" ? () => setDiaryPrepare(true) : () => {setDiaryPrepare(true); setDiaryID(diary[index].diaryID)}
+                                    diary[index].color === "#ffffff" ? () => {no(); setDiaryPrepare(true)} : () => {no(); setDiaryPrepare(true); setDiaryID(diary[index].diaryID)}
                                     : ()=> navigate(`/read-diary/${diary[index].diaryID}?type=history`)}>{diary[index].partnerID}</div>
                             ))}
                             <div className="close_btn" onClick={no}>닫기</div>

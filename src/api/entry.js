@@ -3,7 +3,11 @@ import {axiosInstance} from "./user";
 // 다이어리 개별 일기 내용 요청
 export const getDiaryPage = async(diaryID) => {
     try {
-        const response = await axiosInstance.get(`/entries/list/${diaryID}`);
+        const response = await axiosInstance.get('/entries/list/{diaryID}', {
+            params: {
+                diaryID: diaryID
+            }
+        });
         console.log('데이터 받기 완료');
         return response.data
     } catch(e) {

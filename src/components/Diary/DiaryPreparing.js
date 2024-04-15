@@ -4,8 +4,7 @@ import {useEffect, useState} from "react";
 import {getMatchingCode} from "../../api/matching";
 
 const DiaryPreparing = ({who, diaryID}) => {
-    const navigate = useNavigate();
-    const goHistory = () => navigate('/history');
+    const goHistory = () => window.location.replace('/history');
 
     const [myInvitationCode, setCode] = useState("");
 
