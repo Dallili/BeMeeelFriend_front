@@ -61,9 +61,9 @@ const WithStrangerNewDiary = () => {
     const sendRandomMatching = async () => {
         const result = await postRandomMatching({
             createdAt: new Date(),
-            firstInterest: currentClick[0],
-            secondInterest: currentClick[1],
-            thirdInterest: currentClick[2]
+            firstInterest: interests[currentClick[0]],
+            secondInterest: interests[currentClick[1]],
+            thirdInterest: interests[currentClick[2]]
         });
         if(result !== "fail") {
             showDiaryDone();
@@ -85,8 +85,8 @@ const WithStrangerNewDiary = () => {
                 <div className="interests">
                     {interests.map((it, i) =>
                         <div className="interest">
-                            <div className="interest_circle" id={[`${i}`, "번"].join("")} onClick={interestSelect}></div>
-                            <div className="interest_text" id={[`${i}`, "번"].join("")}>{it}</div>
+                            <div className="interest_circle" id={i} onClick={interestSelect}></div>
+                            <div className="interest_text" id={i}>{it}</div>
                         </div>
                     )}
                 </div>
