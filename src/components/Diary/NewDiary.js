@@ -1,22 +1,19 @@
 import './NewDIary.scss';
 import {useState} from "react";
 import LongButton from "../LongButton";
-import {useNavigate, useOutletContext} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const NewDiary = () => {
-    const {setNewDiaryInfo} = useOutletContext();
     const navigate = useNavigate();
     const [withWho, setWithWho] = useState("friend");
     const [isClicked, setIsClicked] = useState("left");
     const withFriend = () => {
         setWithWho("friend");
         setIsClicked("left");
-        setNewDiaryInfo(withWho);
     }
     const withStranger = () => {
         setWithWho("stranger");
         setIsClicked("right");
-        setNewDiaryInfo(withWho);
     }
 
     const goWithFriend = () => navigate('/newdiary/friend');

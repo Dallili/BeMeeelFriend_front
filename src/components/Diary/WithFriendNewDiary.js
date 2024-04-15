@@ -1,11 +1,9 @@
 import './WithSbNewDiary.scss';
 import NextBtn from "./components/NextBtn";
 import {useState} from "react";
-import {useNavigate, useOutletContext} from "react-router-dom";
-import CreateDiaryDone from "./CreateDiaryDone";
+import {useNavigate} from "react-router-dom";
 
 const WithFriendNewDiary = () => {
-    const {setInvite} = useOutletContext();
     const navigate = useNavigate();
     const [clicked, setClicked] = useState("left");
     const [imgBlack, setImgBlack] = useState(true);
@@ -13,13 +11,11 @@ const WithFriendNewDiary = () => {
     const leftClicked = () => {
         setClicked("left");
         setImgBlack(true);
-        setInvite("inviting");
     };
 
     const rightClicked = () => {
         setClicked("right");
         setImgBlack(false);
-        setInvite("invited");
     };
 
     const goChooseColor = () => navigate('/newdiary/color');
