@@ -3,13 +3,8 @@ import {axiosInstance} from "./user";
 // 다이어리 개별 일기 내용 요청
 export const getDiaryPage = async(diaryID) => {
     try {
-        const response = await axiosInstance.get('/entries/list/{diaryID}', {
-            params: {
-                diaryID: diaryID
-            }
-        });
-        console.log('데이터 받기 완료');
-        return response.data
+        const res = await axiosInstance.get(`/entries/list/${diaryID}`);
+        return res.data
     } catch(e) {
         alert("일기장 조회 실패");
         return "fail"
@@ -19,7 +14,8 @@ export const getDiaryPage = async(diaryID) => {
 // 새 일기 작성
 export const postDiary = async (content) => {
     try {
-        const response = await axiosInstance.post('/entries/', content);
+        const res = await axiosInstance.post('/entries/', content);
+        return res.data
     } catch(error) {
         return "fail"
     }
@@ -28,7 +24,8 @@ export const postDiary = async (content) => {
 // 일기 수정
 export const putDiary = async (content, entryID) => {
     try {
-        await axiosInstance.put(`/entries/${entryID}`, content)
+        const res = await axiosInstance.put(`/entries/${entryID}`, content);
+        return res.data
     }catch(error) {
         return "fail"
     }

@@ -26,7 +26,7 @@ const ReadDiaryPage = () => {
             "sendAt": unsentData[0].date,
             "content": unsentData[0].content
         } : {
-            "sendAt": new Date().toLocaleDateString(),
+            "sendAt": `${new Date().toLocaleDateString()} ${new Date().toTimeString()}`,
             "content": "일기를 작성할 차례입니다."
     });
 
@@ -41,7 +41,7 @@ const ReadDiaryPage = () => {
             } else {
                 return {
                     "entryID": sentData[sentData.length - 1].entryID + 1,
-                    "sendAt": new Date().toLocaleDateString(),
+                    "sendAt": `${new Date().toLocaleDateString()} ${new Date().toTimeString()}`,
                     "content": "일기를 작성할 차례입니다."
                 };
             }
