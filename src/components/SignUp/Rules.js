@@ -7,11 +7,14 @@ import {signUp} from "../../api/user";
 
 const Rules = () => {
     const navigate = useNavigate();
-    const {userInfo, setUserInfo} = useOutletContext();
-    console.log(userInfo)
+    const { userInfo } = useOutletContext();
+
     const goWelcome = async () => {
-        await signUp(userInfo);
-        navigate('/welcome');
+        const res = await signUp(userInfo);
+
+        if (res === "fail") {
+            alert("회원가입 오류입니다");
+        }
     }
 
     return (

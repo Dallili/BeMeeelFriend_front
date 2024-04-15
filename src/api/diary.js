@@ -1,25 +1,10 @@
-import axios from "axios";
-const userToken = sessionStorage.getItem("userToken");
-
-export let axiosInstance;
-axiosInstance = axios.create({
-    defaults: {
-        withCredentials: true,
-        headers: {
-            common: {
-                Authorization: `Bearer ${userToken}`,
-            }
-        },
-    }
-});
-
-axiosInstance.defaults.baseURL = process.env.REACT_APP_SERVER_URL;
+import {axiosInstance} from "./user";
 
 // 일기 생성
 export const createDiary = async (data) => {
     try {
-        const response = await axiosInstance.post(`/matches/`, data);
-        return response.data
+        const res = await axiosInstance.post(`/matches/`, data);
+        return res.data
     } catch (error) {
         alert("일기장 생성 실패");
         return "fail"
@@ -47,44 +32,39 @@ export const deactivateDiary = async (diaryID) => {
 
 // 일기장 조회
 // 메인 페이지 일기장 조회
-export const getDiary = async (userID) => {
+export const getDiary = async () => {
     try {
-        const response = await axiosInstance.get(`/diaries/replied`, {
-            params: {
-                loginMemberID: userID
-            }
-        })
-        return response.data
+        const res = await axiosInstance.get(`/diaries/replied`);
+        return res.data
     } catch (e) {
-        alert("일기장 불러오기 오류");
+        return "fail"
     }
 };
 
+// 히스토리 캐비닛 일기 조회, 총 일기 개수 조회
+export const getActivated = async () => {
+    try {
+        const response = await axiosInstance.get(`/diaries/`, {
+            params: {
+                status: true
+            }
+        })
+        return response.data
+    } catch (error){
+        return "fail"
+    }
+};
+
+// 비활성화 일기장 조회
 export const getDeactivated = async (userID) => {
     try {
-        const response = await axiosInstance.get(`/diaries`,{
+        const response = await axiosInstance.get(`/diaries/`,{
             params:{
-                status: false,
-                memberID: userID
+                status: false
             }
         })
         return response.data
     } catch(error) {
-        console.log(error);
-    }
-};
-
-export const getActivated = async (userID) => {
-    try {
-        const response = await axiosInstance.get(`/diaries`, {
-            params: {
-                status: true,
-                memberID: userID
-            }
-        })
-        console.log(response);
-        return response.data
-    } catch (error){
-        console.log(error);
+        return "fail"
     }
 };

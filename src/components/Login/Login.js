@@ -10,7 +10,6 @@ const Login = () => {
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
 
-    console.log(process.env.REACT_APP_SERVER_URL)
     const idInputHandler = (e) => {
         setId(e.target.value);
     }
@@ -25,7 +24,10 @@ const Login = () => {
             email:`${id}`,
             password:`${pw}`
         }
-        await login(data);
+        const res = await login(data);
+        if (res === "fail") {
+            alert("로그인 오류. 다시 시도해주세요.");
+        }
     }
 
     const goSignUp = () => navigate('/signup');

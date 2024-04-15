@@ -7,7 +7,6 @@ import {useOutletContext} from "react-router-dom";
 import {postRandomMatching} from "../../api/matching";
 
 const WithStrangerNewDiary = () => {
-    const {setKeyword} = useOutletContext();
     const [selectedNum, setSelectedNum] = useState(0);
     const [currentClick, setCurrentClick] = useState([]);
     const [prevClick, setPrevClick] = useState([]);
@@ -61,22 +60,17 @@ const WithStrangerNewDiary = () => {
 
     const sendRandomMatching = async () => {
         const result = await postRandomMatching({
-            memberID: sessionStorage.getItem("userID"),
-            createdAt: new Date().toLocaleTimeString(),
+            createdAt: new Date(),
             firstInterest: currentClick[0],
             secondInterest: currentClick[1],
             thirdInterest: currentClick[2]
         });
-        if(result === true) {
-            showDiaryDone();
-        } else {
+        if(result !== "fail") {
             showDiaryDone();
         }
-
     };
 
     const showDiaryDone = () => {
-        setKeyword(currentClick);
         setDiaryDone("stranger");
     };
 

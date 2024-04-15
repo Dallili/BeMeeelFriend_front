@@ -6,7 +6,6 @@ const CreateDiaryPage = () => {
     const [newDiaryInfo, setNewDiaryInfo] = useState("");
     const [invite, setInvite] = useState("");
     const [color, setColor] = useState("");
-    const [keyword, setKeyword] = useState([]);
 
     return (
         <div className="createDiary">

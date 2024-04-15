@@ -4,29 +4,43 @@ import Modal from "../Modal";
 import useModal from "../../hooks/useModal";
 import {useNavigate} from "react-router-dom";
 import {getUserInfo} from "../../api/user";
+import {useEffect, useState} from "react";
+import {getActivated} from "../../api/diary";
 
 const SandwichMenu = ({menuClose}) => {
     // 사용자 정보 받아와서 넘겨주기
-    // const userData= getUserInfo();
-    // const name = userData.nickname;
-    // const gender = userData.gender;
-    const name = "반짝이는 마녀";
-    const num = 1;
-    const navigate = useNavigate();
+    const [name, setNickname] = useState("");
+    const [gender, setGender] = useState("");
 
-    const goCreateDiary = () => navigate('/newdiary');
-    const goSettings = () => navigate('/settings');
-    const goNotify = () => navigate('/notify');
+    const [num, setNum] = useState(0);
 
+    const getInfo = async () => {
+        const res = await getUserInfo();
+        const diaryNum = await getActivated();
+        setNickname(res.nickname);
+        setGender(res.gender);
+        setNum(diaryNum.total);
+    }
+
+    useEffect(() => {
+        getInfo();
+    }, []);
 
     const {isOpen, open, close} = useModal();
 
     const logout= () => {
+        logout();
         console.log("로그아웃 성공");
         close();
     };
 
+    const navigate = useNavigate();
+
     const goDeactivated = () => navigate('/deactivated-diary');
+    const goCreateDiary = () => navigate('/newdiary');
+    const goSettings = () => navigate('/settings');
+    const goNotify = () => navigate('/notify');
+
 
     return (
         <>

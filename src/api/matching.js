@@ -14,11 +14,15 @@ export const getMatchingCode = async (diaryID) => {
 
 export const patchMatchingCode = async (data) => {
     try {
-        const res = await axiosInstance.patch('/matches', data);
-        return true
+        const res = await axiosInstance.patch('/matches/', {
+            params: {
+                code: data
+            }
+        });
+        return res.data.state
     } catch (e) {
         alert("코드 전송 실패");
-        return false
+        return "fail"
     }
 }
 
@@ -29,7 +33,7 @@ export const postRandomMatching = async (data) => {
         return res.data
     } catch (e) {
         alert("매칭 전송 실패");
-        return false
+        return "fail"
     }
 }
 

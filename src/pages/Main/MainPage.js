@@ -19,43 +19,27 @@ const MainPage = () => {
         yes();
     };
 
-    const [diary, setDiary] = useState([
-        {
-            "diaryID": "diary8",
-            "userID": "user8",
-            "partnerID": "user10",
-            "updatedBy": "user8",
-            "updatedAt": "2024-03-26 15:52:15",
-            "color": "#000000",
-            "activated": true
-        }
-    ]);
+    const [diary, setDiary] = useState([]);
+    const [diaryColor, setDiaryColor] = useState([]);
 
-    const [diaryColor, setDiaryColor] = useState(diary && diary.map((it) => it.color));
+    const getMainDiary = async () => {
+        const res = await getDiary();
+
+        if (res === "fail") {
+            alert("일기장 불러오기 오류");
+        } else {
+            const diaries = res.diaries;
+            setDiary(diaries);
+            setDiaryColor(diary && diary.map((it) => it.color));
+        }
+    };
+
+    useEffect(() => {
+        getMainDiary();
+    }, []);
 
     const navigate = useNavigate();
     const goHistory = () => navigate('/history');
-
-    const [userID, setUserID] = useState(localStorage.getItem("userID"));
-    const getMainDiary = async (userID) => {
-        const diaries = await getDiary(userID).diaries;
-        setDiary(diaries)
-        // setDiary([
-        //     {
-        //         "diaryID": "diary8",
-        //         "userID": "user8",
-        //         "partnerID": "user10",
-        //         "updatedBy": "user8",
-        //         "updatedAt": "2024-03-26 15:52:15",
-        //         "color": "#000000",
-        //         "activated": true
-        //     }
-        // ]);
-    };
-
-    // useEffect(() => {
-    //     getMainDiary(userID);
-    // }, []);
 
     return (
         <div className="main">

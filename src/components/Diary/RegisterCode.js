@@ -3,13 +3,13 @@ import CreateDiaryDone from "./CreateDiaryDone";
 import {useState} from "react";
 import NextBtn from "./components/NextBtn";
 import {patchMatchingCode} from "../../api/matching";
+import sendDiaryDone from "./SendDiaryDone";
 
 const RegisterCode = () => {
     const [diaryDone, setDiaryDone]= useState("");
     const [invitationCode, setInvitationCode] = useState("");
 
     const showDiaryDone = () => {
-        sendMatchingCode();
         setDiaryDone("friend");
     };
 
@@ -18,10 +18,11 @@ const RegisterCode = () => {
     };
 
     const sendMatchingCode = async () => {
-        const result = await patchMatchingCode({
-            code: invitationCode,
-            userID: sessionStorage.getItem("userID")
-        })
+        const res = await patchMatchingCode(invitationCode);
+
+        if(res !== "fail") {
+            showDiaryDone();
+        }
     };
 
     return (
@@ -32,7 +33,7 @@ const RegisterCode = () => {
             <input className="invitation_input" value={invitationCode} onChange={onInputHandler}/>
             <div className="send_btn">
                 {invitationCode ? (
-                    <NextBtn text="제출하기" onClick={showDiaryDone} />
+                    <NextBtn text="제출하기" onClick={sendMatchingCode} />
                 ): (
                     <NextBtn text="제출하기" style={{backgroundColor:"#dedede", cursor:"default"}} />
                 )}

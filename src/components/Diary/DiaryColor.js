@@ -3,6 +3,7 @@ import NextBtn from "./components/NextBtn";
 import {useEffect, useState} from "react";
 import CreateDiaryDone from "./CreateDiaryDone";
 import {createDiary} from "../../api/diary";
+import {getUserInfo} from "../../api/user";
 
 const DiaryColor = () => {
     // 원래 색깔, 서버에 넘겨 줘야 함
@@ -63,18 +64,20 @@ const DiaryColor = () => {
     }, [diaryColor, prevClick, currentArr, colors]);
 
     const [diaryDone, setDiaryDone]= useState("");
+    const [code, setCode] = useState("");
 
     const createNewDiary = async () => {
         const succeed = await createDiary({
-            memberID: sessionStorage.getItem("userID"),
             color: currentArr
         });
 
-        if(!succeed){
-            setDiaryID(succeed.diaryID);
+        const user = await getUserInfo();
+
+        if(succeed !== "fail"){
+            setCode(succeed.code);
+            setDiaryID(user.nickname);
             showDiaryDone();
         }
-        showDiaryDone();
     };
 
     const showDiaryDone = () => {
@@ -117,7 +120,7 @@ const DiaryColor = () => {
                 </div>
             </div>
             <NextBtn text="일기장 만들기" onClick={createNewDiary} />
-            { diaryDone !== "" && <CreateDiaryDone who={diaryDone} diaryID={diaryID} color={diaryColor}/>}
+            { diaryDone !== "" && <CreateDiaryDone who={diaryDone} diaryID={diaryID} code={code}/>}
         </div>
     );
 }

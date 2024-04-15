@@ -4,6 +4,7 @@ import SandwichMenu from "../../components/Main/SandwichMenu";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import DiaryPreparing from "../../components/Diary/DiaryPreparing";
+import {getActivated} from "../../api/diary";
 
 const HistoryCabinetPage = () => {
     const navigate = useNavigate();
@@ -11,45 +12,30 @@ const HistoryCabinetPage = () => {
     const {isOpen, open, close} = useModal();
     const {isModalOpen, yes, no} = useModal();
 
-    const [diary, setDiary] = useState([
-        {
-            "diaryID": "diary8",
-            "userID": "user8",
-            "partnerID": "user10",
-            "updatedBy": "user8",
-            "updatedAt": "2024-03-26 15:52:15",
-            "color": "#000000",
-            "activated": true
-        }
-    ]);
+    const [diary, setDiary] = useState([]);
+    const [diaryColor, setDiaryColor] = useState([]);
 
-    const diaryColor = [diary.map((it, index) => diary[index].color)];
     const clicked = () => {
         yes();
     };
     const goMain = () => navigate('/');
     const goAllDiaries = () => navigate('/deactivated-diary');
 
-    const getActivatedDiary = (userID) => {
-        // const diaries = await getActivated(userID).diaries;
-        // setDiaries(diaries)
-        setDiary([
-                {
-                    "diaryID": "diary12",
-                    "userID": "user12",
-                    "partnerID": "user14",
-                    "updatedBy": "user12",
-                    "updatedAt": "2024-03-26 15:52:15",
-                    "color": "#000000",
-                    "activated": true
-                }
-            ]);
+    const getActivatedDiary = async () => {
+        const res = await getActivated();
+
+        if (res === "fail") {
+            alert("일기장 불러오기 오류");
+        } else {
+            const diaries = res.diaries;
+            setDiary(diaries);
+            setDiaryColor(diary && diary.map((it) => it.color));
+        }
     };
 
     useEffect(() => {
         getActivatedDiary();
     }, []);
-
 
     return (
         <div className="historyCabinet">
@@ -121,7 +107,7 @@ const HistoryCabinetPage = () => {
                             <div className="modal_text">일기장 선택</div>
                             {diary.map((it, index) => (
                                 <div key={index} className="diary_select" onClick={diary[index].partnerID === null ?
-                                    diary[index].color === "#000000" ? <DiaryPreparing who="stranger" />
+                                    diary[index].color === "#ffffff" ? <DiaryPreparing who="stranger" />
                                     : <DiaryPreparing />
                                     : ()=> navigate(`/read-diary/${diary[index].diaryID}?type=history`)}>{diary[index].partnerID}</div>
                             ))}

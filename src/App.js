@@ -92,7 +92,7 @@ function App() {
                     </Route>
                     <Route path="/welcome" element={<Welcome />} />
 
-                    {/*<Route element={<PrivateRoute />}>*/}
+                    <Route element={<PrivateRoute />}>
                         {/*메인 페이지: 메인 캐비넷*/}
                         <Route path="/" element={<MainPage />} />
                         {/*알림 페이지*/}
@@ -130,7 +130,7 @@ function App() {
                         <Route path="/settings/guide" element={<UserGuidePage />}/>
                         <Route path="/settings/userreport" element={<UserReportPage />} />
                         <Route path="/settings/withdrawal" element={<WithdrawalPage />} />
-                    {/*</Route>*/}
+                    </Route>
                 </Routes>
             </div>
         )}
