@@ -7,29 +7,7 @@ import {getUserInfo, logOut} from "../../api/user";
 import {useEffect, useState} from "react";
 import {getActivated} from "../../api/diary";
 
-const SandwichMenu = ({menuClose}) => {
-    // 사용자 정보 받아와서 넘겨주기
-    const [name, setNickname] = useState("");
-    const [gender, setGender] = useState("");
-
-    const [num, setNum] = useState(0);
-
-    const getInfo = async () => {
-        const res = await getUserInfo();
-        const diaryNum = await getActivated();
-        setNickname(res.nickname);
-        setGender(res.gender);
-        if (diaryNum.total === null) {
-            setNum(0);
-        } else {
-            setNum(diaryNum.total);
-        }
-    }
-
-    useEffect(() => {
-        getInfo();
-    }, []);
-
+const SandwichMenu = ({menuClose, name, num}) => {
     const {isOpen, open, close} = useModal();
 
     const logout= () => {

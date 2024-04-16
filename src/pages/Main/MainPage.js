@@ -4,7 +4,8 @@ import useModal from "../../hooks/useModal";
 import SandwichMenu from "../../components/Main/SandwichMenu";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {getDiary} from "../../api/diary";
+import {getActivated, getDiary} from "../../api/diary";
+import {getUserInfo} from "../../api/user";
 
 const MainPage = () => {
     // 샌드위치 메뉴
@@ -20,6 +21,7 @@ const MainPage = () => {
 
     const [diary, setDiary] = useState([]);
     const [diaryColor, setDiaryColor] = useState([]);
+    const [diaryName, setDiaryName] = useState([]);
 
     const getMainDiary = async () => {
         const res = await getDiary();
@@ -29,13 +31,34 @@ const MainPage = () => {
         } else {
             const diaries = res.diaries;
             setDiary(diaries);
-            setDiaryColor(diaries.map((it) => it.color.slice(2, -2)));
+            setDiaryColor(diaries.map((it) => it.color.slice(1, -1)));
+            setDiaryName(diaries.map((it) => diaries.memberName === name ?
+                    setDiaryName(diaries.partnerName) :  setDiaryName(diaries.memberName)
+            ));
         }
     };
+
+    const [name, setNickname] = useState("");
+    const [gender, setGender] = useState("");
+
+    const [num, setNum] = useState(0);
+
+    const getInfo = async () => {
+        const res = await getUserInfo();
+        const diaryNum = await getActivated();
+        setNickname(res.nickname);
+        setGender(res.gender);
+        if (diaryNum.total === null) {
+            setNum(0);
+        } else {
+            setNum(diaryNum.total);
+        }
+    }
 
     console.log(diaryColor)
 
     useEffect(() => {
+        getInfo();
         getMainDiary();
     }, []);
 
@@ -48,7 +71,7 @@ const MainPage = () => {
                 <div className="sandwich_btn" onClick={open}>
                     <img src={require('../../img/Main/sandwich_btn.png')} alt="sandwichBtn" className="sandwich" />
                 </div>
-                {isOpen && <SandwichMenu menuClose={close}/>}
+                {isOpen && <SandwichMenu menuClose={close} name={name} num={num}/>}
                 <div className="diarys">
                     {diary && diary.length === 1 ? (
                         <div className="diary_bg" onClick={clicked}>
@@ -108,7 +131,7 @@ const MainPage = () => {
                         <div className="modal diarySelect_modal">
                             <div className="modal_text">일기장 선택</div>
                             {diary.map((it, index) => (
-                                <div key={index} className="diary_select" onClick={()=> navigate(`/read-diary/${diary[index].diaryID}`)}>{diary[index].partnerID}</div>
+                                <div key={index} className="diary_select" onClick={()=> navigate(`/read-diary/${diary[index].diaryID}`)}>{diaryName[index]}</div>
                             ))}
                             <div className="close_btn" onClick={no}>닫기</div>
                         </div>

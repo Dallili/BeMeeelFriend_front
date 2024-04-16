@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import DiaryPreparing from "../../components/Diary/DiaryPreparing";
 import {getActivated} from "../../api/diary";
+import {getUserInfo} from "../../api/user";
 
 const HistoryCabinetPage = () => {
     const navigate = useNavigate();
@@ -23,6 +24,24 @@ const HistoryCabinetPage = () => {
     const goMain = () => navigate('/');
     const goAllDiaries = () => navigate('/deactivated-diary');
 
+    const [name, setNickname] = useState("");
+    const [gender, setGender] = useState("");
+
+    const [num, setNum] = useState(0);
+    const [diaryName, setDiaryName] = useState([]);
+
+    const getInfo = async () => {
+        const res = await getUserInfo();
+        const diaryNum = await getActivated();
+        setNickname(res.nickname);
+        setGender(res.gender);
+        if (diaryNum.total === null) {
+            setNum(0);
+        } else {
+            setNum(diaryNum.total);
+        }
+    }
+
     const getActivatedDiary = async () => {
         const res = await getActivated();
 
@@ -31,11 +50,15 @@ const HistoryCabinetPage = () => {
         } else {
             const diaries = res.diaries;
             setDiary(diaries);
-            setDiaryColor(diary.map((it) => it.color));
+            setDiaryColor(diaries.map((it) => it.color.slice(1, -1)));
+            setDiaryName(diaries.map((it) => diaries.memberName === name ?
+                setDiaryName(diaries.partnerName) :  setDiaryName(diaries.memberName)
+            ));
         }
     };
 
     useEffect(() => {
+        getInfo();
         getActivatedDiary();
     }, []);
 
@@ -45,7 +68,7 @@ const HistoryCabinetPage = () => {
                 <div className="sandwich_btn" onClick={open}>
                     <img src={require('../../img/Main/sandwich_btn.png')} alt="sandwichBtn" className="sandwich" />
                 </div>
-                {isOpen && <SandwichMenu menuClose={close}/>}
+                {isOpen && <SandwichMenu menuClose={close} name={name} num={num}/>}
                 <div className="diarys">
                     {diary.length === 1 ? (
                         <div className="diary_bg" onClick={clicked}>
@@ -112,7 +135,7 @@ const HistoryCabinetPage = () => {
                                      onClick={
                                     diary[index].partnerID === null ?
                                     diary[index].color === "#ffffff" ? () => {no(); setDiaryPrepare(true)} : () => {no(); setDiaryPrepare(true); setDiaryID(diary[index].diaryID)}
-                                    : ()=> navigate(`/read-diary/${diary[index].diaryID}?type=history`)}>{diary[index].partnerID === null ? "준비중" : diary[index].partnerID}</div>
+                                    : ()=> navigate(`/read-diary/${diary[index].diaryID}?type=history`)}>{diary[index].partnerID === null ? "준비중" : diaryName[index]}</div>
                             ))}
                             <div className="close_btn" onClick={no}>닫기</div>
                         </div>
