@@ -24,14 +24,13 @@ const ReadDiaryPage = () => {
         if (res !== "fail") {
             setSentData(res.sent);
             setUnsentData(res.unsent);
-            const num = res.sent.length > 0 ? res.sent.length - 1 : -2
-            setPageNum(num);
-            setIsEnd(type === "history" || type === "deactivate" ? "history" : res.sent.length > 0 ? "read" : "end");
         }
     }
 
-    useEffect(() => {
+    useEffect( () => {
         getDiaryEntry();
+        setPageNum(sentData.length > 0 ? sentData.length - 1 : -2);
+        setIsEnd(type === "history" || type === "deactivate" ? "history" : sentData.length > 0 ? "read" : "end");
     }, []);
 
     console.log(type)
