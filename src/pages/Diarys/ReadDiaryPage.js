@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import {useEffect, useState} from "react";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 import {getDiaryPage} from "../../api/entry";
+import async from "async";
 
 const ReadDiaryPage = () => {
     const navigate = useNavigate();
@@ -14,16 +15,16 @@ const ReadDiaryPage = () => {
     const [sentData, setSentData] = useState([]);
     const [unsentData, setUnsentData] = useState([]);
 
-    const getDiaryEntry = async () => {
-        const res = await getDiaryPage(diaryID);
-
-        if (res) {
-            setSentData(res.sent);
-            setUnsentData(res.unsent);
-        }
-    }
 
     useEffect( () => {
+        async function getDiaryEntry() {
+            const res = await getDiaryPage(diaryID);
+
+            if (res !== "fail") {
+                setSentData(res.sent);
+                setUnsentData(res.unsent);
+            }
+        }
         getDiaryEntry();
     }, []);
 
@@ -43,6 +44,7 @@ const ReadDiaryPage = () => {
     });
 
     useEffect(() => {
+        setPageNum(sentData.length > 0 ? sentData.length - 1 : -2);
         setContent(unsentData.length > 0 ? {
             "entryID": unsentData[0].entryID,
             "sendAt": unsentData[0].date,
@@ -58,6 +60,7 @@ const ReadDiaryPage = () => {
 
     console.log(type)
     console.log(pageNum)
+    console.log(sentData)
     console.log(sentData[pageNum])
 
     const getNextContent = (currentPage, sentData, unsentData) => {
