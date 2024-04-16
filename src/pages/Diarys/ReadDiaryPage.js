@@ -27,17 +27,6 @@ const ReadDiaryPage = () => {
             const num = res.sent.length > 0 ? res.sent.length - 1 : -2
             setPageNum(num);
             setIsEnd(type === "history" || type === "deactivate" ? "history" : res.sent.length > 0 ? "read" : "end");
-            setContent(res.sent.length > 0 && num !== res.sent.length ? {
-                sendAt: res.sent[num].sendAt,
-                content: res.sent[num].content
-            } : unsentData.length > 0 ? {
-                "entryID": res.unsent[0].entryID,
-                "sendAt": res.unsent[0].date,
-                "content": res.unsent[0].content
-            } : {
-                "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
-                "content": "일기를 작성할 차례입니다."
-            })
         }
     }
 
@@ -48,6 +37,21 @@ const ReadDiaryPage = () => {
     console.log(type)
     console.log(pageNum)
     console.log(sentData[pageNum])
+
+    useEffect(() => {
+        setContent(unsentData.length > 0 ? {
+            "entryID": unsentData[0].entryID,
+            "sendAt": unsentData[0].date,
+            "content": unsentData[0].content
+        } : sentData.length > 0 && pageNum !== sentData.length ? {
+            sendAt: sentData[pageNum].sendAt,
+            content: sentData[pageNum].content
+        } :  {
+            "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
+            "content": "일기를 작성할 차례입니다."
+        })
+    }, [sentData, unsentData, pageNum]);
+
 
     const getNextContent = (currentPage, sentData, unsentData) => {
         if (currentPage === sentData.length - 1 || sentData.length === 0) {
@@ -80,13 +84,13 @@ const ReadDiaryPage = () => {
         if ( pageNum === sentData.length-1 || sentData.length === 0 ) {
             setPageNum(sentData.length);
             setIsEnd("end");
-            setContent(getNextContent(pageNum, sentData, unsentData));
+            // setContent(getNextContent(pageNum, sentData, unsentData));
         } else {
             setPageNum(pageNum + 1);
-            setContent({
-                sendAt: sentData[pageNum + 1].sendAt,
-                content: sentData[pageNum + 1].content,
-            });
+            // setContent({
+            //     sendAt: sentData[pageNum + 1].sendAt,
+            //     content: sentData[pageNum + 1].content,
+            // });
         }
     };
 
@@ -96,10 +100,10 @@ const ReadDiaryPage = () => {
                 setIsEnd("hidden");
             } else {
                 setPageNum(pageNum - 1);
-                setContent({
-                    sendAt: sentData[pageNum - 1].sendAt,
-                    content: sentData[pageNum - 1].content
-                });
+                // setContent({
+                //     sendAt: sentData[pageNum - 1].sendAt,
+                //     content: sentData[pageNum - 1].content
+                // });
             }
         }
     };
