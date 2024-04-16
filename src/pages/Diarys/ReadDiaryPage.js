@@ -16,10 +16,7 @@ const ReadDiaryPage = () => {
     // 일기 읽기에서 기본으로 가장 최근 일기 내용 보여줌
     const [pageNum, setPageNum] = useState();
     const [isEnd, setIsEnd] = useState("");
-    const [content, setContent] = useState({
-        "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
-        "content": "일기를 작성할 차례입니다."
-    });
+    const [content, setContent] = useState({});
 
     const getDiaryEntry = async () => {
         const res = await getDiaryPage(diaryID);
@@ -29,13 +26,13 @@ const ReadDiaryPage = () => {
             await setUnsentData(res.unsent);
             await setPageNum(res.sent.length > 0 ? res.sent.length - 1 : -2);
             await setIsEnd(type === "history" || type === "deactivate" ? "history" : res.sent.length > 0 ? "read" : "end");
-            setContent(sentData.length > 0 && pageNum !== sentData.length ? {
-                sendAt: sentData[pageNum].sendAt,
-                content: sentData[pageNum].content
+            setContent(res.sent.length > 0 && pageNum !== res.sent.length ? {
+                sendAt: res.sent[pageNum].sendAt,
+                content: res.sent[pageNum].content
             } : unsentData.length > 0 ? {
-                "entryID": unsentData[0].entryID,
-                "sendAt": unsentData[0].date,
-                "content": unsentData[0].content
+                "entryID": res.unsent[0].entryID,
+                "sendAt": res.unsent[0].date,
+                "content": res.unsent[0].content
             } : {
                 "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
                 "content": "일기를 작성할 차례입니다."

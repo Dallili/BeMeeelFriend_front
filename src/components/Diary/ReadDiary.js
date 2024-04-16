@@ -3,7 +3,7 @@ import DiaryModal from "./DiaryModal";
 import useModal from "../../hooks/useModal";
 import {useNavigate, useParams} from "react-router-dom";
 import {deactivateDiary, deleteDiary} from "../../api/diary";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const ReadDiary = ({date, content, sendDiary, type, goSendDiary}) => {
     const navigate = useNavigate();
@@ -13,9 +13,7 @@ const ReadDiary = ({date, content, sendDiary, type, goSendDiary}) => {
     const {isModalOpen, yes, no} = useModal();
     const {isOpen, open, close} = useModal();
 
-    const [dateAndTime, setDateAndTime] = useState(content === "일기를 작성할 차례입니다." ? date.split(',') : date.split(' '));
-
-    console.log(dateAndTime)
+    const [dateAndTime, setDateAndTime] = useState([]);
 
     const onDeactivate = () => {
         deactivateDiary(diaryID);
@@ -24,6 +22,10 @@ const ReadDiary = ({date, content, sendDiary, type, goSendDiary}) => {
     const onDelete = () => {
         deleteDiary(diaryID);
     };
+
+    useEffect(() => {
+        setDateAndTime(content === "일기를 작성할 차례입니다." ? date.split(',') : date.split(' '));
+    }, [date]);
 
     return (
         <div className="read_diary">
