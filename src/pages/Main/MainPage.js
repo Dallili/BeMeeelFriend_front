@@ -29,7 +29,7 @@ const MainPage = () => {
         } else {
             const diaries = res.diaries;
             setDiary(diaries);
-            setDiaryColor(diaries.map((it) => it.color));
+            setDiaryColor(diaries.map((it) => it.color.slice(2, -2)));
         }
     };
 
