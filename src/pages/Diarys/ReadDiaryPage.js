@@ -30,7 +30,17 @@ const ReadDiaryPage = () => {
     // 일기 읽기에서 기본으로 가장 최근 일기 내용 보여줌
     const [pageNum, setPageNum] = useState(sentData.length > 0 ? sentData.length - 1 : -2);
     const [isEnd, setIsEnd] = useState(type === "history" || type === "deactivate" ? "history" : sentData.length > 0 ? "read" : "end");
-    const [content, setContent] = useState({});
+    const [content, setContent] = useState(unsentData.length > 0 ? {
+        "entryID": unsentData[0].entryID,
+        "sendAt": unsentData[0].date,
+        "content": unsentData[0].content
+    } : sentData.length > 0 && pageNum !== sentData.length ? {
+        sendAt: sentData[pageNum].sendAt,
+        content: sentData[pageNum].content
+    } :  {
+        "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
+        "content": "일기를 작성할 차례입니다."
+    });
 
     useEffect(() => {
         setContent(unsentData.length > 0 ? {
