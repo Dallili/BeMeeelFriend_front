@@ -13,15 +13,11 @@ const ReadDiaryPage = () => {
 
     const [sentData, setSentData] = useState([]);
     const [unsentData, setUnsentData] = useState([]);
-    // 일기 읽기에서 기본으로 가장 최근 일기 내용 보여줌
-    const [pageNum, setPageNum] = useState();
-    const [isEnd, setIsEnd] = useState("");
-    const [content, setContent] = useState({});
 
     const getDiaryEntry = async () => {
         const res = await getDiaryPage(diaryID);
 
-        if (res !== "fail") {
+        if (res) {
             setSentData(res.sent);
             setUnsentData(res.unsent);
         }
@@ -32,6 +28,11 @@ const ReadDiaryPage = () => {
         setPageNum(sentData.length > 0 ? sentData.length - 1 : -2);
         setIsEnd(type === "history" || type === "deactivate" ? "history" : sentData.length > 0 ? "read" : "end");
     }, []);
+
+    // 일기 읽기에서 기본으로 가장 최근 일기 내용 보여줌
+    const [pageNum, setPageNum] = useState(sentData.length > 0 ? sentData.length - 1 : -2);
+    const [isEnd, setIsEnd] = useState(type === "history" || type === "deactivate" ? "history" : sentData.length > 0 ? "read" : "end");
+    const [content, setContent] = useState({});
 
     console.log(type)
     console.log(pageNum)
