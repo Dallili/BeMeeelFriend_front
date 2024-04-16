@@ -25,18 +25,12 @@ const ReadDiaryPage = () => {
 
     useEffect( () => {
         getDiaryEntry();
-        setPageNum(sentData.length > 0 ? sentData.length - 1 : -2);
-        setIsEnd(type === "history" || type === "deactivate" ? "history" : sentData.length > 0 ? "read" : "end");
     }, []);
 
     // 일기 읽기에서 기본으로 가장 최근 일기 내용 보여줌
     const [pageNum, setPageNum] = useState(sentData.length > 0 ? sentData.length - 1 : -2);
     const [isEnd, setIsEnd] = useState(type === "history" || type === "deactivate" ? "history" : sentData.length > 0 ? "read" : "end");
     const [content, setContent] = useState({});
-
-    console.log(type)
-    console.log(pageNum)
-    console.log(sentData[pageNum])
 
     useEffect(() => {
         setContent(unsentData.length > 0 ? {
@@ -52,6 +46,9 @@ const ReadDiaryPage = () => {
         })
     }, [sentData, unsentData, pageNum]);
 
+    console.log(type)
+    console.log(pageNum)
+    console.log(sentData[pageNum])
 
     const getNextContent = (currentPage, sentData, unsentData) => {
         if (currentPage === sentData.length - 1 || sentData.length === 0) {
