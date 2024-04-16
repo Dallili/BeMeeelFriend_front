@@ -9,27 +9,10 @@ const ReadDiaryPage = () => {
     const navigate = useNavigate();
     const {diaryID} = useParams();
     const [searchParams, setSearchParams] = useSearchParams();
-    const type = (searchParams.get("type") === "history" || searchParams.get("type") === "deactivated") ? "history": "main";
+    const type = (searchParams.get("type") === "history" || searchParams.get("type") === "deactivated") ? "history": "main"
 
     const [sentData, setSentData] = useState([]);
     const [unsentData, setUnsentData] = useState([]);
-
-    async function getDiaryEntry() {
-        const res = await getDiaryPage(diaryID);
-
-        if (res === "fail") {
-            alert("조회 실패")
-        } else {
-            setSentData(res.sent);
-            setUnsentData(res.unsent);
-        }
-    }
-
-    useEffect( () => {
-        getDiaryEntry();
-        console.log(sentData)
-    }, []);
-
 
     // 일기 읽기에서 기본으로 가장 최근 일기 내용 보여줌
     const [pageNum, setPageNum] = useState(sentData.length > 0 ? sentData.length - 1 : -2);
@@ -62,6 +45,35 @@ const ReadDiaryPage = () => {
         console.log(sentData)
         console.log(unsentData)
     }, [sentData, unsentData, pageNum]);
+
+    async function getDiaryEntry() {
+        const res = await getDiaryPage(diaryID);
+
+        if (res === "fail") {
+            alert("조회 실패")
+        } else {
+            setSentData(res.sent);
+            setUnsentData(res.unsent);
+            const num = res.sent.length > 0 ? res.sent.length - 1 : -2
+            setPageNum(num);
+            setContent(res.unsent.length > 0 ? {
+                "entryID": res.unsent[0].entryID,
+                "sendAt": res.unsent[0].date,
+                "content": res.unsent[0].content
+            } : res.sent.length > 0 ? {
+                sendAt: res.sent[num].sendAt,
+                content: res.sent[num].content
+            } :  {
+                "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
+                "content": "일기를 작성할 차례입니다."
+            })
+        }
+    }
+
+    useEffect( () => {
+        getDiaryEntry();
+    }, []);
+
 
     console.log(type)
     console.log(pageNum)
