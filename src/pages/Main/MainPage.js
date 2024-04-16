@@ -37,9 +37,6 @@ const MainPage = () => {
         getMainDiary();
     }, []);
 
-    console.log(diary)
-    console.log(diaryColor)
-
     const navigate = useNavigate();
     const goHistory = () => navigate('/history');
 

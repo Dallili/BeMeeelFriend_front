@@ -11,6 +11,7 @@ const ReadDiaryPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const type = (searchParams.get("type") === "history" || searchParams.get("type") === "deactivated") ? "history": "main";
 
+    console.log(type)
     const [sentData, setSentData] = useState([]);
     const [unsentData, setUnsentData] = useState([]);
 
@@ -33,8 +34,10 @@ const ReadDiaryPage = () => {
     const [isEnd, setIsEnd] = useState(type === "history" || type === "deactivate" ? "history" : sentData.length > 0 ? "read" : "end");
 
     const [content, setContent] = useState(
-        sentData.length > 0 ? sentData[pageNum] :
-            unsentData.length > 0 ? {
+        sentData.length > 0 ? {
+            sendAt: sentData[pageNum].sendAt,
+            content: sentData[pageNum].content
+        } : unsentData.length > 0 ? {
             "entryID": unsentData[0].entryID,
             "sendAt": unsentData[0].date,
             "content": unsentData[0].content
@@ -58,7 +61,10 @@ const ReadDiaryPage = () => {
                 };
             }
         } else {
-            return sentData[currentPage + 1];
+            return {
+                sendAt: sentData[currentPage + 1].sendAt,
+                content: sentData[currentPage + 1].content
+            };
         }
     };
 
@@ -79,7 +85,10 @@ const ReadDiaryPage = () => {
                 setIsEnd("hidden");
             } else {
                 setPageNum(pageNum - 1);
-                setContent(sentData[pageNum - 1]);
+                setContent({
+                    sendAt: sentData[pageNum - 1].sendAt,
+                    content: sentData[pageNum - 1].content
+                });
             }
         }
     };
