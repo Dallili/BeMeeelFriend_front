@@ -33,6 +33,7 @@ const ReadDiaryPage = () => {
 
     const [isEnd, setIsEnd] = useState(type === "history" || type === "deactivate" ? "history" : sentData.length > 0 ? "read" : "end");
 
+    console.log(sentData[pageNum])
     const [content, setContent] = useState(
         sentData.length > 0 ? {
             sendAt: sentData[pageNum].sendAt,
@@ -75,7 +76,10 @@ const ReadDiaryPage = () => {
             getNextContent(pageNum, sentData, unsentData);
         } else {
             setPageNum(pageNum + 1);
-            setContent(sentData[pageNum + 1]);
+            setContent({
+                sendAt: sentData[pageNum + 1].sendAt,
+                content: sentData[pageNum + 1].content,
+            });
         }
     };
 
