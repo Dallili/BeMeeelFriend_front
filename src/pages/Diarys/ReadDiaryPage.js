@@ -17,7 +17,9 @@ const ReadDiaryPage = () => {
     async function getDiaryEntry() {
         const res = await getDiaryPage(diaryID);
 
-        if (res !== "fail") {
+        if (res === "fail") {
+            alert("조회 실패")
+        } else {
             setSentData(res.sent);
             setUnsentData(res.unsent);
         }
@@ -25,6 +27,7 @@ const ReadDiaryPage = () => {
 
     useEffect( () => {
         getDiaryEntry();
+        console.log(sentData)
     }, []);
 
 
