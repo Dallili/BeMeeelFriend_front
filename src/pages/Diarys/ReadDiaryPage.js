@@ -22,13 +22,14 @@ const ReadDiaryPage = () => {
         const res = await getDiaryPage(diaryID);
 
         if (res !== "fail") {
-            await setSentData(res.sent);
-            await setUnsentData(res.unsent);
-            await setPageNum(res.sent.length > 0 ? res.sent.length - 1 : -2);
-            await setIsEnd(type === "history" || type === "deactivate" ? "history" : res.sent.length > 0 ? "read" : "end");
-            setContent(res.sent.length > 0 && pageNum !== res.sent.length ? {
-                sendAt: res.sent[pageNum].sendAt,
-                content: res.sent[pageNum].content
+            setSentData(res.sent);
+            setUnsentData(res.unsent);
+            const num = res.sent.length > 0 ? res.sent.length - 1 : -2
+            setPageNum(num);
+            setIsEnd(type === "history" || type === "deactivate" ? "history" : res.sent.length > 0 ? "read" : "end");
+            setContent(res.sent.length > 0 && num !== res.sent.length ? {
+                sendAt: res.sent[num].sendAt,
+                content: res.sent[num].content
             } : unsentData.length > 0 ? {
                 "entryID": res.unsent[0].entryID,
                 "sendAt": res.unsent[0].date,
@@ -62,6 +63,11 @@ const ReadDiaryPage = () => {
                     "content": "일기를 작성할 차례입니다."
                 };
             }
+        } else if (currentPage === sentData.length) {
+            return {
+                "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
+                "content": "일기를 작성할 차례입니다."
+            };
         } else {
             return {
                 sendAt: sentData[currentPage + 1].sendAt,
