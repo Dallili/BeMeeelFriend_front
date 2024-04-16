@@ -58,14 +58,14 @@ const ReadDiaryPage = () => {
                 };
             } else {
                 return {
-                    sendAt: sentData[currentPage + 1].sendAt,
-                    content: sentData[currentPage + 1].content
+                    "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
+                    "content": "일기를 작성할 차례입니다."
                 };
             }
         } else {
             return {
-                "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
-                "content": "일기를 작성할 차례입니다."
+                sendAt: sentData[currentPage + 1].sendAt,
+                content: sentData[currentPage + 1].content
             };
         }
     };
