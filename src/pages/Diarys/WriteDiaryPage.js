@@ -74,7 +74,7 @@ const WriteDiaryPage = () => {
 
     return (
         <div className="writeDiary">
-            <Header type="back" style={{backgroundColor:"#ffb4aa", border:"none"}}/>
+            <Header type="backMain" style={{backgroundColor:"#ffb4aa", border:"none"}}/>
             <WriteDiary type="write" isNew={isNew} setIsNew={setIsNew} allDelete={allDelete} setAllDelete={setAllDelete} setChangeBg={setChangeBg} changeBg={changeBg} content={content} setContent={setContent}/>
             <BottomNav type="write" setAllDelete={setAllDelete} setChangeBg={setChangeBg} setSaveDiary={setSaveDiary} onSubmit={onSubmit}/>
         </div>

@@ -1,9 +1,22 @@
 import '../../components/Diary/DiaryDone.scss';
 import {useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {getUserInfo} from "../../api/user";
+import {getActivated} from "../../api/diary";
 
 const EmotionReport = ({username}) => {
     const navigate = useNavigate();
+
+    const [name, setNickname] = useState("");
+
+    const getInfo = async () => {
+        const res = await getUserInfo();
+        setNickname(res.nickname);
+    }
+
+    useEffect(() => {
+        getInfo();
+    }, []);
     const goMain = () => window.location.replace("/");
     const [progress, setProgress] = useState([83, 37, 30, 27, 25, 18]);
 
@@ -13,7 +26,7 @@ const EmotionReport = ({username}) => {
             <div className="done_popup">
                 <div className="done_titles">
                     <img src={require('../../img/Diarys/star.png')} alt="img" />
-                    <div className="done_title_emotion">반짝이는 마녀님의</div>
+                    <div className="done_title_emotion">{name}님의</div>
                     <div className="done_title_emotion">오늘 기분은</div>
                 </div>
                 <div className="done_explains">

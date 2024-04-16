@@ -2,7 +2,7 @@ import './MainPage.scss';
 import '../../components/Modal.scss';
 import useModal from "../../hooks/useModal";
 import SandwichMenu from "../../components/Main/SandwichMenu";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getDiary} from "../../api/diary";
 
@@ -29,9 +29,11 @@ const MainPage = () => {
         } else {
             const diaries = res.diaries;
             setDiary(diaries);
-            setDiaryColor(diary && diary.map((it) => it.color));
+            setDiaryColor(diaries.map((it) => it.color));
         }
     };
+
+    console.log(diaryColor)
 
     useEffect(() => {
         getMainDiary();
@@ -50,18 +52,18 @@ const MainPage = () => {
                 <div className="diarys">
                     {diary && diary.length === 1 ? (
                         <div className="diary_bg" onClick={clicked}>
-                            <img src={require('../../img/Main/book_mask.png')} alt="bg" className="fill" style={{filter:`opacity(.6) drop-shadow(0 0 0 ${diary[0].color}`}}/>
+                            <img src={require('../../img/Main/book_mask.png')} alt="bg" className="fill" style={{filter:`opacity(.6) drop-shadow(0 0 0 ${diaryColor[0]}`}}/>
                             <div className="diary_line">
                                 <img src={require('../../img/Main/book_line.png')} alt="diary" className="line" />
                             </div>
                         </div>
                     ): diary && diary.length === 2 ? (
                         <div className="diary_bg diaries" onClick={clicked}>
-                            <img src={require('../../img/Main/book_mask0.png')} alt="bg" className="fill0" style={{filter:`opacity(.4) drop-shadow(0 0 0 ${diary[0].color}`}}/>
+                            <img src={require('../../img/Main/book_mask0.png')} alt="bg" className="fill0" style={{filter:`opacity(.4) drop-shadow(0 0 0 ${diaryColor[1]}`}}/>
                             <div className="diary_line" style={{paddingTop:"33px", paddingLeft:"12px"}}>
                                 <img src={require('../../img/Main/book_line0.png')} alt="diary" className="line line0" />
                                 <div className="diary_line">
-                                    <img src={require('../../img/Main/book_mask1.png')} alt="bg" className="fill1" style={{filter:`opacity(.8) drop-shadow(0 0 0 ${diary[1].color}`}}/>
+                                    <img src={require('../../img/Main/book_mask1.png')} alt="bg" className="fill1" style={{filter:`opacity(.6) drop-shadow(0 0 0 ${diaryColor[2]}`}}/>
                                     <div className="diary_line">
                                         <img src={require('../../img/Main/book_line1.png')} alt="diary" className="line line1" />
                                     </div>
@@ -79,7 +81,7 @@ const MainPage = () => {
                                     <div className="diary_line">
                                         <img src={require('../../img/Main/book_line1.png')} alt="diary" className="line line1" />
                                         <div className="diary_line" style={{marginTop:"-120px", paddingLeft:"20px"}}>
-                                            <img src={require('../../img/Main/book_mask.png')} alt="bg" className="fill fill2" style={{filter:`opacity(.8) drop-shadow(0 0 0 ${diaryColor[2]}`}}/>
+                                            <img src={require('../../img/Main/book_mask.png')} alt="bg" className="fill fill2" style={{filter:`opacity(.6) drop-shadow(0 0 0 ${diaryColor[2]}`}}/>
                                             <div className="diary_line" onClick={clicked}>
                                                 <img src={require('../../img/Main/book_line.png')} alt="diary" className="line line2" />
                                             </div>

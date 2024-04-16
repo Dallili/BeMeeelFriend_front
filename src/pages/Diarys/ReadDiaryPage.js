@@ -166,7 +166,7 @@ const ReadDiaryPage = () => {
 
     return (
         <div className="readDiary">
-            <Header type="back" style={{backgroundColor:"#ffb4aa", border:"none"}}/>
+            <Header type="backMain" style={{backgroundColor:"#ffb4aa", border:"none"}}/>
             <ReadDiary type={searchParams.get("type")} date={content.sendAt} content={content.content} goSendDiary={goWriteOrSendDiary}/>
             <BottomNav type={isEnd} goWriteDiary={goWriteOrSendDiary} showNextPage={showNextPage} showPrevPage={showPrevPage}/>
         </div>

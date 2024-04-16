@@ -38,7 +38,7 @@ const SendDiaryPage = () => {
 
     return(
         <div className="sendDiary">
-            <Header type="back" style={{backgroundColor:"#ffb4aa", border:"none"}}/>
+            <Header type="backMain" style={{backgroundColor:"#ffb4aa", border:"none"}}/>
             <SendDiary date={date} content={content.content} sendDiary={sendDiary}/>
             <BottomNav type="send" setSendDiary={handleSendDiary} goWriteDiary={goWriteDiary} />
         </div>
