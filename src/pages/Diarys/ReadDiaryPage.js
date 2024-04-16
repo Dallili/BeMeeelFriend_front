@@ -17,19 +17,16 @@ const ReadDiaryPage = () => {
     async function getDiaryEntry() {
         const res = await getDiaryPage(diaryID);
 
-        console.log(res)
-        console.log(res.sent)
         if (res !== "fail") {
             setSentData(res.sent);
             setUnsentData(res.unsent);
         }
-        console.log(sentData)
-        console.log(unsentData)
     }
 
     useEffect( () => {
         getDiaryEntry();
     }, []);
+
 
     // 일기 읽기에서 기본으로 가장 최근 일기 내용 보여줌
     const [pageNum, setPageNum] = useState(sentData.length > 0 ? sentData.length - 1 : -2);
@@ -59,6 +56,8 @@ const ReadDiaryPage = () => {
             "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
             "content": "일기를 작성할 차례입니다."
         })
+        console.log(sentData)
+        console.log(unsentData)
     }, [sentData, unsentData, pageNum]);
 
     console.log(type)
