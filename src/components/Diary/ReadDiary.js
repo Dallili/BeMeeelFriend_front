@@ -15,6 +15,8 @@ const ReadDiary = ({date, content, sendDiary, type, goSendDiary}) => {
 
     const [dateAndTime, setDateAndTime] = useState(content === "일기를 작성할 차례입니다." ? date.split(',') : date.split(' '));
 
+    console.log(dateAndTime)
+
     const onDeactivate = () => {
         deactivateDiary(diaryID);
     };
