@@ -21,10 +21,10 @@ const ReadDiaryPage = () => {
         const res = await getDiaryPage(diaryID);
 
         if (res !== "fail") {
-            setSentData(res.sent);
-            setUnsentData(res.unsent);
-            setPageNum(res.sent.length > 0 ? res.sent.length - 1 : -2);
-            setIsEnd(type === "history" || type === "deactivate" ? "history" : res.sent.length > 0 ? "read" : "end")
+            await setSentData(res.sent);
+            await setUnsentData(res.unsent);
+            await setPageNum(res.sent.length > 0 ? res.sent.length - 1 : -2);
+            await setIsEnd(type === "history" || type === "deactivate" ? "history" : res.sent.length > 0 ? "read" : "end")
         }
     }
 
@@ -36,7 +36,7 @@ const ReadDiaryPage = () => {
     console.log(pageNum)
     console.log(sentData[pageNum])
     const [content, setContent] = useState(
-        sentData.length > 0 ? {
+        sentData.length > 0 && pageNum !== sentData.length ? {
             sendAt: sentData[pageNum].sendAt,
             content: sentData[pageNum].content
         } : unsentData.length > 0 ? {
@@ -58,14 +58,14 @@ const ReadDiaryPage = () => {
                 };
             } else {
                 return {
-                    "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
-                    "content": "일기를 작성할 차례입니다."
+                    sendAt: sentData[currentPage + 1].sendAt,
+                    content: sentData[currentPage + 1].content
                 };
             }
         } else {
             return {
-                sendAt: sentData[currentPage + 1].sendAt,
-                content: sentData[currentPage + 1].content
+                "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
+                "content": "일기를 작성할 차례입니다."
             };
         }
     };
@@ -74,7 +74,7 @@ const ReadDiaryPage = () => {
         if ( pageNum === sentData.length-1 || sentData.length === 0 ) {
             setPageNum(sentData.length);
             setIsEnd("end");
-            getNextContent(pageNum, sentData, unsentData);
+            setContent(getNextContent(pageNum, sentData, unsentData));
         } else {
             setPageNum(pageNum + 1);
             setContent({
@@ -111,7 +111,9 @@ const ReadDiaryPage = () => {
         if (pageNum === sentData.length-1 && (type === "history" || type === "deactivated") ){
             setIsEnd("history");
         }
-
+        if (pageNum === sentData.length) {
+            setIsEnd("end");
+        }
     }, [pageNum]);
 
 
