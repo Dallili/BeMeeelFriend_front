@@ -89,6 +89,7 @@ const ReadDiaryPage = () => {
 
     const getDiaryEntry = async () => {
         const res = await getDiaryPage(diaryID);
+        console.log(res)
         if (res !== "fail") {
             setSentData(res.sent);
             setUnsentData(res.unsent);
@@ -98,6 +99,9 @@ const ReadDiaryPage = () => {
     useEffect(() => {
         getDiaryEntry();
     }, []);
+
+    console.log(sentData)
+    console.log(unsentData)
 
     const goWriteOrSendDiary = () => {
         // 기존에 작성해 둔 일기가 있으면
