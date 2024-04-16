@@ -29,22 +29,22 @@ const ReadDiaryPage = () => {
         "content": "일기를 작성할 차례입니다."
     });
 
-    useEffect(() => {
-        setPageNum(sentData.length > 0 ? sentData.length - 1 : -2);
-        setContent(unsentData.length > 0 ? {
-            "entryID": unsentData[0].entryID,
-            "sendAt": unsentData[0].date,
-            "content": unsentData[0].content
-        } : sentData.length > 0 && pageNum !== sentData.length ? {
-            sendAt: sentData[pageNum].sendAt,
-            content: sentData[pageNum].content
-        } :  {
-            "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
-            "content": "일기를 작성할 차례입니다."
-        })
-        console.log(sentData)
-        console.log(unsentData)
-    }, [sentData, unsentData, pageNum]);
+    // useEffect(() => {
+    //     setPageNum(sentData.length > 0 ? sentData.length - 1 : -2);
+    //     setContent(unsentData.length > 0 ? {
+    //         "entryID": unsentData[0].entryID,
+    //         "sendAt": unsentData[0].date,
+    //         "content": unsentData[0].content
+    //     } : sentData.length > 0 && pageNum !== sentData.length ? {
+    //         sendAt: sentData[pageNum].sendAt,
+    //         content: sentData[pageNum].content
+    //     } :  {
+    //         "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
+    //         "content": "일기를 작성할 차례입니다."
+    //     })
+    //     console.log(sentData)
+    //     console.log(unsentData)
+    // }, [sentData, unsentData, pageNum]);
 
     async function getDiaryEntry() {
         const res = await getDiaryPage(diaryID);
@@ -111,13 +111,13 @@ const ReadDiaryPage = () => {
         if ( pageNum === sentData.length-1 || sentData.length === 0 ) {
             setPageNum(sentData.length);
             setIsEnd("end");
-            // setContent(getNextContent(pageNum, sentData, unsentData));
+            setContent(getNextContent(pageNum, sentData, unsentData));
         } else {
             setPageNum(pageNum + 1);
-            // setContent({
-            //     sendAt: sentData[pageNum + 1].sendAt,
-            //     content: sentData[pageNum + 1].content,
-            // });
+            setContent({
+                sendAt: sentData[pageNum + 1].sendAt,
+                content: sentData[pageNum + 1].content,
+            });
         }
     };
 
@@ -127,10 +127,10 @@ const ReadDiaryPage = () => {
                 setIsEnd("hidden");
             } else {
                 setPageNum(pageNum - 1);
-                // setContent({
-                //     sendAt: sentData[pageNum - 1].sendAt,
-                //     content: sentData[pageNum - 1].content
-                // });
+                setContent({
+                    sendAt: sentData[pageNum - 1].sendAt,
+                    content: sentData[pageNum - 1].content
+                });
             }
         }
     };
