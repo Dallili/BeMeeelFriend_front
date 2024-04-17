@@ -32,7 +32,7 @@ const ReadDiaryPage = () => {
         } else {
             const sent = res.sent;
             const unsent = res.unsent;
-            const unsent1 = [{...res.unsent[0], sendAt: res.unsent[0].date}];
+            const unsent1 = [{...res.unsent[0], sendAt: res.unsent[0].updatedAt}];
             let total;
             let initTotal;
             if (unsent.length === 0){
