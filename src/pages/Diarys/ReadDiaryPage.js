@@ -16,12 +16,12 @@ const ReadDiaryPage = () => {
     // const [sentData, setSentData] = useState([]);
     const [unsentData, setUnsentData] = useState([]);
 
-    const [content, setContent] = useState([]);
-
     const init = [{
         sendAt: `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
         content: "일기를 작성할 차례입니다."
     }];
+
+    const [content, setContent] = useState([init]);
 
     async function getDiaryEntry(){
         const res = await getDiaryPage(diaryID);
@@ -102,7 +102,7 @@ const ReadDiaryPage = () => {
     return (
         <div className="readDiary">
             <Header type="backMain" style={{backgroundColor:"#ffb4aa", border:"none"}}/>
-            <ReadDiary type={searchParams.get("type")} date={content && content[pageNum].sendAt} content={content && content[pageNum].content} goSendDiary={goWriteOrSendDiary}/>
+            <ReadDiary type={searchParams.get("type")} date={content[pageNum].sendAt ? content[pageNum].sendAt : null} content={content[pageNum].content ? content[pageNum].content : null} goSendDiary={goWriteOrSendDiary}/>
             <BottomNav type={isEnd} goWriteDiary={goWriteOrSendDiary} showNextPage={showNextPage} showPrevPage={showPrevPage}/>
         </div>
     );
