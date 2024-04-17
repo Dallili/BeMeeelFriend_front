@@ -50,8 +50,6 @@ import LoadingPage from "./pages/Main/LoadingPage";
 function App() {
     const [showSplash, setShowSplash] = useState(sessionStorage.getItem('splashShown'));
 
-    const MainCabinet = lazy(() => import("./pages/Main/MainPage"));
-
     useEffect(() => {
         if(showSplash === null) {
             const timer = setTimeout(()=> {
@@ -96,7 +94,7 @@ function App() {
 
                     <Route element={<PrivateRoute />}>
                         {/*메인 페이지: 메인 캐비넷*/}
-                        <Route path="/" element={<MainCabinet />} />
+                        <Route path="/" element={<MainPage />} />
                         {/*알림 페이지*/}
                         <Route path="/notify" element={<NotifyPage />} />
                         {/*일기장 생성*/}
