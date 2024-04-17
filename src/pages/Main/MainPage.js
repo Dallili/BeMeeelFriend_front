@@ -53,8 +53,6 @@ const MainPage = () => {
         }
     }
 
-    console.log(diaryName);
-
     useEffect(() => {
         getInfo();
         getMainDiary();

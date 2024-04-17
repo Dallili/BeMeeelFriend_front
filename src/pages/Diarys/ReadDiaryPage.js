@@ -1,7 +1,7 @@
 import ReadDiary from "../../components/Diary/ReadDiary";
 import BottomNav from "../../components/BottomNav";
 import Header from "../../components/Header";
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 import {getDiaryPage} from "../../api/entry";
 
@@ -13,21 +13,23 @@ const ReadDiaryPage = () => {
     const [isEnd, setIsEnd] = useState(type === "history" || type === "deactivate" ? "history" : "read");
 
 
-    const [sentData, setSentData] = useState([]);
-    const [unsentData, setUnsentData] = useState([]);
+    // const [sentData, setSentData] = useState([]);
+    // const [unsentData, setUnsentData] = useState([]);
+    let sentData = [];
+    let unsentData = [];
+
     const [content, setContent] = useState({});
 
     async function getDiaryEntry(){
         const res = await getDiaryPage(diaryID);
 
-        const sent = res.sent;
-        const unsent = res.unsent;
-
         if (res === "fail") {
             alert("일기 조회 실패");
         } else {
-            setSentData(sent);
-            setUnsentData(unsent);
+            sentData = res.sent;
+            unsentData = res.unsent;
+            // setSentData(sent);
+            // setUnsentData(unsent);
         }
     }
 
@@ -36,6 +38,7 @@ const ReadDiaryPage = () => {
     }, []);
 
     useEffect(() => {
+        console.log(sentData, unsentData);
         setContent(unsentData.length > 0 ? unsentData[0] :
             sentData.length > 0 ? sentData[sentData.length - 1] : {
             sendAt: `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
