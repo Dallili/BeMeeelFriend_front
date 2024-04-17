@@ -1,10 +1,9 @@
 import ReadDiary from "../../components/Diary/ReadDiary";
 import BottomNav from "../../components/BottomNav";
 import Header from "../../components/Header";
-import {Suspense, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 import {getDiaryPage} from "../../api/entry";
-import LoadingPage from "../Main/LoadingPage";
 
 const ReadDiaryPage = () => {
     const navigate = useNavigate();
@@ -60,6 +59,19 @@ const ReadDiaryPage = () => {
         getDiaryEntry();
     }, []);
 
+
+    const showNextPage = () => {
+        if (pageNum < content.length) {
+            setPageNum(() => pageNum + 1);
+        }
+    };
+
+    const showPrevPage = () => {
+        if (pageNum > 0) {
+            setPageNum(() => pageNum - 1);
+        }
+    };
+
     useEffect(() => {
         if (pageNum === 0) {
             setIsEnd("hidden");
@@ -74,18 +86,6 @@ const ReadDiaryPage = () => {
         }
     }, [pageNum]);
 
-    const showNextPage = () => {
-        if (pageNum < content.length) {
-            setPageNum(() => pageNum + 1);
-        }
-    };
-
-    const showPrevPage = () => {
-        if (pageNum > 0) {
-            setPageNum(() => pageNum - 1);
-        }
-    };
-
     const goWriteOrSendDiary = () => {
         // 기존에 작성해 둔 일기가 있으면
         if (unsentData.length > 0) {
@@ -99,7 +99,7 @@ const ReadDiaryPage = () => {
     return (
         <div className="readDiary">
             <Header type="backMain" style={{backgroundColor:"#ffb4aa", border:"none"}}/>
-            <ReadDiary type={searchParams.get("type")} date={content[pageNum].sendAt} content={content[pageNum].content} goSendDiary={goWriteOrSendDiary}/>
+            <ReadDiary type={searchParams.get("type")} date={content[pageNum].sendAt || content[pageNum].date} content={content[pageNum].content} goSendDiary={goWriteOrSendDiary}/>
             <BottomNav type={isEnd} goWriteDiary={goWriteOrSendDiary} showNextPage={showNextPage} showPrevPage={showPrevPage}/>
         </div>
     );
