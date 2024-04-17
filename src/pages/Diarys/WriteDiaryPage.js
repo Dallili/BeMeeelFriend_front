@@ -18,9 +18,9 @@ const WriteDiaryPage = () => {
         const res = await getDiaryPage(diaryID);
         if (res !== "fail") {
             setUnsentData(res.unsent);
-            if (res.unsent) {
-                setContent(unsentData[0]);
-            }
+            // if (res.unsent) {
+            //     setContent(unsentData[0]);
+            // }
         }
     }
 
