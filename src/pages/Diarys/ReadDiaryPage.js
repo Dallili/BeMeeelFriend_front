@@ -102,7 +102,7 @@ const ReadDiaryPage = () => {
     return (
         <div className="readDiary">
             <Header type="backMain" style={{backgroundColor:"#ffb4aa", border:"none"}}/>
-            <ReadDiary type={searchParams.get("type")} date={content[pageNum].sendAt} content={content[pageNum].content} goSendDiary={goWriteOrSendDiary}/>
+            <ReadDiary type={searchParams.get("type")} date={content && content[pageNum].sendAt} content={content && content[pageNum].content} goSendDiary={goWriteOrSendDiary}/>
             <BottomNav type={isEnd} goWriteDiary={goWriteOrSendDiary} showNextPage={showNextPage} showPrevPage={showPrevPage}/>
         </div>
     );
