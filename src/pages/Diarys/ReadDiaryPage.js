@@ -34,6 +34,8 @@ const ReadDiaryPage = () => {
             setUnsentData(unsent);
             const total = [...sent, ...unsent];
             const initTotal = [...total, ...init];
+            console.log(total)
+            console.log(initTotal)
 
             // 작성한 일기 없음
             if (unsent.length === 0 && type !== "history") {
@@ -52,6 +54,7 @@ const ReadDiaryPage = () => {
                     setIsEnd("hiddenAndWrite");
                 }
             }
+            console.log(content)
         }
     }
 
