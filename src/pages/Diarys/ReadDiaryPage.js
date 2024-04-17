@@ -29,23 +29,6 @@ const ReadDiaryPage = () => {
         "content": "일기를 작성할 차례입니다."
     });
 
-    // useEffect(() => {
-    //     setPageNum(sentData.length > 0 ? sentData.length - 1 : -2);
-    //     setContent(unsentData.length > 0 ? {
-    //         "entryID": unsentData[0].entryID,
-    //         "sendAt": unsentData[0].date,
-    //         "content": unsentData[0].content
-    //     } : sentData.length > 0 && pageNum !== sentData.length ? {
-    //         sendAt: sentData[pageNum].sendAt,
-    //         content: sentData[pageNum].content
-    //     } :  {
-    //         "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
-    //         "content": "일기를 작성할 차례입니다."
-    //     })
-    //     console.log(sentData)
-    //     console.log(unsentData)
-    // }, [sentData, unsentData, pageNum]);
-
     async function getDiaryEntry() {
         const res = await getDiaryPage(diaryID);
 

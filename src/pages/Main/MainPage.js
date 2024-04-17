@@ -32,9 +32,7 @@ const MainPage = () => {
             const diaries = res.diaries;
             setDiary(diaries);
             setDiaryColor(diaries.map((it) => it.color.slice(1, -1)));
-            setDiaryName(diaries.map((it) => it.memberName === name ?
-                    setDiaryName(it.partnerName) :  setDiaryName(it.memberName)
-            ));
+            setDiaryName(diaries.map((it) => it.memberName === name ? it.partnerName :  it.memberName ));
         }
     };
 
@@ -86,7 +84,7 @@ const MainPage = () => {
                             <div className="diary_line" style={{paddingTop:"33px", paddingLeft:"12px"}}>
                                 <img src={require('../../img/Main/book_line0.png')} alt="diary" className="line line0" />
                                 <div className="diary_line">
-                                    <img src={require('../../img/Main/book_mask1.png')} alt="bg" className="fill1" style={{filter:`opacity(.5) drop-shadow(0 0 0 ${diaryColor[2]}`}}/>
+                                    <img src={require('../../img/Main/book_mask1.png')} alt="bg" className="fill1" style={{filter:`opacity(.8) drop-shadow(0 0 0 ${diaryColor[2]}`}}/>
                                     <div className="diary_line">
                                         <img src={require('../../img/Main/book_line1.png')} alt="diary" className="line line1" />
                                     </div>
@@ -104,7 +102,7 @@ const MainPage = () => {
                                     <div className="diary_line">
                                         <img src={require('../../img/Main/book_line1.png')} alt="diary" className="line line1" />
                                         <div className="diary_line" style={{marginTop:"-120px", paddingLeft:"20px"}}>
-                                            <img src={require('../../img/Main/book_mask.png')} alt="bg" className="fill fill2" style={{filter:`opacity(.5) drop-shadow(0 0 0 ${diaryColor[2]}`}}/>
+                                            <img src={require('../../img/Main/book_mask.png')} alt="bg" className="fill fill2" style={{filter:`opacity(.8) drop-shadow(0 0 0 ${diaryColor[2]}`}}/>
                                             <div className="diary_line" onClick={clicked}>
                                                 <img src={require('../../img/Main/book_line.png')} alt="diary" className="line line2" />
                                             </div>

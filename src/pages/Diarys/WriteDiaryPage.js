@@ -18,6 +18,9 @@ const WriteDiaryPage = () => {
         const res = await getDiaryPage(diaryID);
         if (res !== "fail") {
             setUnsentData(res.unsent);
+            if (res.unsent) {
+                setContent(unsentData[0]);
+            }
         }
     }
 
@@ -25,6 +28,7 @@ const WriteDiaryPage = () => {
         getDiaryEntry();
     }, []);
 
+    console.log(unsentData);
     const [isNew, setIsNew] = useState(unsentData.length <= 0);
 
     const [content, setContent] = useState(unsentData.length <= 0 ? {
