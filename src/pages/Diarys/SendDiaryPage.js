@@ -14,7 +14,7 @@ const SendDiaryPage = () => {
     const [content, setContent] = useState({});
 
     // 일기 데이터 가져옴
-    const getDiaryEntry = async () => {
+    const getDiaryEntry1 = async () => {
         const res = await getDiaryPage(diaryID);
         if (res !== "fail") {
             setContent(res.unsent[0]);
@@ -22,7 +22,7 @@ const SendDiaryPage = () => {
     }
 
     useEffect(() => {
-        getDiaryEntry();
+        getDiaryEntry1();
     }, []);
 
     const goWriteDiary = () => navigate(`/write-diary/${diaryID}`);

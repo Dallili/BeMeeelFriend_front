@@ -31,10 +31,16 @@ const ReadDiaryPage = () => {
             alert("일기 조회 실패");
         } else {
             const sent = res.sent;
-            const unsent = [{...res.unsent, sendAt: res.unsent.date}];
+            const unsent = res.unsent;
+            let total;
+            let initTotal;
+            if (unsent.length === 0){
+                initTotal = [...sent, ...init];
+            } else {
+                total = [...sent, {...unsent, sendAt: unsent.date}];
+            }
             setUnsentData(unsent);
-            const total = [...sent, ...unsent];
-            const initTotal = [...total, ...init];
+
             console.log(total)
             console.log(initTotal)
 

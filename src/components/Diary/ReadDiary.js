@@ -23,9 +23,9 @@ const ReadDiary = ({date, content, sendDiary, type, goSendDiary}) => {
         deleteDiary(diaryID);
     };
 
-    // useEffect(() => {
-    //     setDateAndTime(content === "일기를 작성할 차례입니다." ? date.split(',') : date.split(' '));
-    // }, [date]);
+    useEffect(() => {
+        setDateAndTime(content === "일기를 작성할 차례입니다." ? date.split(',') : date.split(' '));
+    }, [date]);
 
     return (
         <div className="read_diary">
@@ -51,8 +51,8 @@ const ReadDiary = ({date, content, sendDiary, type, goSendDiary}) => {
             <div className="date_box">
                 <img src={require('../../img/Diarys/calendar_icon.png')} alt="icon"/>
                 <div style={{display:"flex", flexDirection:"column"}}>
-                    {/*<div className="date">{dateAndTime[0]}</div>*/}
-                    {/*<div className="time">{dateAndTime[1]}</div>*/}
+                    <div className="date">{dateAndTime[0]}</div>
+                    <div className="time">{dateAndTime[1]}</div>
                 </div>
             </div>
             <div className="diaryInput_box">
