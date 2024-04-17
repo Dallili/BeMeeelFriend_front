@@ -30,7 +30,7 @@ const ReadDiaryPage = () => {
             alert("일기 조회 실패");
         } else {
             const sent = res.sent;
-            const unsent = res.unsent;
+            const unsent = [{...res.unsent, sendAt: res.unsent.date}];
             setUnsentData(unsent);
             const total = [...sent, ...unsent];
             const initTotal = [...total, ...init];
@@ -99,7 +99,7 @@ const ReadDiaryPage = () => {
     return (
         <div className="readDiary">
             <Header type="backMain" style={{backgroundColor:"#ffb4aa", border:"none"}}/>
-            <ReadDiary type={searchParams.get("type")} date={content[pageNum].sendAt || content[pageNum].date} content={content[pageNum].content} goSendDiary={goWriteOrSendDiary}/>
+            <ReadDiary type={searchParams.get("type")} date={content[pageNum].sendAt} content={content[pageNum].content} goSendDiary={goWriteOrSendDiary}/>
             <BottomNav type={isEnd} goWriteDiary={goWriteOrSendDiary} showNextPage={showNextPage} showPrevPage={showPrevPage}/>
         </div>
     );
