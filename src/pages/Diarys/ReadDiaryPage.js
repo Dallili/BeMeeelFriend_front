@@ -21,7 +21,7 @@ const ReadDiaryPage = () => {
         content: "일기를 작성할 차례입니다."
     }];
 
-    const [content, setContent] = useState([init]);
+    const [content, setContent] = useState(init);
 
     async function getDiaryEntry(){
         const res = await getDiaryPage(diaryID);
