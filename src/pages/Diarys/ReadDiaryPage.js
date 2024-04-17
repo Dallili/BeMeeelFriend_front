@@ -10,8 +10,9 @@ const ReadDiaryPage = () => {
     const {diaryID} = useParams();
     const [searchParams, setSearchParams] = useSearchParams();
     const type = (searchParams.get("type") === "history" || searchParams.get("type") === "deactivated") ? "history" : "main";
-    const [isEnd, setIsEnd] = useState(type === "history" || type === "deactivate" ? "history" : "read");
     const [pageNum, setPageNum] = useState(0);
+    const [isEnd, setIsEnd] = useState(type === "history" || type === "deactivate" ? "history" : "read");
+
 
     // const [sentData, setSentData] = useState([]);
     const [unsentData, setUnsentData] = useState([]);
