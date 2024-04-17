@@ -95,10 +95,8 @@ function App() {
                     <Route path="/welcome" element={<Welcome />} />
 
                     <Route element={<PrivateRoute />}>
-                        <Suspense fallback={<LoadingPage />}>
                         {/*메인 페이지: 메인 캐비넷*/}
-                            <Route path="/" element={<MainCabinet />} />
-                        </Suspense>
+                        <Route path="/" element={<MainCabinet />} />
                         {/*알림 페이지*/}
                         <Route path="/notify" element={<NotifyPage />} />
                         {/*일기장 생성*/}

@@ -1,9 +1,10 @@
 import ReadDiary from "../../components/Diary/ReadDiary";
 import BottomNav from "../../components/BottomNav";
 import Header from "../../components/Header";
-import {useEffect, useState} from "react";
+import {Suspense, useEffect, useState} from "react";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 import {getDiaryPage} from "../../api/entry";
+import LoadingPage from "../Main/LoadingPage";
 
 const ReadDiaryPage = () => {
     const navigate = useNavigate();
