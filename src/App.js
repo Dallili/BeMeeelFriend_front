@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {lazy, Suspense, useEffect, useState} from "react";
 import {Route, Routes} from "react-router-dom";
 
 import SplashScreen from "./components/SplashScreen";
@@ -44,11 +44,13 @@ import PrivateRoute from "./router/PrivateRoute";
 import DiaryDonePage from "./pages/Diarys/DiaryDonePage";
 import SendDiaryDone from "./components/Diary/SendDiaryDone";
 import RegisterCode from "./components/Diary/RegisterCode";
+import LoadingPage from "./pages/Main/LoadingPage";
 
 
 function App() {
     const [showSplash, setShowSplash] = useState(sessionStorage.getItem('splashShown'));
 
+    const MainCabinet = lazy(() => import("./pages/Main/MainPage"));
 
     useEffect(() => {
         if(showSplash === null) {
@@ -93,8 +95,10 @@ function App() {
                     <Route path="/welcome" element={<Welcome />} />
 
                     <Route element={<PrivateRoute />}>
+                        <Suspense fallback={<LoadingPage />}>
                         {/*메인 페이지: 메인 캐비넷*/}
-                        <Route path="/" element={<MainPage />} />
+                            <Route path="/" element={<MainCabinet />} />
+                        </Suspense>
                         {/*알림 페이지*/}
                         <Route path="/notify" element={<NotifyPage />} />
                         {/*일기장 생성*/}

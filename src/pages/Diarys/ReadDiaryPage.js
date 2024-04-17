@@ -1,7 +1,7 @@
 import ReadDiary from "../../components/Diary/ReadDiary";
 import BottomNav from "../../components/BottomNav";
 import Header from "../../components/Header";
-import {useEffect, useMemo, useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 import {getDiaryPage} from "../../api/entry";
 
@@ -11,14 +11,17 @@ const ReadDiaryPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const type = (searchParams.get("type") === "history" || searchParams.get("type") === "deactivated") ? "history" : "main";
     const [isEnd, setIsEnd] = useState(type === "history" || type === "deactivate" ? "history" : "read");
-
+    const [pageNum, setPageNum] = useState(0);
 
     // const [sentData, setSentData] = useState([]);
-    // const [unsentData, setUnsentData] = useState([]);
-    let sentData = [];
-    let unsentData = [];
+    const [unsentData, setUnsentData] = useState([]);
 
-    const [content, setContent] = useState({});
+    const [content, setContent] = useState([]);
+
+    const init = [{
+        sendAt: `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
+        content: "일기를 작성할 차례입니다."
+    }];
 
     async function getDiaryEntry(){
         const res = await getDiaryPage(diaryID);
@@ -26,10 +29,29 @@ const ReadDiaryPage = () => {
         if (res === "fail") {
             alert("일기 조회 실패");
         } else {
-            sentData = res.sent;
-            unsentData = res.unsent;
-            // setSentData(sent);
-            // setUnsentData(unsent);
+            const sent = res.sent;
+            const unsent = res.unsent;
+            setUnsentData(unsent);
+            const total = [...sent, ...unsent];
+            const initTotal = [...total, ...init];
+
+            // 작성한 일기 없음
+            if (unsent.length === 0 && type !== "history") {
+                setContent(initTotal);
+                if (sent.length === 0) {
+                    setIsEnd("hiddenAndWrite");
+                    setPageNum(initTotal.length - 1);
+                } else {
+                    setPageNum(initTotal.length - 2);
+                }
+            } else {
+                // 작성한 일기 있음
+                setContent(total);
+                setPageNum(total.length -1);
+                if (sent.length === 0) {
+                    setIsEnd("hiddenAndWrite");
+                }
+            }
         }
     }
 
@@ -38,13 +60,30 @@ const ReadDiaryPage = () => {
     }, []);
 
     useEffect(() => {
-        console.log(sentData, unsentData);
-        setContent(unsentData.length > 0 ? unsentData[0] :
-            sentData.length > 0 ? sentData[sentData.length - 1] : {
-            sendAt: `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
-                content: "일기를 작성할 차례입니다."
-        });
-    }, [sentData, unsentData]);
+        if (pageNum === 0) {
+            setIsEnd("hidden");
+        } else if (pageNum === content.length -1) {
+            if (type === "history") {
+                setIsEnd("history");
+            } else {
+                setIsEnd("end");
+            }
+        } else {
+            setIsEnd("read");
+        }
+    }, [pageNum]);
+
+    const showNextPage = () => {
+        if (pageNum < content.length) {
+            setPageNum(() => pageNum + 1);
+        }
+    };
+
+    const showPrevPage = () => {
+        if (pageNum > 0) {
+            setPageNum(() => pageNum - 1);
+        }
+    };
 
     const goWriteOrSendDiary = () => {
         // 기존에 작성해 둔 일기가 있으면
@@ -59,8 +98,8 @@ const ReadDiaryPage = () => {
     return (
         <div className="readDiary">
             <Header type="backMain" style={{backgroundColor:"#ffb4aa", border:"none"}}/>
-            <ReadDiary type={searchParams.get("type")} date={content.sendAt} content={content.content} goSendDiary={goWriteOrSendDiary}/>
-            {/*<BottomNav type={isEnd} goWriteDiary={goWriteOrSendDiary} showNextPage={showNextPage} showPrevPage={showPrevPage}/>*/}
+            <ReadDiary type={searchParams.get("type")} date={content[pageNum].sendAt} content={content[pageNum].content} goSendDiary={goWriteOrSendDiary}/>
+            <BottomNav type={isEnd} goWriteDiary={goWriteOrSendDiary} showNextPage={showNextPage} showPrevPage={showPrevPage}/>
         </div>
     );
 };
