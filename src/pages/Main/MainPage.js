@@ -23,8 +23,11 @@ const MainPage = () => {
     const [diaryColor, setDiaryColor] = useState([]);
     const [diaryName, setDiaryName] = useState([]);
 
+    const [name, setNickname] = useState("");
+
     const getMainDiary = async () => {
         const res = await getDiary();
+        const response = await getUserInfo();
 
         if (res === "fail") {
             alert("일기장 불러오기 오류");
@@ -32,11 +35,10 @@ const MainPage = () => {
             const diaries = res.diaries;
             setDiary(diaries);
             setDiaryColor(diaries.map((it) => it.color.slice(1, -1)));
-            setDiaryName(diaries.map((it) => it.memberName === name ? it.partnerName :  it.memberName ));
+            setDiaryName(diaries.map((it) => it.memberName === response.nickname ? it.partnerName :  it.memberName));
         }
     };
 
-    const [name, setNickname] = useState("");
     const [gender, setGender] = useState("");
 
     const [num, setNum] = useState(0);

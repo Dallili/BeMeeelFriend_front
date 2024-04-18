@@ -19,7 +19,7 @@ const WriteDiaryPage = () => {
         if (res !== "fail") {
             setUnsentData(res.unsent);
             // if (res.unsent) {
-            //     setContent(unsentData[0]);
+            //     setContent(res.unsent[0]);
             // }
         }
     }
