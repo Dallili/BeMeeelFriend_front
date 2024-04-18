@@ -1,9 +1,12 @@
 import Header from "../../components/Header";
 import BottomNav from "../../components/BottomNav";
 import DeleteDiary from "../../components/Diary/DeleteDiary";
-import {useEffect, useMemo, useState} from "react";
+import {useEffect, useState} from "react";
+import {deleteDiary, getDeactivated} from "../../api/diary";
+import {useParams} from "react-router-dom";
 
 const DeleteDiaryPage = () => {
+    const {diaryID} = useParams();
     const [selectedNum, setSelectedNum] = useState(0);
     const [allSelect, setAllSelect] = useState("전체 선택");
     const [isAllClicked, setIsAllClicked] = useState(false);
@@ -18,6 +21,7 @@ const DeleteDiaryPage = () => {
         }
     }
 
+
     const yesDelete = () => {
         if (selectedNum > 0) {
             setIsClicked(true);
@@ -30,24 +34,19 @@ const DeleteDiaryPage = () => {
     const [response, setResponse] = useState([]);
     const [total, setTotal] = useState(1);
 
-    const getDeactivatedDiary = () => {
-        // const res = await getDeactivated();
-        // const diary = res.diaries;
-        // const num = res.total;
-        // setResponse(diary);
-        // setTotal(num);
 
-        const deactivatedDiaries = [
-            {
-                "diaryID": "diary10",
-                "userID": "user10",
-                "partnerID": "user12",
-                "updatedBy": "new user",
-                "updatedAt": "2024-03-26 21:18:33",
-                "color": "#000000",
-                "activated": false
-            }];
-        setResponse(deactivatedDiaries);
+    const getDeactivatedDiary = async () => {
+        const res = await getDeactivated();
+
+        if (res === "fail") {
+            alert("일기장 조회 실패");
+            window.location.replace("/history");
+        } else {
+            const diary = res.diaries;
+            const num = res.total;
+            setResponse(diary);
+            setTotal(num);
+        }
     };
 
     useEffect(() => {

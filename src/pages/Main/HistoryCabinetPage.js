@@ -44,6 +44,7 @@ const HistoryCabinetPage = () => {
 
     const getActivatedDiary = async () => {
         const res = await getActivated();
+        const response = await getUserInfo();
 
         if (res === "fail") {
             alert("일기장 불러오기 오류");
@@ -51,9 +52,7 @@ const HistoryCabinetPage = () => {
             const diaries = res.diaries;
             setDiary(diaries);
             setDiaryColor(diaries.map((it) => it.color.slice(1, -1)));
-            setDiaryName(diaries.map((it) => diaries.memberName === name ?
-                setDiaryName(diaries.partnerName) :  setDiaryName(diaries.memberName)
-            ));
+            setDiaryName(diaries.map((it) => it.memberName === response.nickname ? it.partnerName :  it.memberName));
         }
     };
 

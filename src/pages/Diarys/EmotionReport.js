@@ -24,7 +24,7 @@ const EmotionReport = ({username}) => {
         <div className="emotion_report">
             <div className="overlay"></div>
             <div className="done_popup">
-                <div className="done_titles" style={{paddingLeft: "50px"}}>
+                <div className="done_titles" style={{padding: "0 50px"}}>
                     <img src={require('../../img/Diarys/star.png')} alt="img" />
                     <div className="done_title_emotion">{name}님의</div>
                     <div className="done_title_emotion">오늘 기분은</div>

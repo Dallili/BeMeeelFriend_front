@@ -18,18 +18,20 @@ export const createDiary = async (data) => {
 export const deleteDiary = async (diaryID) => {
     try {
         await axiosInstance.delete(`/diaries/${diaryID}`);
-        alert("일기장 삭제 완료");
+        window.location.replace('/');
     } catch(error) {
         console.log(error);
+        return "fail"
     }
 };
 
 export const deactivateDiary = async (diaryID) => {
     try{
         await axiosInstance.patch(`/diaries/${diaryID}/state`);
-        alert("일기장 비활성화 완료");
+        window.location.replace('/');
     } catch (e) {
         console.log(e);
+        return "fail"
     }
 };
 

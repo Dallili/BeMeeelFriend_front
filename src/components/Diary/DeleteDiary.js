@@ -45,9 +45,12 @@ const DeleteDiary = ({diarys, diaryNum, isAllClicked, setSelectedNum, selectedNu
         });
     };
 
-    // 만약에 여러 개를 한 번에 지운다면?
+    const onDelete = async (diaryID) => {
+        await deleteDiary(diaryID);
+    };
+
     const onDeleteDiary = () => {
-        selectedDiaries.map(async (it) => await deleteDiary(diarys[selectedDiaries[it]].diaryID))
+        selectedDiaries.map(async (it) => await onDelete(diarys[selectedDiaries[it]].diaryID))
     }
 
     // if( allSelect === true) {

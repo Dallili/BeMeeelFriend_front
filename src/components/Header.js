@@ -11,6 +11,10 @@ const Header = ({text, type, style, onClick}) => {
         navigate("/");
     };
 
+    const goHis = () => {
+        navigate("/history");
+    };
+
     return (
         <div className="header" style={style}>
             { type === "delete" ? (
@@ -35,7 +39,15 @@ const Header = ({text, type, style, onClick}) => {
                     <div className="text">{text}</div>
                     <div className="right_blank"></div>
                 </div>
-                ): (
+                ): type === "backHis" ? (
+                <div className="back">
+                    <div className="btn_container">
+                        <img src={require('../img/back_btn.png')} alt="backBtn" className="backBtn_img" onClick={goHis}/>
+                    </div>
+                    <div className="text">{text}</div>
+                    <div className="right_blank"></div>
+                </div>
+                ) : (
                 <div className="cancel">
                     <div className="left_blank"></div>
                     <div className="text">{text}</div>

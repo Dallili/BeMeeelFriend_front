@@ -15,13 +15,19 @@ const ReadDiary = ({date, content, sendDiary, type, goSendDiary}) => {
 
     const [dateAndTime, setDateAndTime] = useState([]);
 
-    const onDeactivate = () => {
-        deactivateDiary(diaryID);
+    const onDeactivate = async () => {
+        await deactivateDiary(diaryID);
     };
 
-    const onDelete = () => {
-        deleteDiary(diaryID);
+    const onDelete = async () => {
+        await deleteDiary(diaryID);
     };
+
+    const [wantDelete, setWantDelete] = useState(false);
+    const willDelete = () => {
+        open();
+        setWantDelete(true);
+    }
 
     useEffect(() => {
         setDateAndTime(content === "일기를 작성할 차례입니다." ? date.split(',') : date.split(' '));
@@ -39,7 +45,7 @@ const ReadDiary = ({date, content, sendDiary, type, goSendDiary}) => {
                 <div className="indexes">
                     <div className="index left index_clicked" onClick={() => navigate(`/read-diary/${diaryID}?type=deactivated`, {state:"refresh"})}>일기 보기</div>
                     {/*<div className="index center" style={{visibility:"hidden"}}></div>*/}
-                    <div className="index right" onClick={open}>일기 삭제</div>
+                    <div className="index right" onClick={willDelete}>일기 삭제</div>
                 </div>
             ): (
                 <div className="indexes">
@@ -59,8 +65,8 @@ const ReadDiary = ({date, content, sendDiary, type, goSendDiary}) => {
                 <textarea className="diary_input" value={content} disabled="true"></textarea>
             </div>
             {isModalOpen && <DiaryModal onClick={no} onClick2={onDeactivate} text1="해당 일기장을 비활성화 하시겠습니까?" text2="비활성화한 일기장은" text3="다시 복구할 수 없습니다." btn="비활성화" />}
-            {isOpen && <DiaryModal onClick={close} onClick2={onDelete} text1="해당 일기장을 삭제 하시겠습니까?" text2="삭제한 일기장은" text3="다시 복구할 수 없습니다." btn="삭제" />}
-            {isOpen && <DiaryModal onClick={close} onClick2={onDelete} text1="반환 요청 하시겠습니까?" text2="요청 취소는 불가합니다." btn="반환 요청" />}
+            {isOpen && wantDelete && <DiaryModal onClick={close} onClick2={onDelete} text1="해당 일기장을 삭제 하시겠습니까?" text2="삭제한 일기장은" text3="다시 복구할 수 없습니다." btn="삭제" />}
+            {isOpen && !wantDelete && <DiaryModal onClick={close} onClick2={onDelete} text1="반환 요청 하시겠습니까?" text2="요청 취소는 불가합니다." btn="반환 요청" />}
         </div>
     );
 };
