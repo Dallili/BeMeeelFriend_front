@@ -53,7 +53,25 @@ export const getUserInfo = async () => {
     try {
         const res = await axiosInstance.get(`/members`);
         return res.data
-    } catch (e){
+    } catch (e) {
         alert("유저 정보 조회 실패");
+    }
+}
+
+export const patchPassword = async () => {
+    try {
+        const res = await axiosInstance.patch(`/members/pw`);
+        return true
+    } catch (e) {
+        alert("비밀번호 변경 오류");
+    }
+}
+
+export const patchMemberInfo = async () => {
+    try {
+        const res = await axiosInstance.patch(`/members`);
+        return true
+    } catch (e) {
+        alert("회원 정보 수정 오류");
     }
 }
