@@ -76,8 +76,8 @@ const BottomNav = ({type, onClick, goWriteDiary, num, allSelect, setSendDiary, s
                         <div onClick={()=>{
                             setAllDelete(true);
                         }}>초기화</div>
-                        <div style={{width:"2px", height:"30px", margin:"-3px -3px 0 -3px", backgroundColor:"#D5D5D5"}}></div>
-                        <div onClick={() => setChangeBg(true)}>속지 변경</div>
+                        {/*<div style={{width:"2px", height:"30px", margin:"-3px -3px 0 -3px", backgroundColor:"#D5D5D5"}}></div>*/}
+                        {/*<div onClick={() => setChangeBg(true)}>속지 변경</div>*/}
                     </div>
                     <div className="nav_btn" style={{color:"#4D4D4D", fontWeight:"600"}} onClick={onSubmit}>저장하기</div>
                 </div>

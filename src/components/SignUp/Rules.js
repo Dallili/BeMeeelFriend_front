@@ -2,11 +2,10 @@ import './SignUp.scss';
 import ProgressBar from "./components/ProgressBar";
 import SignupLabel from "./components/SignupLabel";
 import LongButton from "../LongButton";
-import {useNavigate, useOutletContext} from "react-router-dom";
+import {useOutletContext} from "react-router-dom";
 import {signUp} from "../../api/user";
 
 const Rules = () => {
-    const navigate = useNavigate();
     const { userInfo } = useOutletContext();
 
     const goWelcome = async () => {

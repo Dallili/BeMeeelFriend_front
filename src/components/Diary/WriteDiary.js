@@ -1,13 +1,12 @@
 import './ReadDiary.scss';
 import '../Modal.scss';
-import {useEffect, useRef, useState} from "react";
-import ShortButton from "../ShortButton";
+import {useEffect} from "react";
 import useModal from "../../hooks/useModal";
 import DiaryModal from "./DiaryModal";
 import {useNavigate, useParams} from "react-router-dom";
 import {deactivateDiary} from "../../api/diary";
 
-const WriteDiary = ({isNew, setIsNew, allDelete, setAllDelete, setChangeBg, changeBg, type, content, setContent}) => {
+const WriteDiary = ({isNew, allDelete, setAllDelete, content, setContent}) => {
     // 배경 선택 모달 상태 관리
     // const {isOpen, open, close} = useModal();
     // const [choice, setChoice] = useState();
@@ -38,7 +37,7 @@ const WriteDiary = ({isNew, setIsNew, allDelete, setAllDelete, setChangeBg, chan
         // if (changeBg === true) {
         //     open();
         // }
-    }, [isNew, allDelete, changeBg]);
+    }, [isNew, allDelete]);
 
     // const selectBackground = () => {
     //     close();

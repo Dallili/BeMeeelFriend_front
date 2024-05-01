@@ -1,41 +1,42 @@
 import Header from "../../components/Header";
 import WriteDiary from "../../components/Diary/WriteDiary";
 import BottomNav from "../../components/BottomNav";
-import {useEffect, useReducer, useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {getDiaryPage, postDiary, putDiary} from "../../api/entry";
 
 const WriteDiaryPage = () => {
     const navigate = useNavigate();
     const {diaryID} = useParams();
-    const [saveDiary ,setSaveDiary] = useState(false);
     const [allDelete, setAllDelete] = useState(false);
-    const [changeBg, setChangeBg] = useState(false);
+    // const [changeBg, setChangeBg] = useState(false);
 
     const [unsentData, setUnsentData] = useState([]);
 
+    const [content, setContent] = useState({
+        diaryID: diaryID,
+        date: new Date().toLocaleDateString(),
+        content: ""
+    });
+
+    const [isNew, setIsNew] = useState(true);
+
     const getDiaryEntry = async () => {
-        const res = await getDiaryPage(diaryID);
-        if (res !== "fail") {
-            setUnsentData(res.unsent);
-            // if (res.unsent) {
-            //     setContent(res.unsent[0]);
-            // }
+        try {
+            const res = await getDiaryPage(diaryID);
+            if (res.unsent.length > 0) {
+                setUnsentData(res.unsent);
+                setContent(res.unsent[0]);
+                setIsNew(false);
+            }
+        } catch (e) {
+            console.log(e);
         }
     }
 
     useEffect(() => {
         getDiaryEntry();
     }, []);
-
-    console.log(unsentData);
-    const [isNew, setIsNew] = useState(unsentData.length <= 0);
-
-    const [content, setContent] = useState(unsentData.length <= 0 ? {
-        diaryID: diaryID,
-        date: new Date().toLocaleDateString(),
-        content: ""
-    }: unsentData[0]);
 
     const onCreate = async () => {
         const res = await postDiary({
@@ -79,8 +80,8 @@ const WriteDiaryPage = () => {
     return (
         <div className="writeDiary">
             <Header type="backMain" style={{backgroundColor:"#ffb4aa", border:"none"}}/>
-            <WriteDiary type="write" isNew={isNew} setIsNew={setIsNew} allDelete={allDelete} setAllDelete={setAllDelete} setChangeBg={setChangeBg} changeBg={changeBg} content={content} setContent={setContent}/>
-            <BottomNav type="write" setAllDelete={setAllDelete} setChangeBg={setChangeBg} setSaveDiary={setSaveDiary} onSubmit={onSubmit}/>
+            <WriteDiary type="write" isNew={isNew} allDelete={allDelete} setAllDelete={setAllDelete} content={content} setContent={setContent}/>
+            <BottomNav type="write" setAllDelete={setAllDelete} onSubmit={onSubmit}/>
         </div>
     );
 };

@@ -30,7 +30,7 @@ const ReadDiary = ({date, content, sendDiary, type, goSendDiary}) => {
     }
 
     useEffect(() => {
-        setDateAndTime(content === "일기를 작성할 차례입니다." ? date.split(',') : date.split(' '));
+        setDateAndTime(content == null ? ["", ""] : (content === "일기를 작성할 차례입니다." || content === "아직 작성된 일기가 없습니다.") ? date.split(',') : date.split(' '));
     }, [date]);
 
     return (

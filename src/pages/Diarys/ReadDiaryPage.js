@@ -9,132 +9,120 @@ const ReadDiaryPage = () => {
     const navigate = useNavigate();
     const {diaryID} = useParams();
     const [searchParams, setSearchParams] = useSearchParams();
-    const type = (searchParams.get("type") === "history" || searchParams.get("type") === "deactivated") ? "history": "main"
-
-    const [sentData, setSentData] = useState([]);
+    const type = (searchParams.get("type") === "history" || searchParams.get("type") === "deactivated") ? "history": "main";
     const [unsentData, setUnsentData] = useState([]);
 
     // 일기 읽기에서 기본으로 가장 최근 일기 내용 보여줌
-    const [pageNum, setPageNum] = useState(sentData.length > 0 ? sentData.length - 1 : -2);
-    const [isEnd, setIsEnd] = useState(type === "history" || type === "deactivate" ? "history" : sentData.length > 0 ? "read" : "end");
-    const [content, setContent] = useState(unsentData.length > 0 ? {
-        "entryID": unsentData[0].entryID,
-        "sendAt": unsentData[0].date,
-        "content": unsentData[0].content
-    } : sentData.length > 0 && pageNum !== sentData.length ? {
-        sendAt: sentData[pageNum].sendAt,
-        content: sentData[pageNum].content
-    } :  {
-        "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
-        "content": "일기를 작성할 차례입니다."
+    const [pageNum, setPageNum] = useState(0);
+    const [isEnd, setIsEnd] = useState(type === "history" || type === "deactivate" ? "history" : "end");
+    const [content, setContent] = useState([{
+        sendAt: " ",
+        content: ""
+    }]);
+
+    const today = new Date();
+    const year = today.toLocaleDateString('en-US', {
+        year: 'numeric',
     });
+    const month = today.toLocaleDateString('en-US', {
+        month: '2-digit',
+    });
+    const day = today.toLocaleDateString('en-US', {
+        day: '2-digit',
+    });
+    const finalToday = `${year}-${month}-${day}`;
 
     async function getDiaryEntry() {
         const res = await getDiaryPage(diaryID);
-
-        if (res === "fail") {
-            alert("조회 실패")
-        } else {
-            setSentData(res.sent);
-            setUnsentData(res.unsent);
-            const num = res.sent.length > 0 ? res.sent.length - 1 : -2
-            setPageNum(num);
-            setContent(res.unsent.length > 0 ? {
-                "entryID": res.unsent[0].entryID,
-                "sendAt": res.unsent[0].date,
-                "content": res.unsent[0].content
-            } : res.sent.length > 0 ? {
-                sendAt: res.sent[num].sendAt,
-                content: res.sent[num].content
-            } :  {
-                "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
-                "content": "일기를 작성할 차례입니다."
-            })
+        try {
+            if (res === "fail") {
+                alert("조회 실패")
+            } else {
+                const sent = res.sent;
+                const unsent = res.unsent;
+                setUnsentData(unsent);
+                if (type === "history") {
+                    if (sent.length === 0) {
+                        setContent([...sent, {
+                            "sendAt": `${finalToday},${new Date().toTimeString().split(' ')[0]}`,
+                            "content": "아직 작성된 일기가 없습니다."
+                        }])
+                        setPageNum(0);
+                    } else {
+                        setContent([...sent]);
+                        setPageNum(sent.length - 1);
+                    }
+                } else if (unsent.length > 0) {
+                    const unsent = {
+                        ...res.unsent[0],
+                        "sendAt": res.unsent[0].updatedAt
+                    };
+                    setContent([...sent, unsent]);
+                    setPageNum(sent.length);
+                } else if (sent.length > 0) {
+                    setContent([...sent, {
+                        "sendAt": `${finalToday},${new Date().toTimeString().split(' ')[0]}`,
+                        "content": "일기를 작성할 차례입니다."
+                    }]);
+                    setPageNum(sent.length - 1);
+                } else {
+                    setContent([{
+                        "sendAt": `${finalToday},${new Date().toTimeString().split(' ')[0]}`,
+                        "content": "일기를 작성할 차례입니다."
+                    }]);
+                }
+            }
+        } catch (e){
+            console.log(e);
         }
     }
 
+    console.log(content)
     useEffect( () => {
         getDiaryEntry();
     }, []);
 
-
-    console.log(type)
-    console.log(pageNum)
-    console.log(sentData)
-    console.log(sentData[pageNum])
-
-    const getNextContent = (currentPage, sentData, unsentData) => {
-        if (currentPage === sentData.length - 1 || sentData.length === 0) {
-            if (unsentData.length > 0) {
-                return {
-                    "entryID": unsentData[0].entryID,
-                    "sendAt": unsentData[0].date,
-                    "content": unsentData[0].content
-                };
-            } else {
-                return {
-                    "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
-                    "content": "일기를 작성할 차례입니다."
-                };
-            }
-        } else if (currentPage === sentData.length) {
-            return {
-                "sendAt": `${new Date().toLocaleDateString()},${new Date().toTimeString().split(' ')[0]}`,
-                "content": "일기를 작성할 차례입니다."
-            };
+    useEffect(() => {
+        if (pageNum !== content.length && pageNum === 0) {
+            setIsEnd("hidden");
         } else {
-            return {
-                sendAt: sentData[currentPage + 1].sendAt,
-                content: sentData[currentPage + 1].content
-            };
+            setIsEnd("read");
         }
-    };
+        if (type === "history"){
+            if (pageNum === content.length - 1) {
+                if (pageNum === 0) {
+                    setIsEnd("");
+                } else {
+                    setIsEnd("history");
+                }
+            }
+        } else {
+            if (pageNum === content.length - 1) {
+                if (pageNum === 0) {
+                    if (pageNum === content.length -1) {
+                        setIsEnd("hidden");
+                    } else {
+                        setIsEnd("hiddenAndWrite");
+                    }
+                }
+                else {
+                    setIsEnd("end");
+                }
+            }
+        }
+    }, [pageNum]);
 
     const showNextPage = () => {
-        if ( pageNum === sentData.length-1 || sentData.length === 0 ) {
-            setPageNum(sentData.length);
-            setIsEnd("end");
-            setContent(getNextContent(pageNum, sentData, unsentData));
-        } else {
+        if (pageNum !== content.length - 1) {
             setPageNum(pageNum + 1);
-            setContent({
-                sendAt: sentData[pageNum + 1].sendAt,
-                content: sentData[pageNum + 1].content,
-            });
         }
     };
 
     const showPrevPage = () =>  {
-        if ( pageNum > -1 ) {
-            if ( pageNum === 0 ) {
-                setIsEnd("hidden");
-            } else {
-                setPageNum(pageNum - 1);
-                setContent({
-                    sendAt: sentData[pageNum - 1].sendAt,
-                    content: sentData[pageNum - 1].content
-                });
-            }
+        if ( pageNum > 0 ) {
+            setPageNum(pageNum - 1);
         }
     };
-
-    useEffect(() => {
-        if (pageNum > -1 && pageNum < sentData.length && !(isEnd === "history")) {
-            setIsEnd("read");
-        }
-        if (pageNum === 0) {
-            setIsEnd("hidden");
-        }
-        if (pageNum === -2) {
-            setIsEnd("hiddenAndWrite");
-        }
-        if (pageNum === sentData.length-1 && (type === "history" || type === "deactivated") ){
-            setIsEnd("history");
-        }
-        if (pageNum === sentData.length) {
-            setIsEnd("end");
-        }
-    }, [pageNum]);
 
     const goWriteOrSendDiary = () => {
         // 기존에 작성해 둔 일기가 있으면
@@ -149,7 +137,7 @@ const ReadDiaryPage = () => {
     return (
         <div className="readDiary">
             <Header type={type === "history" ? "backHis" :"backMain"} style={{backgroundColor:"#ffb4aa", border:"none"}}/>
-            <ReadDiary type={searchParams.get("type")} date={content.sendAt} content={content.content} goSendDiary={goWriteOrSendDiary}/>
+            <ReadDiary type={searchParams.get("type")} date={content[pageNum].sendAt} content={content[pageNum].content} goSendDiary={goWriteOrSendDiary}/>
             <BottomNav type={isEnd} goWriteDiary={goWriteOrSendDiary} showNextPage={showNextPage} showPrevPage={showPrevPage}/>
         </div>
     );
