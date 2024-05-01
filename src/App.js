@@ -45,6 +45,7 @@ import DiaryDonePage from "./pages/Diarys/DiaryDonePage";
 import SendDiaryDone from "./components/Diary/SendDiaryDone";
 import RegisterCode from "./components/Diary/RegisterCode";
 import LoadingPage from "./pages/Main/LoadingPage";
+import PublicRoute from "./router/PublicRoute";
 
 
 function App() {
@@ -78,19 +79,21 @@ function App() {
         ) : (
             <div className="AppBody">
                 <Routes>
-                    {/*로그인 페이지*/}
-                    <Route path="/login" element={<LoginPage />}/>
+                    <Route element={<PublicRoute />}>
+                        {/*로그인 페이지*/}
+                        <Route path="/login" element={<LoginPage />}/>
 
-                    {/*회원가입 페이지*/}
-                    <Route path="/signup" element={<SignupPage />}>
-                        <Route index="true" element={<Certification />} />
-                        <Route path="verify" element={<CodeCerification />} />
-                        <Route path="detail" element={<IdPassword />} />
-                        <Route path="profile" element={<Profile />} />
-                        <Route path="birthday" element={<Birthday />} />
-                        <Route path="rules" element={<Rules />} />
+                        {/*회원가입 페이지*/}
+                        <Route path="/signup" element={<SignupPage />}>
+                            <Route index="true" element={<Certification />} />
+                            <Route path="verify" element={<CodeCerification />} />
+                            <Route path="detail" element={<IdPassword />} />
+                            <Route path="profile" element={<Profile />} />
+                            <Route path="birthday" element={<Birthday />} />
+                            <Route path="rules" element={<Rules />} />
+                        </Route>
+                        <Route path="/welcome" element={<Welcome />} />
                     </Route>
-                    <Route path="/welcome" element={<Welcome />} />
 
                     <Route element={<PrivateRoute />}>
                         {/*메인 페이지: 메인 캐비넷*/}
