@@ -1,7 +1,7 @@
 import './DiaryDone.scss';
-import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getMatchingCode} from "../../api/matching";
+import {deleteDiary} from "../../api/diary";
 
 const DiaryPreparing = ({who, diaryID}) => {
     const goHistory = () => window.location.replace('/history');
@@ -25,6 +25,10 @@ const DiaryPreparing = ({who, diaryID}) => {
         }
     }, []);
 
+    const onDelete = async () => {
+        await deleteDiary(diaryID);
+    };
+
     return (
         <div className="diaryPreparing">
             <div className="overlay"></div>
@@ -45,6 +49,7 @@ const DiaryPreparing = ({who, diaryID}) => {
                             <div className="invitation_text">아래의 초대 코드를 친구에게 공유해주세요.</div>
                             <input className="invitation_code" disabled="true" value={myInvitationCode} />
                             <button className="invitation_btn" onClick={handleCopy}>복사</button>
+                            <button className="invitation_btn" onClick={onDelete} style={{marginTop:"20px"}}>매칭 취소</button>
                         </div>
                     </div>
                 )}

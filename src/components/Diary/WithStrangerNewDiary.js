@@ -61,9 +61,9 @@ const WithStrangerNewDiary = () => {
     const sendRandomMatching = async () => {
         const result = await postRandomMatching({
             createdAt: new Date(),
-            firstInterest: interests[currentClick[0]],
-            secondInterest: interests[currentClick[1]],
-            thirdInterest: interests[currentClick[2]]
+            firstInterest: currentClick[0],
+            secondInterest: currentClick[1],
+            thirdInterest: currentClick[2]
         });
         if(result !== "fail") {
             showDiaryDone();

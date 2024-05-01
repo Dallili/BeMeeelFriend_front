@@ -11,9 +11,10 @@ const Rules = () => {
 
     const goWelcome = async () => {
         const res = await signUp(userInfo);
-
         if (res === "fail") {
-            alert("회원가입 오류입니다");
+            alert("회원가입 오류");
+        } else {
+            window.location.replace("/welcome");
         }
     }
 

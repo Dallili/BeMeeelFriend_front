@@ -27,6 +27,8 @@ const Login = () => {
         const res = await login(data);
         if (res === "fail") {
             alert("로그인 오류. 다시 시도해주세요.");
+        } else {
+            window.location.replace("/");
         }
     }
 
