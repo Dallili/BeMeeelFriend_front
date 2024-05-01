@@ -43,7 +43,7 @@ const SandwichMenu = ({menuClose, name, num}) => {
                         <label>DIARY</label>
                         <div className="line"></div>
                     </div>
-                    <MenuItem title="일기장 생성" item="addDiary_btn" onClick={goCreateDiary}/>
+                    <MenuItem title="일기장 생성" item="addDiary_btn" onClick={num <= 3 && goCreateDiary}/>
                     <MenuItem title="비활성화된 일기장 읽기" item="deactivateRead_btn" onClick={goDeactivated}/>
                 </div>
                 <div className="menu_list">
