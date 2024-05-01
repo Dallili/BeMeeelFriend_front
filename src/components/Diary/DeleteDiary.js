@@ -1,11 +1,10 @@
 import './DeactivatedDiary.scss';
 import '../Modal.scss';
 import {useEffect, useState} from "react";
-import ShortButton from "../ShortButton";
 import DiaryModal from "./DiaryModal";
 import {deleteDiary} from "../../api/diary";
 
-const DeleteDiary = ({diarys, diaryNum, isAllClicked, setSelectedNum, selectedNum, allSelect, isClicked, onClick}) => {
+const DeleteDiary = ({diarys, diaryNum, isAllClicked, setSelectedNum, selectedNum, allSelect, isClicked, onClick, diaryColor, username}) => {
     const [selectedDiaries, setSelectedDiaries] = useState([]);
     const [deleteReady, setDeleteReady] = useState(true);
 
@@ -106,7 +105,7 @@ const DeleteDiary = ({diarys, diaryNum, isAllClicked, setSelectedNum, selectedNu
                     {/*<img src={require('../../img/diary_icon.svg')} alt="diary" className="diary_img"/>*/}
                     <div
                         className="square"
-                        style={{ backgroundColor: selectedDiaries.includes(index) ? '#FE614C' : '#747474' }}
+                        style={{ filter: selectedDiaries.includes(index) ? "opacity(.8) drop-shadow(0 0 0 #000000)" : `opacity(.6) drop-shadow(0 0 0 ${diaryColor[index]})`}}
                         id={`${index}`}
                         onClick={() => onClickDiary(index)}
                     />
@@ -115,7 +114,7 @@ const DeleteDiary = ({diarys, diaryNum, isAllClicked, setSelectedNum, selectedNu
                         style={{ color: '#747474' }}
                         onClick={() => onClickDiary(index)}
                     >
-                        {diarys[index].partnerID}
+                        {username[index]}
                     </div>
                 </div>
             ))}

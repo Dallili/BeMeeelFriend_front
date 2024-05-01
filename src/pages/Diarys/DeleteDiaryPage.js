@@ -33,7 +33,8 @@ const DeleteDiaryPage = () => {
 
     const [response, setResponse] = useState([]);
     const [total, setTotal] = useState(1);
-
+    const [diaryColor, setDiaryColor] = useState([""]);
+    const [userName, setUserName] = useState([""]);
 
     const getDeactivatedDiary = async () => {
         const res = await getDeactivated();
@@ -45,6 +46,8 @@ const DeleteDiaryPage = () => {
             const diary = res.diaries;
             const num = res.total;
             setResponse(diary);
+            setDiaryColor(diary.map((it) => it.color.slice(1, -1)));
+            setUserName(diary.map((it) => it.memberName === response.nickname ? it.partnerName :  it.memberName));
             setTotal(num);
         }
     };
@@ -56,7 +59,7 @@ const DeleteDiaryPage = () => {
     return (
         <div className="deleteDiary">
             <Header text="일기장 선택" type="delete" onClick={yesDelete}/>
-            <DeleteDiary diarys={response} diaryNum={total} isAllClicked={isAllClicked} setSelectedNum={setSelectedNum} selectedNum={selectedNum} allSelect={allSelect} isClicked={isClicked} onClick={noDelete}/>
+            <DeleteDiary diarys={response} diaryNum={total} isAllClicked={isAllClicked} setSelectedNum={setSelectedNum} selectedNum={selectedNum} allSelect={allSelect} isClicked={isClicked} onClick={noDelete} diaryColor={diaryColor} username={userName}/>
             <BottomNav type="delete" num={selectedNum} onClick={selectAll} allSelect={allSelect}/>
         </div>
     );

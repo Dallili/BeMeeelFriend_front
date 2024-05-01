@@ -5,7 +5,7 @@ import ShortButton from "../ShortButton";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-const DeactivatedDiary = ({diarys, diaryNum}) => {
+const DeactivatedDiary = ({diarys, diaryNum, username, diaryColor}) => {
     const navigate = useNavigate();
 
     const {isOpen, open, close} = useModal();
@@ -14,11 +14,11 @@ const DeactivatedDiary = ({diarys, diaryNum}) => {
     const goReadDiary = () => navigate(`/read-diary/${diaryID}?type=deactivated`);
     const goDeleteDiary = () => navigate('/delete-diary');
 
+    const [user, setUser] = useState("");
 
-    const [username, setUsername]= useState("");
     const modalOpen = (e) => {
         yes();
-        setUsername(diarys[e.target.id].partnerID);
+        setUser(username[e.target.id]);
         setDiaryID(diarys[e.target.id].diaryID);
     }
 
@@ -43,10 +43,10 @@ const DeactivatedDiary = ({diarys, diaryNum}) => {
             ):(
                 <>
                 {diarys.map((it, index) => (
-                        <div className="diary">
+                        <div className="diary" key={index}>
                             {/*<img src={require('../../img/diary_icon.svg')} alt="diary" className="diary_img"/>*/}
-                            <div className="square" id={index}  onClick={modalOpen}></div>
-                            <div className="diary_text" id={index}  onClick={modalOpen}>{diarys[index].partnerID}</div>
+                            <div className="square" id={index} onClick={modalOpen} style={{filter:`opacity(.6) drop-shadow(0 0 0 ${diaryColor[index]}`}}></div>
+                            <div className="diary_text" id={index} onClick={modalOpen}>{username[index]}</div>
                         </div>
                     ))}
                 </>
@@ -59,7 +59,7 @@ const DeactivatedDiary = ({diarys, diaryNum}) => {
                             <img onClick={no} src={require('../../img/cancel_btn.png')} alt="cancelBtn" className="modalCancel_img" />
                         </div>
                         <div className="modal_texts">
-                            <div className="modal_text_small">{username}님과</div>
+                            <div className="modal_text_small">{user}님과</div>
                             <div className="modal_text_small">작성했던 일기를 보러가실래요?</div>
                         </div>
                         <div className="modal_two_btn">
