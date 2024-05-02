@@ -19,7 +19,7 @@ const Login = () => {
     }
 
     // 로그인 버튼 클릭 시 서버로 아이디, 패스워드 전달
-    const onClickLogin = async (e) => {
+    const onClickLogin = async () => {
         const data= {
             email:`${id}`,
             password:`${pw}`
@@ -31,6 +31,12 @@ const Login = () => {
             window.location.replace("/");
         }
     }
+
+    const handleEnter = (e) => {
+        if (e.key === "Enter") {
+            onClickLogin();
+        }
+    };
 
     const goSignUp = () => navigate('/signup');
 
@@ -45,7 +51,7 @@ const Login = () => {
             </div>
             <div className="input_box">
                 <input className="login_input" onChange={idInputHandler} type="text" placeholder="아이디"/>
-                <input className="login_input" onChange={pwInputHandler} type="password" placeholder="비밀번호"/>
+                <input className="login_input" onChange={pwInputHandler} onKeyDown={handleEnter} type="password" placeholder="비밀번호"/>
             </div>
             <div className="login_btn">
                 <LongButton onClick={onClickLogin} text="로그인 하기" type="login" />
