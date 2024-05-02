@@ -1,7 +1,6 @@
 import SettingsItem from "./components/SettingsItem";
 import './SettingsList.scss'
 import {useNavigate} from "react-router-dom";
-import {useCallback, useState} from "react";
 import Modal from "../Modal";
 import useModal from "../../hooks/useModal";
 
@@ -28,7 +27,7 @@ const SettingsList = ({userId, filtering}) => {
             <div className="category_label">사용자 설정</div>
             <div className="buttons">
                 <div className="id">
-                    <SettingsItem type="disabled" itemName="아이디"/>
+                    <SettingsItem type="disabled" itemName="닉네임"/>
                     <div className="user_id">{userId}</div>
                 </div>
                 <SettingsItem type="false" itemName="프로필 수정" onClick={goEditProfile}/>

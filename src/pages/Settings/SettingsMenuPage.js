@@ -1,18 +1,24 @@
 import Header from "../../components/Header";
 import SettingsList from "../../components/Settings/SettingsList";
 import {Routes} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {getUserInfo} from "../../api/user";
 
+const SettingsMenuPage = () => {
+    const [nickName, setNickname] = useState("");
+    const getInfo = async () => {
+        const res = await getUserInfo();
+        setNickname(res.nickname);
+    }
 
-const SettingsMenuPage = ({userInformation}) => {
-    // const [userInfo, setUserInfo] = useState(userInformation);
-    // const userId = userInfo.id;
-    // const filtering = userInfo.filter;
+    useEffect(() => {
+        getInfo();
+    }, []);
 
     return(
         <div className="settings">
             <Header type="back" text="설정"/>
-            <SettingsList userId="dogcat" filtering="off"/>
+            <SettingsList userId={nickName} filtering="off"/>
         </div>
     )
 }

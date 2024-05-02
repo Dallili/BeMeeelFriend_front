@@ -15,8 +15,12 @@
 
         .user_id{
             display: flex;
+            justify-content: center;
             align-items: center;
             padding-right: 32px;
+            min-width: 100px;
+            max-width: 300px;
+            text-align: center;
             color: #FE614C;
             font-weight: 500;
         }
