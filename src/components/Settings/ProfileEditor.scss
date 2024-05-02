@@ -1,3 +1,10 @@
+@mixin input {
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: #F5F5F5;
+}
+
 .counter {
     display: flex;
     justify-content: right;
@@ -5,44 +12,20 @@
     font-size: 13px;
 }
 
-.select_container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-left: 32px;
-    margin-right: 32px;
-
-    .select {
-        height: 50px;
-        //@if (calc(var(--vw, 1vw) * 100) < 400) {
-        //    padding-left: 4vw;
-        //    padding-right: 4vw;
-        //}
-        padding-left: 20px;
-        padding-right: 20px;
-        border: none;
-        border-radius: 10px;
-        font-size: 14px;
-        background-color: #F5F5F5;
-    }
-
-    .select:focus{
-        outline: none;
-    }
-
-    .option {
-        font-size: 14px;
-        background-color: #747474;
-    }
-
-    .ymd {
-        margin-left: 1px;
-        margin-right: 2px;
-    }
+.datePicker {
+    @include input;
+    height: 50px;
+    min-width: 406px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
 }
 
-
-
+.datePicker:focus {
+    outline: none;
+}
 
 
 

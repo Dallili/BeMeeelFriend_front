@@ -3,35 +3,53 @@ import './ProfileEditor.scss'
 import './SettingsCommon.scss'
 import SettingTextLabel from "./components/SettingTextLabel";
 import {useEffect, useState} from "react";
+import {getUserInfo, patchMemberInfo} from "../../api/user";
+import DatePicker from "react-datepicker";
 
-const nick = "jerry";
-const year = [1999, 2000, 2001, 2002, 2003];
-const month = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-const date = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
-const ProfileEditor = ({getNickName, birthDay}) => {
-    const [nickName, setNickName] = useState(nick);
-    const [inputCount, setInputCount] = useState(nick.length);
+const ProfileEditor = () => {
+    const [nickName, setNickName] = useState("");
+    const [inputCount, setInputCount] = useState(0);
+    const [birthday, setBirthday] = useState();
+    const [selectedDate, setSelectedDate] = useState(new Date());
 
-    const onInputHandler = (e, maxlength) => {
-        if (e.target.value.length > maxlength){
-            e.value = e.value.substring(0, maxlength);
+    const onInputHandler = (e) => {
+        if (e.target.value.length > 20){
+            e.value = e.value.substring(0, 20);
         }
-        //saving the length of a nickname written in the input box
         setInputCount(e.target.value.length);
         //입력한 nickname 화면에 반영
         setNickName(e.target.value);
     }
 
-    function setScreenSize() {
-        let vw = window.innerWidth * 0.01;
-        let vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vw', `${vw}px`);
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    const onChangeHandler = (selected) => {
+        const year = selected.toLocaleDateString('en-US', {year:'numeric'});
+        const month = selected.toLocaleDateString('en-US', {month:'2-digit'});
+        const date = selected.toLocaleDateString('en-US', {day:'2-digit'});
+        setBirthday(`${year}-${month}-${date}`);
     }
+
+
+    const getInfo = async () => {
+        const res = await getUserInfo();
+        setNickName(res.nickname);
+        setInputCount(res.nickname.length);
+        setSelectedDate(res.birthday);
+    }
+
     useEffect(() => {
-        setScreenSize();
-    });
+        getInfo();
+    }, []);
+
+    const editInfo = async () => {
+        const res = await patchMemberInfo({
+            nickname: nickName,
+            birthday: birthday
+        });
+        if (res === true) {
+            window.location.replace("/settings");
+        }
+    }
 
     return (
         <div className="editor">
@@ -48,28 +66,21 @@ const ProfileEditor = ({getNickName, birthDay}) => {
             </div>
             <div className="counter">{inputCount}자/20자</div>
             <SettingTextLabel text="생일" />
-            <div className="select_container">
-                <select className="select">
-                    {year.map((it) => (
-                        <option className="option" value={it}>{it}</option>
-                        ))}
-                </select>
-                <div className="ymd">년</div>
-                <select className="select">
-                    {month.map((it) => (
-                        <option className="option" value={it}>{it}</option>
-                    ))}
-                </select>
-                <div className="ymd">월</div>
-                <select className="select">
-                    {date.map((it) => (
-                        <option className="option" value={it}>{it}</option>
-                    ))}
-                </select>
-                <div className="ymd">일</div>
+            <div className="input_container">
+                <DatePicker
+                    className="datePicker"
+                    dateFormat='yyyy-MM-dd'
+                    minDate={new Date('1900-01-01')}
+                    maxDate={new Date()}
+                    selected={selectedDate}
+                    onChange={(date) => {
+                        setSelectedDate(date);
+                        onChangeHandler(date);
+                    }}
+                />
             </div>
             <div className="btn">
-                <LongButton text="완료" type="positive"/>
+                <LongButton onClick={editInfo} text="완료" type="positive"/>
             </div>
         </div>
     )
