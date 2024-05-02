@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import Modal from "../Modal";
 import useModal from "../../hooks/useModal";
 import {useState} from "react";
+import {logOut} from "../../api/user";
 
 const SettingsList = ({userId, filtering}) => {
     const navigate = useNavigate();
@@ -18,8 +19,7 @@ const SettingsList = ({userId, filtering}) => {
     const {isOpen, open, close} = useModal();
 
     const logout= () => {
-        console.log("로그아웃 성공");
-        close();
+        logOut();
     };
 
     const [filterOn, setFilterOn] = useState(false);
