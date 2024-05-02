@@ -3,6 +3,7 @@ import './SettingsList.scss'
 import {useNavigate} from "react-router-dom";
 import Modal from "../Modal";
 import useModal from "../../hooks/useModal";
+import {useState} from "react";
 
 const SettingsList = ({userId, filtering}) => {
     const navigate = useNavigate();
@@ -21,6 +22,11 @@ const SettingsList = ({userId, filtering}) => {
         close();
     };
 
+    const [filterOn, setFilterOn] = useState(false);
+    const handleToggle = () => {
+        setFilterOn((prev) => !prev);
+    };
+
 
     return (
         <div className="settings_list">
@@ -34,7 +40,10 @@ const SettingsList = ({userId, filtering}) => {
                 <SettingsItem type="false" itemName="비밀번호 변경" onClick={goChangePassword}/>
                 <div className="filtering">
                     <SettingsItem type="disabled" itemName={"혐오 발언 필터링 설정"}/>
-                    {/*<ToggleBtn filtering={filtering} />*/}
+                    <label className="switch" htmlFor="toggle">
+                        <input type="checkbox" id="toggle" onChange={handleToggle}/>
+                        <span className="slider round"></span>
+                    </label>
                 </div>
             </div>
             <div className="border_line"></div>
