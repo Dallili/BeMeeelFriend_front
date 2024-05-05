@@ -1,0 +1,51 @@
+.howToUse {
+  position: relative;
+  padding-top: 70px;
+
+  .img_container {
+    display: flex;
+  }
+  .htu_img {
+    display: flex;
+    margin: 0 auto;
+  }
+  .index {
+    position: absolute;
+    top: 10%;
+    left: 7%;
+    margin-left: 50px;
+    color: #FF8B7B;
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 25px;
+  }
+  .index_color {
+    color: #8CD0CA;
+  }
+  .arrow {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    cursor: pointer;
+    label {
+      font-size: 10px;
+      font-weight: 600;
+      color: #747474;
+    }
+  }
+  .arrow_left {
+    left: 5%;
+  }
+  .arrow_right {
+    right: 5%;
+  }
+  .reverse {
+    left: 5%;
+    transform: scaleX(-1);
+  }
+  .arrow_img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
