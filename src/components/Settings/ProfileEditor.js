@@ -11,15 +11,17 @@ const ProfileEditor = () => {
     const [nickName, setNickName] = useState("");
     const [inputCount, setInputCount] = useState(0);
     const [birthday, setBirthday] = useState();
-    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedDate, setSelectedDate] = useState("");
 
+    const regExp = /^[A-Za-z0-9가-힣]*$/
     const onInputHandler = (e) => {
-        if (e.target.value.length > 20){
-            e.value = e.value.substring(0, 20);
+        let tempname = e.target.value;
+        if(tempname.search(/\s/) !== -1) {
+            alert("닉네임에 빈 칸을 포함할 수 없습니다.");
+            tempname = tempname.substring(0, e.target.value.length - 1);
         }
+        setNickName(tempname);
         setInputCount(e.target.value.length);
-        //입력한 nickname 화면에 반영
-        setNickName(e.target.value);
     }
 
     const onChangeHandler = (selected) => {
@@ -28,7 +30,6 @@ const ProfileEditor = () => {
         const date = selected.toLocaleDateString('en-US', {day:'2-digit'});
         setBirthday(`${year}-${month}-${date}`);
     }
-
 
     const getInfo = async () => {
         const res = await getUserInfo();
@@ -42,13 +43,18 @@ const ProfileEditor = () => {
     }, []);
 
     const editInfo = async () => {
-        const res = await patchMemberInfo({
-            nickname: nickName,
-            birthday: birthday
-        });
-        if (res === true) {
-            window.location.replace("/settings");
+        if (regExp.test(nickName)) {
+            const res = await patchMemberInfo({
+                nickname: nickName,
+                birthday: birthday
+            });
+            if (res === true) {
+                window.location.replace("/settings");
+            }
+        } else {
+            alert("닉네임에 특수문자 사용 불가, 한글 자음과 모음 사용 할 수 없습니다.");
         }
+
     }
 
     return (
