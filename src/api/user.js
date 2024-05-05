@@ -35,6 +35,7 @@ export const login = async (data) => {
         sessionStorage.setItem("userToken", token);
         return true;
     } catch(e) {
+        alert(e.response.data.message);
         return "fail";
     }
 }
@@ -58,18 +59,18 @@ export const getUserInfo = async () => {
     }
 }
 
-export const patchPassword = async () => {
+export const patchPassword = async (data) => {
     try {
-        const res = await axiosInstance.patch(`/members/pw`);
+        const res = await axiosInstance.patch(`/members/pw`, data);
         return true
     } catch (e) {
-        alert("비밀번호 변경 오류");
+        alert(e.response.data.message);
     }
 }
 
-export const patchMemberInfo = async () => {
+export const patchMemberInfo = async (data) => {
     try {
-        const res = await axiosInstance.patch(`/members`);
+        const res = await axiosInstance.patch(`/members`, data);
         return true
     } catch (e) {
         alert("회원 정보 수정 오류");

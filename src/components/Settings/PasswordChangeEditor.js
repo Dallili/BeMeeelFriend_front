@@ -3,6 +3,7 @@ import './SettingsCommon.scss'
 import SettingTextLabel from "./components/SettingTextLabel";
 import LongButton from "../LongButton";
 import {useState} from "react";
+import {patchPassword} from "../../api/user";
 
 const PasswordChangeEditor = () => {
     const [inputs, setInputs] = useState({
@@ -12,6 +13,7 @@ const PasswordChangeEditor = () => {
     });
 
     const {newPass, newPassCheck, currentPass} = inputs;
+
     const onInputHandler = (e) => {
         const {value, name} = e.target;
         setInputs({
@@ -19,7 +21,18 @@ const PasswordChangeEditor = () => {
             [name]: value
         });
     };
-    const isSame = newPass === newPassCheck;
+
+    const changePw = async () => {
+        const res = await patchPassword({
+            "oldPassword": currentPass,
+            "newPassword": newPass,
+            "confirmPassword": newPassCheck
+        })
+        if (res === true) {
+            alert("비밀번호가 변경되었습니다.");
+            window.location.replace('/settings');
+        }
+    }
 
     return (
         <div className="editor">
@@ -56,7 +69,7 @@ const PasswordChangeEditor = () => {
                 />
             </div>
             <div className="btn">
-                <LongButton text="비밀번호 변경" type="positive" />
+                <LongButton onClick={changePw} text="비밀번호 변경" type="positive" />
             </div>
         </div>
     );
