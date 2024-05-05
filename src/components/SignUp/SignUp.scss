@@ -159,17 +159,17 @@
     .nicknameInput_box {
       display: flex;
       width: 100%;
-      justify-content: space-between;
+      gap: 25px;
 
       .nickname_input {
         @include input;
         width: 70%;
         margin-left: 20px;
-        margin-right: 5px;
         text-align: center;
         font-size: 13px;
         font-weight: 800;
       }
+
       .nickname_input:focus {
         outline: none;
       }
@@ -329,3 +329,4 @@
   background-position-y: bottom;
   background-size: contain;
 }
+
