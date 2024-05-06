@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getActivated, getDiary} from "../../api/diary";
 import {getUserInfo} from "../../api/user";
+import {fetchSSE} from "../../api/notify";
 
 const MainPage = () => {
     // 샌드위치 메뉴
@@ -59,6 +60,16 @@ const MainPage = () => {
         getInfo();
         getMainDiary();
     }, []);
+
+    const [notify, setNotify] = useState("");
+    useEffect(() => {
+        const res = fetchSSE();
+        setNotify(res);
+    }, []);
+
+    useEffect(() => {
+        console.log(notify);
+    }, [notify]);
 
     const navigate = useNavigate();
     const goHistory = () => navigate('/history');
