@@ -61,15 +61,15 @@ const MainPage = () => {
         getMainDiary();
     }, []);
 
-    const [notify, setNotify] = useState("");
-    useEffect(() => {
-        const res = fetchSSE();
-        setNotify(res);
-    }, []);
-
-    useEffect(() => {
-        console.log(notify);
-    }, [notify]);
+    // const [notify, setNotify] = useState("");
+    // useEffect(() => {
+    //     const res = fetchSSE();
+    //     setNotify(res);
+    // }, []);
+    //
+    // useEffect(() => {
+    //     console.log(notify);
+    // }, [notify]);
 
     const navigate = useNavigate();
     const goHistory = () => navigate('/history');

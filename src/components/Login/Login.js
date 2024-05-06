@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import LongButton from "../LongButton";
 import {login} from "../../api/user";
+import {fetchSSE} from "../../api/notify";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -28,6 +29,7 @@ const Login = () => {
         if (res === "fail") {
             // alert("로그인 오류. 다시 시도해주세요.");
         } else {
+            await fetchSSE();
             window.location.replace("/");
         }
     }
