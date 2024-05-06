@@ -4,7 +4,8 @@ export const fetchSSE = async () => {
     const eventSource = new EventSourcePolyfill(`${process.env.REACT_APP_SERVER_URL}/notify/subscribe`, {
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("userToken")}`
-        }
+        },
+        heartbeatTimeout: 3*3600*1000
     });
 
     eventSource.onopen = () => {
