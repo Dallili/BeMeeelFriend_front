@@ -59,6 +59,7 @@ const MainPage = () => {
     useEffect(() => {
         getInfo();
         getMainDiary();
+        fetchSSE();
     }, []);
 
     // const [notify, setNotify] = useState("");

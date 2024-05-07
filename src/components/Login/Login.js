@@ -29,8 +29,8 @@ const Login = () => {
         if (res === "fail") {
             // alert("로그인 오류. 다시 시도해주세요.");
         } else {
-            await fetchSSE();
-            // window.location.replace("/");
+            // await fetchSSE();
+            window.location.replace("/");
         }
     }
 

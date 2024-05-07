@@ -5,12 +5,13 @@ export const fetchSSE = async () => {
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("userToken")}`
         },
-        heartbeatTimeout: 30000
+        heartbeatTimeout: 4500000 * 60
     });
 
     eventSource.onopen = () => {
         console.log("연결 성공");
-        window.location.replace("/");
+        // window.location.replace("/");
+        return true
     };
 
     eventSource.addEventListener('message', (e) => {
