@@ -5,13 +5,17 @@ export const fetchSSE = async () => {
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("userToken")}`
         },
-        heartbeatTimeout: 3*3600*1000
+        heartbeatTimeout: 30000
     });
 
     eventSource.onopen = () => {
-      console.log("연결 성공");
+        console.log("연결 성공");
+        window.location.replace("/");
     };
 
+    eventSource.addEventListener('message', (e) => {
+        console.log(e.data)
+    });
     eventSource.onmessage = async (e) => {
         const res = await e.data;
         const data = e.data.message !== undefined ? JSON.parse(e.data.message) : undefined;
@@ -21,10 +25,11 @@ export const fetchSSE = async () => {
         return res
     };
 
-    eventSource.onerror = (e) => {
-        if (e.error) {
-            console.log("error");
-            eventSource.close();
+    eventSource.onerror = async (e) => {
+        if (e.error.message === "network error") {
+            console.log(e.error);
+            console.log(eventSource.readyState);
         }
+        return false
     }
 };
