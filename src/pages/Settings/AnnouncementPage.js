@@ -22,8 +22,6 @@ const AnnouncementPage = () => {
         if (pinnedList || unpinnedList) {
             setList([...pinnedList, ...unpinnedList]);
         }
-        console.log(pinnedList, unpinnedList)
-        console.log(list)
     };
 
     useEffect(() => {

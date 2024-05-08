@@ -5,7 +5,6 @@ import {useNavigate, useOutletContext} from "react-router-dom";
 const AnnouncementList = () => {
     const { list } = useOutletContext();
 
-    console.log(list)
     const navigate = useNavigate();
 
     return (
