@@ -46,6 +46,7 @@ import SendDiaryDone from "./components/Diary/SendDiaryDone";
 import RegisterCode from "./components/Diary/RegisterCode";
 import LoadingPage from "./pages/Main/LoadingPage";
 import PublicRoute from "./router/PublicRoute";
+import {RecoilRoot} from "recoil";
 
 
 function App() {
@@ -77,6 +78,7 @@ function App() {
         {showSplash === null ? (
             <SplashScreen />
         ) : (
+            <RecoilRoot>
             <div className="AppBody">
                 <Routes>
                     <Route element={<PublicRoute />}>
@@ -136,6 +138,7 @@ function App() {
                     </Route>
                 </Routes>
             </div>
+            </RecoilRoot>
         )}
     </div>
   );
