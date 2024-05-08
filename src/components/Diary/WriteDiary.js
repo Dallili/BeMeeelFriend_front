@@ -21,6 +21,7 @@ const WriteDiary = ({isNew, allDelete, setAllDelete, content, setContent}) => {
 
     const onDeactivate = async () => {
         await deactivateDiary(diaryID);
+        window.location.replace("/");
     };
 
     useEffect(() => {

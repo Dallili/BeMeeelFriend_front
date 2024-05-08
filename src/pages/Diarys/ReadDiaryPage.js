@@ -100,9 +100,9 @@ const ReadDiaryPage = () => {
             if (pageNum === content.length - 1) {
                 if (pageNum === 0) {
                     if (pageNum === content.length -1) {
-                        setIsEnd("hidden");
-                    } else {
                         setIsEnd("hiddenAndWrite");
+                    } else {
+                        setIsEnd("hidden");
                     }
                 }
                 else {
