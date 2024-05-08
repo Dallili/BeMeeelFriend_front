@@ -89,11 +89,11 @@ const BottomNav = ({type, onClick, goWriteDiary, num, allSelect, setSendDiary, s
                         <div onClick={goWriteDiary}>수정하기</div>
                     </div>
                     <div className="nav_btn" style={{color:"#4D4D4D", fontWeight:"600"}}>
-                        <select className="select_time" style={{visibility:"hidden"}}>
-                            {reserveTime.map((it, i) => (
-                                <option key={i} onClick={()=>setTime(`${it}`)}>{it}</option>
-                            ))}
-                        </select>
+                        {/*<select className="select_time" style={{visibility:"hidden"}}>*/}
+                        {/*    {reserveTime.map((it, i) => (*/}
+                        {/*        <option key={i} onClick={()=>setTime(`${it}`)}>{it}</option>*/}
+                        {/*    ))}*/}
+                        {/*</select>*/}
                         <div onClick={setSendDiary}>전달하기</div>
                     </div>
                 </div>
