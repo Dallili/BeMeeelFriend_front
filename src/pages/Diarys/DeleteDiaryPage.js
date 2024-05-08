@@ -4,6 +4,7 @@ import DeleteDiary from "../../components/Diary/DeleteDiary";
 import {useEffect, useState} from "react";
 import {deleteDiary, getDeactivated} from "../../api/diary";
 import {useParams} from "react-router-dom";
+import {getUserInfo} from "../../api/user";
 
 const DeleteDiaryPage = () => {
     const {diaryID} = useParams();
@@ -38,6 +39,7 @@ const DeleteDiaryPage = () => {
 
     const getDeactivatedDiary = async () => {
         const res = await getDeactivated();
+        const response = await getUserInfo();
 
         if (res === "fail") {
             alert("일기장 조회 실패");
