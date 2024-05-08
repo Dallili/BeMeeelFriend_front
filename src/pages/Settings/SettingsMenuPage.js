@@ -6,9 +6,11 @@ import {getUserInfo} from "../../api/user";
 
 const SettingsMenuPage = () => {
     const [nickName, setNickname] = useState("");
+    const [filtering, setFiltering] = useState();
     const getInfo = async () => {
         const res = await getUserInfo();
         setNickname(res.nickname);
+        setFiltering(res.useFiltering);
     }
 
     useEffect(() => {
@@ -18,7 +20,7 @@ const SettingsMenuPage = () => {
     return(
         <div className="settings">
             <Header type="back" text="설정"/>
-            <SettingsList userId={nickName} filtering="off"/>
+            <SettingsList userId={nickName} filtering={filtering} setFiltering={setFiltering}/>
         </div>
     )
 }

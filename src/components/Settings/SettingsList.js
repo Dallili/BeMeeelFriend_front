@@ -5,8 +5,9 @@ import Modal from "../Modal";
 import useModal from "../../hooks/useModal";
 import {useState} from "react";
 import {logOut} from "../../api/user";
+import {patchFiltering} from "../../api/settings";
 
-const SettingsList = ({userId, filtering}) => {
+const SettingsList = ({userId, filtering, setFiltering}) => {
     const navigate = useNavigate();
     const goEditProfile = () => navigate('/settings/editprofile');
     const goChangePassword = () => navigate('/settings/changepassword');
@@ -22,9 +23,12 @@ const SettingsList = ({userId, filtering}) => {
         logOut();
     };
 
-    const [filterOn, setFilterOn] = useState(false);
-    const handleToggle = () => {
-        setFilterOn((prev) => !prev);
+
+    const handleToggle = async () => {
+        setFiltering((prev) => !prev);
+        await patchFiltering({
+            "useFiltering": !filtering
+        });
     };
 
 
@@ -39,9 +43,9 @@ const SettingsList = ({userId, filtering}) => {
                 <SettingsItem type="false" itemName="프로필 수정" onClick={goEditProfile}/>
                 <SettingsItem type="false" itemName="비밀번호 변경" onClick={goChangePassword}/>
                 <div className="filtering">
-                    <SettingsItem type="disabled" itemName={"혐오 발언 필터링 설정"}/>
+                    <SettingsItem type="disabled" itemName={"혐오 발언 필터링"}/>
                     <label className="switch" htmlFor="toggle">
-                        <input type="checkbox" id="toggle" onChange={handleToggle}/>
+                        <input type="checkbox" id="toggle" onChange={handleToggle} checked={filtering}/>
                         <span className="slider round"></span>
                     </label>
                 </div>
