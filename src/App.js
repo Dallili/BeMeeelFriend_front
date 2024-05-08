@@ -127,7 +127,7 @@ function App() {
                         <Route path="/settings/changepassword" element={<PasswordChangePage />}/>
                         <Route path="/settings/announcement" element={<AnnouncementPage />}>
                             <Route index="true" element={<AnnouncementList />} />
-                            <Route path=":id" element={<AnnouncementDetailPage />} />
+                            <Route path=":noticeID" element={<AnnouncementDetailPage />} />
                         </Route>
                         <Route path="/settings/inquiry" element={<InquiryPage />} />
                         <Route path="/settings/guide" element={<UserGuidePage />}/>
