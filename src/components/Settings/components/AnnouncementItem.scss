@@ -1,6 +1,7 @@
 .announcement_item{
     padding: 28px 30px;
     border-bottom: #F5F5F5 solid 1px;
+    cursor: pointer;
 
     .title_pin {
         display: flex;
@@ -16,6 +17,7 @@
         margin-top: 15px;
         font-size: 14px;
     }
+
 }
 
 

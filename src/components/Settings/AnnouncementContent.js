@@ -1,19 +1,29 @@
 import './AnnouncementContent.scss'
-import Header from "../Header";
+import {useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {getDetailAnnouncement} from "../../api/settings";
 
-const AnnouncementContent = ({title, date, text}) => {
-    const date1 = new Date().toLocaleDateString('ko-KR', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
+const AnnouncementContent = () => {
+    const {noticeID} = useParams();
+    const [detail, setDetail] = useState({
+        title: "",
+        createdAt: "",
+        constructor: ""
     });
+    const detailAnnouncement = async () => {
+        const res = await getDetailAnnouncement(noticeID);
+        setDetail(res);
+    }
+    useEffect(() => {
+        detailAnnouncement();
+    }, []);
 
     return(
         <>
         <div className="announcement_content">
-            <div className="announcement_title">{title}</div>
-            <div className="announcement_date">{date1}</div>
-            <div className="announcement_text">{text}</div>
+            <div className="announcement_title">{detail.title}</div>
+            <div className="announcement_date">{detail.createdAt}</div>
+            <div className="announcement_text">{detail.content}</div>
         </div>
         </>
     )

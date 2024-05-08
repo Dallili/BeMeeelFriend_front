@@ -1,63 +1,27 @@
 import './SettingsCommon.scss'
 import AnnouncementItem from "./components/AnnouncementItem";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useOutletContext} from "react-router-dom";
 
 const AnnouncementList = () => {
-    const date1 = new Date();
-    const announcement = [
-        {
-            id: 1,
-            type: "fixed",
-            title: "비밀친구의 n가지 규칙입니다",
-            date: date1,
-            text: "이것은 공지공지공지",
-        }, {
-            id: 2,
-            type: "",
-            title: "비밀친구의 n가지 규칙입니다",
-            date: date1,
-            text: "이것은 공지지공지",
-        },
-        {
-            id: 3,
-            type: "",
-            title: "비밀친구의 n가지 규칙입니다",
-            date: date1,
-            text: "이것은 공지공지공지",
-        },
-        {
-            id: 4,
-            type: "",
-            title: "비밀친구의 n가지 규칙입니다",
-            date: date1,
-            text: "이것은 ",
-        }, {
-            id: 5,
-            type: "",
-            title: "비밀친구의 n가지 규칙입니다",
-            date: date1,
-            text: "이것은 공지공지공지",
-        },
-        {
-            id: 6,
-            type: "",
-            title: "비밀친구의 n가지 규칙입니다",
-            date: date1,
-            text: "이것은 공지공지공지",
-        },
-    ];
+    const { list } = useOutletContext();
+
+    console.log(list)
     const navigate = useNavigate();
-    const goAnnouncementContent = () => navigate(`/settings/announcement/${announcement.id}`);
 
     return (
         <div className="editor">
-            {announcement.map((it) => (
+            {list && list.map((it, index) => (
                 <AnnouncementItem
                     key={it.id}
                     {...it}
-                    onClick={goAnnouncementContent}
+                    onClick={() => navigate(`/settings/announcement/${list[index].noticeID}`)}
                 />
             ))}
+            { !list &&
+            <div style={{textAlign:"center", marginTop:"50px"}}>
+                공지사항이 없습니다.
+            </div>
+            }
         </div>
     );
 };
