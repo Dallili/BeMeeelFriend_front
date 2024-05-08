@@ -25,7 +25,7 @@ export const deleteDiary = async (diaryID) => {
     }
 };
 
-export const deactivateDiary = async (diaryID) => {
+export const deactivateDiary = async (diaryID, data) => {
     try{
         await axiosInstance.patch(`/diaries/${diaryID}/state`);
         window.location.replace('/');
