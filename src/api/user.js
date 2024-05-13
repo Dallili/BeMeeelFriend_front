@@ -16,7 +16,7 @@ export const signUp = async (data) => {
             alert("이미 존재하는 이메일입니다");
         } else {
             // 회원가입 후 로그인
-            const response = await login({
+            await login({
                 email: data.email,
                 password: data.password
             });
@@ -33,9 +33,8 @@ export const login = async (data) => {
         const token = response.data;
         // 토큰 저장
         sessionStorage.setItem("userToken", token);
-        return true;
+        return token;
     } catch(e) {
-        alert(e.response.data.message);
         return "fail";
     }
 }

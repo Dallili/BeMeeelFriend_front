@@ -1,5 +1,8 @@
-import {lazy, Suspense, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {Route, Routes} from "react-router-dom";
+import {useRecoilValue, useSetRecoilState} from "recoil";
+import {notifystateSelector} from "./recoil/atoms/notifyState";
+import {loginState} from "./recoil/atoms/loginState";
 
 import SplashScreen from "./components/SplashScreen";
 
@@ -41,13 +44,9 @@ import WriteDiaryPage from "./pages/Diarys/WriteDiaryPage";
 import SendDiaryPage from "./pages/Diarys/SendDiaryPage";
 import EmotionReport from "./pages/Diarys/EmotionReport";
 import PrivateRoute from "./router/PrivateRoute";
-import DiaryDonePage from "./pages/Diarys/DiaryDonePage";
-import SendDiaryDone from "./components/Diary/SendDiaryDone";
 import RegisterCode from "./components/Diary/RegisterCode";
-import LoadingPage from "./pages/Main/LoadingPage";
 import PublicRoute from "./router/PublicRoute";
-import {RecoilRoot} from "recoil";
-
+import {fetchSSE} from "./api/notify";
 
 function App() {
     const [showSplash, setShowSplash] = useState(sessionStorage.getItem('splashShown'));
@@ -61,6 +60,15 @@ function App() {
             return () => clearTimeout(timer);
         }
     }, [showSplash]);
+
+    const isLogin = useRecoilValue(loginState);
+    const setNotify = useSetRecoilState(notifystateSelector);
+
+    useEffect(() => {
+        if(isLogin !== null) {
+            fetchSSE(setNotify);
+        }
+    }, [isLogin]);
 
     function setScreenSize() {
         let vw = window.innerWidth * 0.01;
@@ -78,7 +86,6 @@ function App() {
         {showSplash === null ? (
             <SplashScreen />
         ) : (
-            <RecoilRoot>
             <div className="AppBody">
                 <Routes>
                     <Route element={<PublicRoute />}>
@@ -136,9 +143,10 @@ function App() {
                         <Route path="/settings/userreport" element={<UserReportPage />} />
                         <Route path="/settings/withdrawal" element={<WithdrawalPage />} />
                     </Route>
+
+                    <Route path="*" element={<h2>404 NOT FOUND</h2>} />
                 </Routes>
             </div>
-            </RecoilRoot>
         )}
     </div>
   );

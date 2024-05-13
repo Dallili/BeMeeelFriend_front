@@ -3,13 +3,16 @@ import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import LongButton from "../LongButton";
 import {login} from "../../api/user";
-import {fetchSSE} from "../../api/notify";
+import {useSetRecoilState} from "recoil";
+import {loginState} from "../../recoil/atoms/loginState";
 
 const Login = () => {
     const navigate = useNavigate();
 
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
+
+    const setLogin = useSetRecoilState(loginState);
 
     const idInputHandler = (e) => {
         setId(e.target.value);
@@ -19,6 +22,7 @@ const Login = () => {
         setPw(e.target.value);
     }
 
+
     // 로그인 버튼 클릭 시 서버로 아이디, 패스워드 전달
     const onClickLogin = async () => {
         const data= {
@@ -27,10 +31,10 @@ const Login = () => {
         }
         const res = await login(data);
         if (res === "fail") {
-            // alert("로그인 오류. 다시 시도해주세요.");
+            alert("로그인 오류. 다시 시도해주세요.");
         } else {
-            // await fetchSSE();
-            window.location.replace("/");
+            setLogin(res);
+            window.location.replace('/');
         }
     }
 
