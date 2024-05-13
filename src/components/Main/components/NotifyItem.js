@@ -1,41 +1,25 @@
 import './NotifyItem.scss';
 import {useState} from "react";
 
-const NotifyItem = ({type, user, date, color}) => {
+const NotifyItem = ({notifyType, receiverID, senderNickname, updatedAt, diaryColor}) => {
     let title = '';
-    const name =`${user}님`;
+    const name =`${senderNickname}님`;
 
-    const [isNone, setIsNone] = useState(false);
-
-    switch (type) {
-        case 1:
+    switch (notifyType) {
+        case "NEWDIARY":
+            title = '과의 일기장이 만들어졌어요.';
+            break;
+        case "REPLY":
             title = '이 보낸 일기가 도착했어요.';
-            break;
-        case 2:
-            title = '께 일기를 전달해요.';
-            break;
-        case 3:
-            title = '과 일기장이 생성되었어요!';
-            break;
-        case 4:
-            title = '이 나와의 일기장을 비활성화했어요.';
-            break;
-        case 5:
-            title = ', 신고가 들어왔어요.';
-            break;
-        case 6:
-            // setIsNone(true);
+           break;
+        case "INACTIVATE":
+            title = '과의 일기장이 비활성화됐어요.';
             break;
         default:
             title = ``;
             break;
     }
 
-    const notifyDate = date.toLocaleDateString('ko-KR', {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-    });
 
     const [isClicked, setIsClicked] = useState("not_clicked");
     const clicked = () => {
@@ -44,16 +28,14 @@ const NotifyItem = ({type, user, date, color}) => {
 
     return (
         <div className={isClicked} onClick={clicked}>
-            {/*<div className={["color_circle", `colorCircle_${isNone}`].join(" ")} style={{*/}
-            {/*    backgroundColor: `${color}`,*/}
-            {/*}}></div>*/}
             <div className="color_circle" style={{
-                backgroundColor: `${color}`
+                filter: diaryColor &&
+                    `opacity(.7) drop-shadow(0 0 0 ${diaryColor.slice(1, -1)})`
             }}/>
             <div className="notify_content">
                 <div className="notify_title">{[name, title].join("")}</div>
                 <div className="notify_text"></div>
-                <div className="notify_date">{notifyDate}</div>
+                <div className="notify_date">{updatedAt}</div>
             </div>
         </div>
     );

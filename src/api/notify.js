@@ -1,36 +1,45 @@
 import { EventSourcePolyfill } from 'event-source-polyfill';
+import {axiosInstance} from "./user";
 
-export const fetchSSE = async () => {
-    const eventSource = new EventSourcePolyfill(`${process.env.REACT_APP_SERVER_URL}/notify/subscribe`, {
+export const fetchSSE = async (setNotify) => {
+    const eventSource = new EventSourcePolyfill(`${process.env.REACT_APP_SERVER_URL}/emitter/subscribe`, {
         headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("userToken")}`
+            Authorization: `Bearer ${sessionStorage.getItem("userToken")}`,
+            withCredentials: true
         },
-        heartbeatTimeout: 4500000 * 60
+        heartbeatTimeout: 86400000
     });
 
     eventSource.onopen = () => {
         console.log("연결 성공");
-        // window.location.replace("/");
-        return true
     };
 
-    eventSource.addEventListener('message', (e) => {
-        console.log(e.data)
-    });
     eventSource.onmessage = async (e) => {
-        const res = await e.data;
-        const data = e.data.message !== undefined ? JSON.parse(e.data.message) : undefined;
-        console.log(res);
-        console.log(data);
-        console.log(res.message);
-        return res
+        let res = await e.data;
+        if (res !== "success") {
+            res = JSON.parse(res);
+            setNotify({
+                notifyType: res.type,
+                senderNickname: res.opponent,
+                diaryColor: res.color,
+                updatedAt: res.timestamp
+            });
+        }
     };
 
     eventSource.onerror = async (e) => {
-        if (e.error.message === "network error") {
+        if (e.error === "network error") {
             console.log(e.error);
-            console.log(eventSource.readyState);
         }
         return false
     }
 };
+
+export const getNotifyList = async () => {
+    try {
+        const res = await axiosInstance.get(`/notify/`);
+        return res.data
+    } catch (e) {
+        alert("유저 정보 조회 실패");
+    }
+}

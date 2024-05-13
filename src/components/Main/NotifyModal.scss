@@ -1,0 +1,45 @@
+.notify_modal {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  left: 45px;
+  top: 30px;
+  width: 320px;
+  height: 70px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #ffedea;
+  box-shadow: 0 4px 4px 0 rgba(54, 52, 52, 0.3);
+  z-index: 1200;
+
+  .notify_content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 12px 12px 0 12px;
+
+    .notify_title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: normal;
+    }
+    .notify_text {
+      margin-top: 2px;
+      font-size: 14px;
+      font-weight: 500;
+      //word-break: keep-all;
+    }
+  }
+
+  .cancel_btn {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
