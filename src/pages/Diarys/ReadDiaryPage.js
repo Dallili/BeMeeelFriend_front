@@ -77,13 +77,12 @@ const ReadDiaryPage = () => {
         }
     }
 
-    console.log(content)
     useEffect( () => {
         getDiaryEntry();
     }, []);
 
     useEffect(() => {
-        if (pageNum !== content.length && pageNum === 0) {
+        if (pageNum !== content.length - 1 && pageNum === 0) {
             setIsEnd("hidden");
         } else {
             setIsEnd("read");
@@ -99,7 +98,7 @@ const ReadDiaryPage = () => {
         } else {
             if (pageNum === content.length - 1) {
                 if (pageNum === 0) {
-                    if (pageNum === content.length -1) {
+                    if (pageNum === content.length -1 && content[content.length-1].content === "일기를 작성할 차례입니다." ) {
                         setIsEnd("hiddenAndWrite");
                     } else {
                         setIsEnd("hidden");
