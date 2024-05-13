@@ -6,7 +6,9 @@ import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getActivated, getDiary} from "../../api/diary";
 import {getUserInfo} from "../../api/user";
-import {fetchSSE} from "../../api/notify";
+import NotifyModal from "../../components/Main/NotifyModal";
+import {useRecoilValue, useSetRecoilState} from "recoil";
+import {notifyArrivalState, notifyArrivalStateSelector} from "../../recoil/atoms/notifyState";
 
 const MainPage = () => {
     // 샌드위치 메뉴
@@ -14,6 +16,10 @@ const MainPage = () => {
 
     // 일기장 선택 모달
     const {isModalOpen, yes, no} = useModal();
+
+    // 알림 모달
+    const notifyArrive = useRecoilValue(notifyArrivalState);
+    const notifyCheck = useSetRecoilState(notifyArrivalStateSelector);
 
     // 일기장 클릭시 일기장 선택 모달 열림
     const clicked = () => {
@@ -59,18 +65,7 @@ const MainPage = () => {
     useEffect(() => {
         getInfo();
         getMainDiary();
-        fetchSSE();
     }, []);
-
-    // const [notify, setNotify] = useState("");
-    // useEffect(() => {
-    //     const res = fetchSSE();
-    //     setNotify(res);
-    // }, []);
-    //
-    // useEffect(() => {
-    //     console.log(notify);
-    // }, [notify]);
 
     const navigate = useNavigate();
     const goHistory = () => navigate('/history');
@@ -146,6 +141,9 @@ const MainPage = () => {
                             <div className="close_btn" onClick={no}>닫기</div>
                         </div>
                     </>
+                )}
+                {notifyArrive === true && (
+                    <NotifyModal onClick={notifyCheck}/>
                 )}
             </div>
         </div>
