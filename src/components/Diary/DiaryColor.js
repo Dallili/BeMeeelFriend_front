@@ -98,6 +98,7 @@ const DiaryColor = () => {
                     <div className="colors">
                         {colors.map((it, i) =>
                             <div className="color"
+                                 key={i}
                                  style={{
                                     backgroundColor:`${it}`,
                                  }}
