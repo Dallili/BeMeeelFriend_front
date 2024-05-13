@@ -3,9 +3,7 @@ import MenuItem from "./components/MenuItem";
 import Modal from "../Modal";
 import useModal from "../../hooks/useModal";
 import {useNavigate} from "react-router-dom";
-import {getUserInfo, logOut} from "../../api/user";
-import {useEffect, useState} from "react";
-import {getActivated} from "../../api/diary";
+import {logOut} from "../../api/user";
 
 const SandwichMenu = ({menuClose, name, num}) => {
     const {isOpen, open, close} = useModal();
