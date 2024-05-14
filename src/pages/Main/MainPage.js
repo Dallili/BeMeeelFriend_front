@@ -87,11 +87,11 @@ const MainPage = () => {
                         </div>
                     ): diary && diary.length === 2 ? (
                         <div className="diary_bg diaries" onClick={clicked}>
-                            <img src={require('../../img/Main/book_mask0.png')} alt="bg" className="fill0" style={{filter:`opacity(.7) drop-shadow(0 0 0 ${diaryColor[1]}`}}/>
+                            <img src={require('../../img/Main/book_mask0.png')} alt="bg" className="fill0" style={{filter:`opacity(.7) drop-shadow(0 0 0 ${diaryColor[0]}`}}/>
                             <div className="diary_line" style={{paddingTop:"33px", paddingLeft:"12px"}}>
                                 <img src={require('../../img/Main/book_line0.png')} alt="diary" className="line line0" />
                                 <div className="diary_line">
-                                    <img src={require('../../img/Main/book_mask1.png')} alt="bg" className="fill1" style={{filter:`opacity(.8) drop-shadow(0 0 0 ${diaryColor[2]}`}}/>
+                                    <img src={require('../../img/Main/book_mask1.png')} alt="bg" className="fill1" style={{filter:`opacity(.8) drop-shadow(0 0 0 ${diaryColor[1]}`}}/>
                                     <div className="diary_line">
                                         <img src={require('../../img/Main/book_line1.png')} alt="diary" className="line line1" />
                                     </div>

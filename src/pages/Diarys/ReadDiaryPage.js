@@ -45,7 +45,7 @@ const ReadDiaryPage = () => {
                     if (sent.length === 0) {
                         setContent([...sent, {
                             "sendAt": `${finalToday},${new Date().toTimeString().split(' ')[0]}`,
-                            "content": "아직 작성된 일기가 없습니다."
+                            "content": "아직 주고 받은 일기가 없습니다."
                         }])
                         setPageNum(0);
                     } else {
@@ -98,7 +98,7 @@ const ReadDiaryPage = () => {
         } else {
             if (pageNum === content.length - 1) {
                 if (pageNum === 0) {
-                    if (pageNum === content.length -1 && content[content.length-1].content === "일기를 작성할 차례입니다." ) {
+                    if (pageNum === content.length -1) {
                         setIsEnd("hiddenAndWrite");
                     } else {
                         setIsEnd("hidden");
@@ -109,7 +109,7 @@ const ReadDiaryPage = () => {
                 }
             }
         }
-    }, [pageNum]);
+    }, [pageNum, content]);
 
     const showNextPage = () => {
         if (pageNum !== content.length - 1) {
