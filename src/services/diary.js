@@ -74,3 +74,12 @@ export const getDeactivated = async (userID) => {
         return "fail"
     }
 };
+
+export const ReturnDiary = async (diaryID) => {
+    try {
+        const response = await axiosInstance.patch(`/diaries/${diaryID}/takeBack`);
+        return true
+    } catch (error) {
+        return error.response.data.message
+    }
+}
