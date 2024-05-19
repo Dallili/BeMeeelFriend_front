@@ -37,4 +37,5 @@
 .clicked {
   @include notifyItem;
   background-color: white;
+  border-bottom: 1px solid #F5F5F5;
 }

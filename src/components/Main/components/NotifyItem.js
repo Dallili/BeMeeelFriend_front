@@ -21,13 +21,13 @@ const NotifyItem = ({notifyType, receiverID, senderNickname, updatedAt, diaryCol
     }
 
 
-    const [isClicked, setIsClicked] = useState("not_clicked");
-    const clicked = () => {
-        setIsClicked("clicked");
-    }
+    // const [isClicked, setIsClicked] = useState("not_clicked");
+    // const clicked = () => {
+    //     setIsClicked("clicked");
+    // }
 
     return (
-        <div className={isClicked} onClick={clicked}>
+        <div className="clicked">
             <div className="color_circle" style={{
                 filter: diaryColor &&
                     `opacity(.7) drop-shadow(0 0 0 ${diaryColor.slice(1, -1)})`
