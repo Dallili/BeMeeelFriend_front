@@ -125,7 +125,7 @@ function App() {
                         <Route path="/read-diary/:diaryID?type=deactivated" element={<ReadDiaryPage />} />
                         <Route path="/write-diary/:diaryID" element={<WriteDiaryPage/>} />
                         <Route path="/send-diary/:diaryID" element={<SendDiaryPage/>} />
-                        <Route path="/emotion-report" element={<EmotionReport />}/>
+                        <Route path="/emotion-report/:entryID" element={<EmotionReport />}/>
 
                         {/*히스토리 캐비넷*/}
                         <Route path="/history" element={<HistoryCabinetPage />} />
