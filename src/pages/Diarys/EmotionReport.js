@@ -1,70 +1,77 @@
 import '../../components/Diary/DiaryDone.scss';
-import {useNavigate} from "react-router-dom";
+import {useParams, useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getUserInfo} from "../../api/user";
-import {getActivated} from "../../api/diary";
+import {getRecentFive, getShortReport} from "../../api/report";
+import ReportGraph from "../../components/Diary/ReportGraph";
 
-const EmotionReport = ({username}) => {
-    const navigate = useNavigate();
+const EmotionReport = () => {
+    const {entryID} = useParams();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const diaryID = searchParams.get("diaryID");
 
     const [name, setNickname] = useState("");
+    const [emotion, setEmotion] = useState("");
+    const [report, setReport] = useState("");
 
     const getInfo = async () => {
         const res = await getUserInfo();
         setNickname(res.nickname);
+    };
+
+    const shortReport = async () => {
+        const res = await getShortReport(entryID);
+        setReport(res.data.summary);
+        setEmotion(res.data.sentiment);
+    };
+
+    const [graphData, setGraphData] = useState([]);
+
+    const LongReport = async () =>{
+        const res = await getRecentFive(diaryID);
+        setGraphData(res.data);
     }
 
     useEffect(() => {
         getInfo();
+        shortReport();
+        LongReport();
     }, []);
+
+    const getEmotion = () => {
+        switch (emotion) {
+            case '매우 부정':
+                return '😟';
+            case '약간 부정':
+                return '🫤';
+            case '보통':
+                return '😐';
+            case '약간 긍정':
+                return '😊';
+            case '매우 긍정':
+                return '😄';
+            default:
+                return ;
+        }
+    }
+
     const goMain = () => window.location.replace("/");
-    const [progress, setProgress] = useState([83, 37, 30, 27, 25, 18]);
+
 
     return (
         <div className="emotion_report">
             <div className="overlay"></div>
             <div className="done_popup">
-                <div className="done_titles" style={{padding: "0 50px"}}>
+                <div className="emotion_done_titles" style={{padding: "0 40px"}}>
                     <img src={require('../../img/Diarys/star.png')} alt="img" />
-                    <div className="done_title_emotion">{name}님의</div>
-                    <div className="done_title_emotion">오늘 기분은</div>
+                    <div className="done_title_emotion">{name}</div>
+                    <div className="done_title_emotion right">님의 오늘 일기는</div>
                 </div>
-                <div className="done_explains">
-                    <div className="done_explain">작성한 일기를 바탕으로 분석한</div>
-                    <div className="done_explain">오늘의 감정데이터입니다.</div>
+                <div className="report_summary" style={{padding: "0 40px", wordBreak:"keep-all"}}>
+                    <div className="emotion">{getEmotion()}</div>
+                    <div className="done_explain">{report}</div>
                 </div>
-                <div className="emotions">
-                    <div className="emotion">
-                        <div className="bar_text">행복</div>
-                        <progress className="emotion_bar" value={`${progress[0]}`} max="100"></progress>
-                        <div className="bar_text">{progress[0]}%</div>
-                    </div>
-                    <div className="emotion">
-                        <div className="bar_text">당황</div>
-                        <progress className="emotion_bar color2" value={`${progress[1]}`} max="100"></progress>
-                        <div className="bar_text">{progress[1]}%</div>
-                    </div>
-                    <div className="emotion">
-                        <div className="bar_text">슬픔</div>
-                        <progress className="emotion_bar color3" value={`${progress[2]}`} max="100"></progress>
-                        <div className="bar_text">{progress[2]}%</div>
-                    </div>
-                    <div className="emotion">
-                        <div className="bar_text">분노</div>
-                        <progress className="emotion_bar color4" value={`${progress[3]}`} max="100"></progress>
-                        <div className="bar_text">{progress[3]}%</div>
-                    </div>
-                    <div className="emotion">
-                        <div className="bar_text">불안</div>
-                        <progress className="emotion_bar color5" value={`${progress[4]}`} max="100"></progress>
-                        <div className="bar_text">{progress[4]}%</div>
-                    </div>
-                    <div className="emotion">
-                        <div className="bar_text">혐오</div>
-                        <progress className="emotion_bar color6" value={`${progress[5]}`} max="100"></progress>
-                        <div className="bar_text">{progress[5]}%</div>
-                    </div>
-                </div>
+                <ReportGraph graphData={graphData}/>
                 <div className="diary_blank"></div>
                 <div className="diary_blank"></div>
                 <div className="doneCancel_btn">

@@ -1,0 +1,55 @@
+.report_graph {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 30px;
+  padding: 20px;
+  width: 360px;
+  height: 360px;
+  border-radius: 10px;
+  background-color: #FFA295;
+
+  .text_label {
+    font-weight: 800;
+    padding: 0;
+    text-align: center;
+  }
+  .chart {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+
+
+      .stick {
+        position: relative;
+        width: 55px;
+        height: 300px;
+        border-radius: 15px;
+        background-color: #FFF2F2;
+        .percent {
+          position: absolute;
+          bottom: 0;
+          width: 55px;
+          border-radius: 15px;
+        }
+      }
+      .date {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: -25px;
+        top: -10px;
+        width: 100px;
+        height: 20px;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.3);
+        color: #313131;
+        font-family: 'Black Han Sans', sans-serif;
+        font-size: 13px;
+        white-space: nowrap;
+        visibility: hidden;
+      }
+  }
+}
