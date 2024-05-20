@@ -12,6 +12,7 @@ const SendDiaryPage = () => {
     const {diaryID} = useParams();
 
     const [content, setContent] = useState({});
+    const [entryID, setEntryID] = useState("");
 
     // 일기 데이터 가져옴
     const getDiaryEntry1 = async () => {
@@ -30,6 +31,7 @@ const SendDiaryPage = () => {
     const handleSendDiary = async () => {
         const res = await sendDiaryPage(content.entryID);
         if (res !== "fail") {
+            setEntryID(res);
             setSendDiary(true);
         }
     };
@@ -39,7 +41,7 @@ const SendDiaryPage = () => {
     return(
         <div className="sendDiary">
             <Header type="backMain" style={{backgroundColor:"#ffb4aa", border:"none"}}/>
-            <SendDiary date={date} content={content.content} sendDiary={sendDiary}/>
+            <SendDiary date={date} content={content.content} sendDiary={sendDiary} entryID={entryID} />
             <BottomNav type="send" setSendDiary={handleSendDiary} goWriteDiary={goWriteDiary} />
         </div>
     );

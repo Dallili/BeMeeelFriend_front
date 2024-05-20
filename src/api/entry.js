@@ -36,7 +36,7 @@ export const putDiary = async (content, entryID) => {
 export const sendDiaryPage = async (entryID) => {
     try {
         const res = await axiosInstance.patch(`/entries/${entryID}`);
-        return res.data
+        return res.data.entryID
     }catch(error){
         alert("일기 전달 실패");
         return "fail"

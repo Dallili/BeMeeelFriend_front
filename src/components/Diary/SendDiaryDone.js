@@ -1,10 +1,10 @@
 import './DiaryDone.scss';
 import {useNavigate} from "react-router-dom";
 
-const SendDiaryDone = () => {
+const SendDiaryDone = ({entryID, diaryID}) => {
     const navigate = useNavigate();
     const goMain = () => window.location.replace("/");
-    const goEmotionReport = () => navigate('/emotion-report');
+    const goEmotionReport = () => navigate(`/emotion-report/${entryID}?diaryID=${diaryID}`);
 
     return (
         <div className="sendDiaryDone">

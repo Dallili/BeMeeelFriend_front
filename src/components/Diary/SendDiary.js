@@ -5,7 +5,7 @@ import SendDiaryDone from "./SendDiaryDone";
 import DiaryModal from "./DiaryModal";
 import {deactivateDiary} from "../../api/diary";
 
-const SendDiary = ({date, content, sendDiary, goSendDiary}) => {
+const SendDiary = ({date, content, sendDiary, goSendDiary, entryID}) => {
     const navigate = useNavigate();
     const {diaryID} = useParams();
     const goReadDiary = () => navigate(`/read-diary/${diaryID}`);
@@ -36,7 +36,7 @@ const SendDiary = ({date, content, sendDiary, goSendDiary}) => {
                 </textarea>
             </div>
             {isModalOpen && <DiaryModal onClick={no} onClick2={onDeactivate} text1="해당 일기장을 비활성화 하시겠습니까?" text2="비활성화한 일기장은" text3="다시 복구할 수 없습니다." btn="비활성화" />}
-            {sendDiary && <SendDiaryDone />}
+            {sendDiary && <SendDiaryDone entryID={entryID} diaryID={diaryID}/>}
         </div>
     )
 }
