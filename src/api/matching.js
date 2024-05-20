@@ -37,3 +37,12 @@ export const postRandomMatching = async (data) => {
     }
 }
 
+export const deleteMatching = async (matchingID) => {
+    try {
+        const res = await axiosInstance.delete(`/matches/${matchingID}`);
+        return true
+    } catch (e) {
+        console.log('매칭 취소 실패');
+    }
+}
+
