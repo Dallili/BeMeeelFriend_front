@@ -90,7 +90,7 @@
         .fill1 {
           margin-left: -5px;
           width: 230px;
-          filter: opacity(.7) drop-shadow(0 0 0 blue);
+          //filter: opacity(.8) drop-shadow(0 0 0 blue);
 
           @include notDesktop {
             @include smallMobile {
