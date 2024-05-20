@@ -1,7 +1,6 @@
 import './DiaryDone.scss';
 import {useEffect, useState} from "react";
-import {getMatchingCode} from "../../api/matching";
-import {deleteDiary} from "../../api/diary";
+import {deleteMatching, getMatchingCode} from "../../api/matching";
 
 const DiaryPreparing = ({who, diaryID}) => {
     const goHistory = () => window.location.replace('/history');
@@ -26,7 +25,7 @@ const DiaryPreparing = ({who, diaryID}) => {
     }, []);
 
     const onDelete = async () => {
-        await deleteDiary(diaryID);
+        await deleteMatching();
     };
 
     return (
@@ -38,10 +37,13 @@ const DiaryPreparing = ({who, diaryID}) => {
                     <img src={require('../../img/Diarys/done_onprogress.png')} alt="done" className="done_img" />
                 </div>
                 { who === "stranger" ? (
-                    <div className="done_explains">
-                        <div className="done_explain">조금만 기다려 주시면!</div>
-                        <div className="done_explain">마음에 쏙 드는 친구를 찾아드릴게요!</div>
-                    </div>
+                    <>
+                        <div className="done_explains">
+                            <div className="done_explain">조금만 기다려 주시면</div>
+                            <div className="done_explain">마음에 쏙 드는 친구를 찾아드릴게요!</div>
+                            <button className="invitation_btn" onClick={onDelete} style={{marginTop:"20px"}}>매칭 취소</button>
+                        </div>
+                    </>
                 ) : (
                     <div className="invitation">
                         <div className="invitation_explain">

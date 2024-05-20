@@ -14,14 +14,15 @@
   .done_popup {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 35px;
     position: absolute;
     top: 0;
     left: 0;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-top: 30px;
     width: 100%;
-    height: calc(var(--vh, 1vh) * 100);
+    height: calc(var(--vh, 1vh) * 100 - 30px);
     background-image: url("../../img/Diarys/done_background.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -90,6 +91,10 @@
     }
 
     .done_explains {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       .done_explain {
         text-align: center;
         font-size: 16px;
@@ -265,4 +270,59 @@
 
 .emotion_report {
   position: relative;
+}
+.invitation_btn {
+  width: 100px;
+  height: 35px;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  background-color: #FE614C;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+.report_summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: 26px;
+  .emotion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+  }
+}
+
+.emotion_done_titles {
+  display: flex;
+  flex-direction: column;
+  min-width: 400px;
+
+  img {
+    width: 160px;
+    margin-left: -60px;
+    margin-bottom: -40px;
+    @include smallMobile {
+      margin-left: -20px;
+      width: 100px;
+    }
+  }
+  .done_title_emotion {
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 3rem;
+    font-weight: 500;
+    word-break: break-all;
+    @include smallMobile {
+      font-size: 2.7rem;
+    }
+  }
+  .right{
+    text-align: center;
+  }
 }
