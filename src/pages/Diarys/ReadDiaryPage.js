@@ -17,7 +17,8 @@ const ReadDiaryPage = () => {
     const [isEnd, setIsEnd] = useState(type === "history" || type === "deactivate" ? "history" : "end");
     const [content, setContent] = useState([{
         sendAt: " ",
-        content: ""
+        content: "",
+        entryID: -1
     }]);
 
     const today = new Date();
@@ -45,7 +46,8 @@ const ReadDiaryPage = () => {
                     if (sent.length === 0) {
                         setContent([...sent, {
                             "sendAt": `${finalToday},${new Date().toTimeString().split(' ')[0]}`,
-                            "content": "아직 주고 받은 일기가 없습니다."
+                            "content": "아직 주고 받은 일기가 없습니다.",
+                            "entryID": -1
                         }])
                         setPageNum(0);
                     } else {
@@ -62,13 +64,15 @@ const ReadDiaryPage = () => {
                 } else if (sent.length > 0) {
                     setContent([...sent, {
                         "sendAt": `${finalToday},${new Date().toTimeString().split(' ')[0]}`,
-                        "content": "일기를 작성할 차례입니다."
+                        "content": "일기를 작성할 차례입니다.",
+                        "entryID": -1
                     }]);
                     setPageNum(sent.length - 1);
                 } else {
                     setContent([{
                         "sendAt": `${finalToday},${new Date().toTimeString().split(' ')[0]}`,
-                        "content": "일기를 작성할 차례입니다."
+                        "content": "일기를 작성할 차례입니다.",
+                        "entryID": -1
                     }]);
                 }
             }
@@ -136,7 +140,7 @@ const ReadDiaryPage = () => {
     return (
         <div className="readDiary">
             <Header type={type === "history" ? "backHis" :"backMain"} style={{backgroundColor:"#ffb4aa", border:"none"}}/>
-            <ReadDiary type={searchParams.get("type")} date={content[pageNum].sendAt} content={content[pageNum].content} goSendDiary={goWriteOrSendDiary}/>
+            <ReadDiary type={searchParams.get("type")} date={content[pageNum].sendAt} content={content[pageNum].content} entryID={content[pageNum].entryID} writerName={content[pageNum].writerName} goSendDiary={goWriteOrSendDiary}/>
             <BottomNav type={isEnd} goWriteDiary={goWriteOrSendDiary} showNextPage={showNextPage} showPrevPage={showPrevPage}/>
         </div>
     );

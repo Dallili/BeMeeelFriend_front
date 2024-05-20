@@ -117,3 +117,18 @@
     z-index: 1000;
   }
 }
+
+.report_btn{
+  display: flex;
+  position: absolute;
+  top: 160px;
+  right: 35px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: 70px;
+  font-weight: 400;
+  text-align: center;
+  cursor: pointer;
+}

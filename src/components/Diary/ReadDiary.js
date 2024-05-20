@@ -2,10 +2,12 @@ import './ReadDiary.scss';
 import DiaryModal from "./DiaryModal";
 import useModal from "../../hooks/useModal";
 import {useNavigate, useParams} from "react-router-dom";
-import {deactivateDiary, deleteDiary, ReturnDiary} from "../../services/diary";
+import {deactivateDiary, deleteDiary, getActivated, ReturnDiary} from "../../api/diary";
 import {useEffect, useState} from "react";
+import {getShortReport} from "../../api/report";
+import {getUserInfo} from "../../api/user";
 
-const ReadDiary = ({date, content, sendDiary, type, goSendDiary}) => {
+const ReadDiary = ({date, content, entryID, sendDiary, writerName, type, goSendDiary}) => {
     const navigate = useNavigate();
 
     const {diaryID} = useParams();
@@ -37,6 +39,20 @@ const ReadDiary = ({date, content, sendDiary, type, goSendDiary}) => {
         setDateAndTime(content == null ? ["", ""] : (content === "일기를 작성할 차례입니다." || content === "아직 작성된 일기가 없습니다.") ? date.split(',') : date.split(' '));
     }, [date]);
 
+    const [nickName, setNickname] = useState("");
+    const getInfo = async () => {
+        const res = await getUserInfo();
+        setNickname(res.nickname);
+    }
+
+    useEffect(() => {
+        getInfo();
+    }, []);
+
+    const goReadReport = () => {
+        navigate(`/emotion-report/${entryID}?diaryID=${diaryID}`);
+    };
+
     const takeBack = async () => {
         const res = await ReturnDiary(diaryID);
         if (res === "아직 회수할 수 없습니다.") {
@@ -47,6 +63,42 @@ const ReadDiary = ({date, content, sendDiary, type, goSendDiary}) => {
         close();
 
     }
+
+    const getEmotion = (emotion) => {
+        switch (emotion) {
+            case '매우 부정':
+                return '😟';
+            case '약간 부정':
+                return '🫤';
+            case '보통':
+                return '😐';
+            case '약간 긍정':
+                return '😊';
+            case '매우 긍정':
+                return '😄';
+            default:
+                return ;
+        }
+    }
+
+    const [emotion, setEmotion] = useState("");
+    const shortReport = async () => {
+        if (entryID !== -1){
+            const res = await getShortReport(entryID);
+            if(res && writerName === nickName){
+                const sentiment = getEmotion(res.data.sentiment);
+                setEmotion(sentiment);
+            } else {
+                setEmotion('');
+            }
+        }
+    };
+
+    useEffect(() => {
+        shortReport();
+    }, [entryID]);
+
+
 
     return (
         <div className="read_diary">
@@ -69,6 +121,7 @@ const ReadDiary = ({date, content, sendDiary, type, goSendDiary}) => {
                     <div className="index right" onClick={yes}>비활성화</div>
                 </div>
             )}
+            <div className="report_btn" onClick={goReadReport}>{emotion}</div>
             <div className="date_box">
                 <img src={require('../../img/Diarys/calendar_icon.png')} alt="icon"/>
                 <div style={{display:"flex", flexDirection:"column"}}>
