@@ -62,16 +62,16 @@ const SettingsList = ({userId, filtering, setFiltering}) => {
             <div className="category_label">기타</div>
             <div className="buttons">
                 <SettingsItem type="false" itemName="로그아웃" onClick={open}/>
-                {isOpen && (
-                    <Modal
-                        message="정말 로그아웃 하시겠습니까?"
-                        close={close}
-                        btnText="로그아웃 하기"
-                        confirm={logout}
-                    />
-                )}
                 <SettingsItem type="false" itemName="회원 탈퇴" onClick={goWithdrawal}/>
             </div>
+            {isOpen && (
+                <Modal
+                    message="정말 로그아웃 하시겠습니까?"
+                    close={close}
+                    btnText="로그아웃 하기"
+                    confirm={logout}
+                />
+            )}
         </div>
     )
 }
