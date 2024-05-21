@@ -6,6 +6,9 @@ import {useEffect, useState} from "react";
 import DiaryPreparing from "../../components/Diary/DiaryPreparing";
 import {getActivated} from "../../api/diary";
 import {getUserInfo} from "../../api/user";
+import NotifyModal from "../../components/Main/NotifyModal";
+import {useRecoilValue, useSetRecoilState} from "recoil";
+import {notifyArrivalState, notifyArrivalStateSelector} from "../../recoil/atoms/notifyState";
 
 const HistoryCabinetPage = () => {
     const navigate = useNavigate();
@@ -61,6 +64,9 @@ const HistoryCabinetPage = () => {
         getInfo();
         getActivatedDiary();
     }, []);
+
+    const notifyArrive = useRecoilValue(notifyArrivalState);
+    const notifyCheck = useSetRecoilState(notifyArrivalStateSelector);
 
     return (
         <div className="historyCabinet">
@@ -143,6 +149,9 @@ const HistoryCabinetPage = () => {
                 )}
                 { diaryPrepare && <DiaryPreparing who="stranger" />}
                 { diaryPrepare && diaryID && <DiaryPreparing diaryID={diaryID}/>}
+                {notifyArrive === true && (
+                    <NotifyModal onClick={notifyCheck}/>
+                )}
             </div>
         </div>
     );
