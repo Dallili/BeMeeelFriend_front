@@ -20,7 +20,7 @@ const ReadDiary = ({date, content, entryID, sendDiary, writerName, type, goSendD
     const onDeactivate = async () => {
         const res = await deactivateDiary(diaryID);
         if(res) {
-            window.location.replace('/');
+            window.location.replace('/deactivated-diary');
         }
     };
 
@@ -53,15 +53,18 @@ const ReadDiary = ({date, content, entryID, sendDiary, writerName, type, goSendD
         navigate(`/emotion-report/${entryID}?diaryID=${diaryID}`);
     };
 
+    const [wantTakeBack, setWantTakeBack] = useState(false);
+
     const takeBack = async () => {
         const res = await ReturnDiary(diaryID);
         if (res === "아직 회수할 수 없습니다.") {
-            alert(res);
+            close();
+            setWantTakeBack(true);
+            yes();
         } else if (res !== true) {
+            close();
             alert("요청 오류. 다시 시도해주세요.");
         }
-        close();
-
     }
 
     const getEmotion = (emotion) => {
@@ -98,8 +101,6 @@ const ReadDiary = ({date, content, entryID, sendDiary, writerName, type, goSendD
         shortReport();
     }, [entryID]);
 
-
-
     return (
         <div className="read_diary">
             {type === "history" ? (
@@ -132,7 +133,8 @@ const ReadDiary = ({date, content, entryID, sendDiary, writerName, type, goSendD
             <div className="diaryInput_box">
                 <textarea className="diary_input" value={content} disabled={true}></textarea>
             </div>
-            {isModalOpen && <DiaryModal onClick={no} onClick2={onDeactivate} text1="해당 일기장을 비활성화 하시겠습니까?" text2="비활성화한 일기장은" text3="다시 복구할 수 없습니다." btn="비활성화" />}
+            {isModalOpen && !wantTakeBack && <DiaryModal onClick={no} onClick2={onDeactivate} text1="해당 일기장을 비활성화 하시겠습니까?" text2="비활성화한 일기장은" text3="다시 복구할 수 없습니다." btn="비활성화" />}
+            {isModalOpen && wantTakeBack && <DiaryModal onClick={() => {setWantTakeBack(false);no();}} onClick2={() => {setWantTakeBack(false);no();}} text1="아직 회수할 수 없습니다." btn="확인" />}
             {isOpen && wantDelete && <DiaryModal onClick={close} onClick2={onDelete} text1="해당 일기장을 삭제 하시겠습니까?" text2="삭제한 일기장은" text3="다시 복구할 수 없습니다." btn="삭제" />}
             {isOpen && !wantDelete && <DiaryModal onClick={close} onClick2={takeBack} text1="반환 요청 하시겠습니까?" text2="요청 취소는 불가합니다." btn="반환 요청" />}
         </div>
