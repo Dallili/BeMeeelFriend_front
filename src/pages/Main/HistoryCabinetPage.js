@@ -32,6 +32,7 @@ const HistoryCabinetPage = () => {
 
     const [num, setNum] = useState(0);
     const [diaryName, setDiaryName] = useState([]);
+    const [matchingID, setMatchingID] = useState();
 
     const getInfo = async () => {
         const res = await getUserInfo();
@@ -53,10 +54,12 @@ const HistoryCabinetPage = () => {
             alert("일기장 불러오기 오류");
         } else {
             const diaries = res.diaries;
-            console.log(diaries)
-            setDiary(diaries);
-            setDiaryColor(diaries.map((it) => it.color.slice(1, -1)));
-            setDiaryName(diaries.map((it) => it.memberName === response.nickname ? it.partnerName :  it.memberName));
+            const unMatched = res.unmatchedDiaries;
+            const total = [...diaries, ...unMatched];
+            console.log(total)
+            setDiary(total);
+            setDiaryColor(total.map((it) => it.color.slice(1, -1)));
+            setDiaryName(total.map((it) => it.memberName === response.nickname ? it.partnerName :  it.memberName));
         }
     };
 
@@ -139,15 +142,19 @@ const HistoryCabinetPage = () => {
                             {diary.map((it, index) => (
                                 <div key={index} className="diary_select"
                                      onClick={
-                                    diary[index].partnerID === null ?
-                                    diary[index].color === "#ffffff" ? () => {no(); setDiaryPrepare(true)} : () => {no(); setDiaryPrepare(true); setDiaryID(diary[index].diaryID)}
-                                    : ()=> navigate(`/read-diary/${diary[index].diaryID}?type=history`)}>{diary[index].partnerID === null ? "준비중" : diaryName[index]}</div>
+                                    diary[index].partnerID === null || diary[index].diaryID === null ?
+                                    diary[index].color === "#000000" ?
+                                        () => {no(); setDiaryPrepare(true); setMatchingID(diary[index].matchingID)}
+                                        : () => {no(); setDiaryPrepare(true); setDiaryID(diary[index].diaryID)}
+                                    : ()=> navigate(`/read-diary/${diary[index].diaryID}?type=history`)}>
+                                    {diary[index].partnerID === null || diary[index].matchingID ? "준비중" : diaryName[index]}
+                                </div>
                             ))}
                             <div className="close_btn" onClick={no}>닫기</div>
                         </div>
                     </>
                 )}
-                { diaryPrepare && <DiaryPreparing who="stranger" />}
+                { diaryPrepare && matchingID && <DiaryPreparing who="stranger" matchingID={matchingID}/>}
                 { diaryPrepare && diaryID && <DiaryPreparing diaryID={diaryID}/>}
                 {notifyArrive === true && (
                     <NotifyModal onClick={notifyCheck}/>

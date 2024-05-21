@@ -49,7 +49,7 @@ const DeleteDiary = ({diarys, diaryNum, isAllClicked, setSelectedNum, selectedNu
     };
 
     const onDeleteDiary = () => {
-        selectedDiaries.map(async (it) => await onDelete(diarys[selectedDiaries[it]].diaryID))
+        selectedDiaries.map(async (it) => await onDelete(diarys[selectedDiaries[it]].diaryID));
     }
 
     // if( allSelect === true) {

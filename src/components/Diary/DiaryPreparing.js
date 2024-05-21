@@ -1,8 +1,9 @@
 import './DiaryDone.scss';
 import {useEffect, useState} from "react";
 import {deleteMatching, getMatchingCode} from "../../api/matching";
+import {deleteDiary} from "../../api/diary";
 
-const DiaryPreparing = ({who, diaryID}) => {
+const DiaryPreparing = ({who, diaryID, matchingID}) => {
     const goHistory = () => window.location.replace('/history');
 
     const [myInvitationCode, setCode] = useState("");
@@ -24,9 +25,19 @@ const DiaryPreparing = ({who, diaryID}) => {
         }
     }, []);
 
-    const onDelete = async () => {
-        await deleteMatching();
+    const onUnknownDelete = async () => {
+        const res = await deleteMatching(matchingID);
+        if (res) {
+            window.location.replace('/history');
+        }
     };
+
+    const onKnownDelete = async () => {
+        const res = await deleteDiary(diaryID);
+        if(res) {
+            window.location.replace('/history');
+        }
+    }
 
     return (
         <div className="diaryPreparing">
@@ -41,7 +52,7 @@ const DiaryPreparing = ({who, diaryID}) => {
                         <div className="done_explains" style={{marginTop:"90px"}}>
                             <div className="done_explain">조금만 기다려 주시면</div>
                             <div className="done_explain">마음에 쏙 드는 친구를 찾아드릴게요!</div>
-                            <button className="invitation_btn" onClick={onDelete} style={{marginTop:"20px"}}>매칭 취소</button>
+                            <button className="invitation_btn" onClick={onUnknownDelete} style={{marginTop:"20px"}}>매칭 취소</button>
                         </div>
                     </>
                 ) : (
@@ -51,7 +62,7 @@ const DiaryPreparing = ({who, diaryID}) => {
                             <div className="invitation_text">아래의 초대 코드를 친구에게 공유해주세요.</div>
                             <input className="invitation_code" disabled="true" value={myInvitationCode} />
                             <button className="invitation_btn" onClick={handleCopy}>복사</button>
-                            <button className="invitation_btn" onClick={onDelete} style={{marginTop:"20px"}}>매칭 취소</button>
+                            <button className="invitation_btn" onClick={onKnownDelete} style={{marginTop:"20px"}}>매칭 취소</button>
                         </div>
                     </div>
                 )}

@@ -18,7 +18,7 @@ export const createDiary = async (data) => {
 export const deleteDiary = async (diaryID) => {
     try {
         await axiosInstance.delete(`/diaries/${diaryID}`);
-        window.location.replace('/');
+        return true
     } catch(error) {
         console.log(error);
         return "fail"
