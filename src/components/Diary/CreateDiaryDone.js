@@ -17,7 +17,7 @@ const CreateDiaryDone = ({who, stranger, diaryID, code}) => {
                 <div className="done_title">교환일기 생성 완료</div>
 
                 { stranger === true ? (
-                    <div className="img_box">
+                    <div className="img_box" style={{marginTop: "80px"}}>
                         <img src={require('../../img/Diarys/done_stranger.png')} alt="done" className="done_img" />
                     </div>
                 ): (

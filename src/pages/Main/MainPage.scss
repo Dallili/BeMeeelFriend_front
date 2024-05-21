@@ -49,7 +49,7 @@
 
         .fill {
           width: 220px;
-          filter: opacity(.7) drop-shadow(0 0 0 blue);
+          //filter: opacity(.7) drop-shadow(0 0 0 blue);
 
           @include notDesktop {
             @include smallMobile {
@@ -69,7 +69,7 @@
 
         .fill0 {
           width: 225px;
-          filter: opacity(.7) drop-shadow(0 0 0 blue);
+          //filter: opacity(.7) drop-shadow(0 0 0 blue);
 
           @include notDesktop {
             @include smallMobile {

@@ -32,13 +32,13 @@ const DiaryPreparing = ({who, diaryID}) => {
         <div className="diaryPreparing">
             <div className="overlay"></div>
             <div className="done_popup">
-                <div className="done_title" style={{fontSize:"45px"}}>일기장 준비 중...</div>
-                <div className="img_box">
+                <div className="done_title" style={{fontSize:"45px", marginTop: "100px"}}>일기장 준비 중...</div>
+                <div className="img_box" style={{marginTop:"30px"}}>
                     <img src={require('../../img/Diarys/done_onprogress.png')} alt="done" className="done_img" />
                 </div>
                 { who === "stranger" ? (
                     <>
-                        <div className="done_explains">
+                        <div className="done_explains" style={{marginTop:"90px"}}>
                             <div className="done_explain">조금만 기다려 주시면</div>
                             <div className="done_explain">마음에 쏙 드는 친구를 찾아드릴게요!</div>
                             <button className="invitation_btn" onClick={onDelete} style={{marginTop:"20px"}}>매칭 취소</button>

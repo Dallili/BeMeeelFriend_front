@@ -15,14 +15,14 @@ const DeleteDiary = ({diarys, diaryNum, isAllClicked, setSelectedNum, selectedNu
             setSelectedNum(diaryNum);
             for(let i=0;i<array.length;i++) {
                 const current = document.getElementById(array[i]);
-                current.style.backgroundColor = "#FE614C";
+                current.style.filter = "opacity(.8) drop-shadow(0 0 0 #000000)";
             }
         } else {
             setSelectedDiaries([]);
             setSelectedNum(0);
             for(let i=0;i<diarys.length;i++) {
                 const current = document.getElementById(`${i}`);
-                current.style.backgroundColor = "#747474";
+                current.style.filter = `opacity(.6) drop-shadow(0 0 0 ${diaryColor[i]})`;
             }
         }
     }, [isAllClicked]);
