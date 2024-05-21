@@ -50,6 +50,7 @@ const DeleteDiary = ({diarys, diaryNum, isAllClicked, setSelectedNum, selectedNu
 
     const onDeleteDiary = () => {
         selectedDiaries.map(async (it) => await onDelete(diarys[selectedDiaries[it]].diaryID));
+        window.location.replace('/deactivated-diary');
     }
 
     // if( allSelect === true) {
