@@ -142,6 +142,19 @@
   .invitation_input:focus {
     outline: none;
   }
+  ::-webkit-scrollbar-thumb {
+    background: #f3d6d1;
+    border: none;
+    border-radius: 12px 12px 12px 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #fbf8f8;
+  }
+  ::-webkit-scrollbar{
+    width: 15px;
+    //height: 5px;
+  }
+
 }
 
 .register_code {
@@ -154,3 +167,4 @@
     bottom: 0;
   }
 }
+
