@@ -10,7 +10,10 @@ const WithStrangerNewDiary = () => {
     const [selectedNum, setSelectedNum] = useState(0);
     const [currentClick, setCurrentClick] = useState([]);
     const [prevClick, setPrevClick] = useState([]);
-    const interests = ["일상", "고민", "수다", "덕질", "음식", "드라마", "운동", "영화", "댄스", "게임", "공부", "시험", "취준", "학생", "직장인"];
+    const interests = ["일상", "고민", "수다", "덕질", "음식", "드라마", "운동", "영화", "댄스", "게임", "공부", "시험", "취준", "학생", "직장인", "여행", "음악", "동물"];
+    const interestIcon = ["🌱", "🤦‍♀️", "🫧", "💗", "🍽️", "📺", "👟", "️🎥", "💃", "🎮", "✏️", "💯", "🕵️‍♀️", "🎒", "💼", "🧳", "🎧", "😽"];
+    // const interests = ["게임", "고민", "공부", "댄스", "덕질", "동물", "드라마", "수다", "시험", "여행", "영화", "운동", "음식", "음악", "일상", "직장인", "취준", "학생"];
+    // const interestIcon = ["🎮", "🤦‍♀️", "✏️", "💃", "💗", "😽", "📺", "🫧", "💯", "🧳", "️🎥", "👟", "🍽️", "🎧", "🌱", "💼", "🕵️‍♀️", "🎒"];
     const [diaryDone, setDiaryDone] = useState("");
 
     const interestSelect = (e) => {
@@ -52,7 +55,7 @@ const WithStrangerNewDiary = () => {
                 const prev = document.getElementById(prevClick[i]);
                 prev.style.backgroundColor = "white";
                 prev.style.color = "black";
-                prev.textContent = "";
+                prev.textContent = `${interestIcon[prevClick[i]]}`;
             }
         }
     }, [currentClick, prevClick]);
@@ -85,7 +88,7 @@ const WithStrangerNewDiary = () => {
                 <div className="interests">
                     {interests.map((it, i) =>
                         <div className="interest">
-                            <div className="interest_circle" id={i} onClick={interestSelect}></div>
+                            <div className="interest_circle" id={i} onClick={interestSelect}>{interestIcon[i]}</div>
                             <div className="interest_text" id={i}>{it}</div>
                         </div>
                     )}
