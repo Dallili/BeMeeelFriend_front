@@ -85,10 +85,10 @@ const IdPassword = () => {
             <div className="password_box">
                 <div className="labels">
                     <label className="large_label">비밀번호</label>
-                    {/*<label className="small_label" style={{fontSize:"10px"}}>알파벳, 숫자, <br/>특수기호!@#$%^* 포함</label>*/}
+                    <label className="small_label" style={{fontSize:"12px", marginLeft:"0", lineHeight:"18px"}}>영어 대/소문자, 숫자, <br/> !@#$%^* 혼합하여 <br/> 8자 이상 25자 미만</label>
                 </div>
                 <div className="passwordInput_box">
-                    <input className="password_input" id="pass1" name="newPass" value={password} type="text" placeholder="8글자 이상 26글자 미만"
+                    <input className="password_input" id="pass1" name="newPass" value={password} type="text" placeholder="8자 이상 25자 미만"
                         onChange={onPassInputHandler}
                     />
                     <input className="password_input" id="pass2" name="newPassCheck" value={passwordCheck} type="text" placeholder="비밀번호 재입력"
