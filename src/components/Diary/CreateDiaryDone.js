@@ -20,8 +20,8 @@ const CreateDiaryDone = ({who, stranger, diaryID, code}) => {
                     <div className="img_box" style={{marginTop: "80px"}}>
                         <img src={require('../../img/Diarys/done_stranger.png')} alt="done" className="done_img" />
                     </div>
-                ): (
-                    <>
+                ):  who === "me" ? (
+                            <>
                         <div className="done_explains">
                             <div className="done_explain">{diaryID}님의 일기장이 다 만들어졌어요!</div>
                             <div className="done_explain">만들어진 일기장을 친구와 공유해보세요</div>
@@ -30,19 +30,30 @@ const CreateDiaryDone = ({who, stranger, diaryID, code}) => {
                             <img src={require('../../img/Diarys/done_envelope.png')} alt="envelope" className="envelope_img"/>
                         </div>
                         <div className="invitation">
-                            { who === "me" ? (
                                 <div className="invitation_explain">
                                     <div className="invitation_title">친구를 <span style={{color:"#227573", textDecoration:"#FC715F 5px underline"}}>초대하기</span> 위해서,</div>
                                     <div className="invitation_text">아래의 초대 코드를 친구에게 공유해주세요.</div>
                                     <input className="invitation_code" disabled="true" value={code} />
                                     <button className="invitation_btn" onClick={handleCopy}>복사</button>
                                 </div>
-                            ):(
-                                <div className="invitation_explain">
-                                    <div style={{height:"100px"}}></div>
-                                </div>
-                            )}
                         </div>
+                                </>
+                        ):(
+                            <>
+                            <div className="done_explains">
+                                <div className="done_explain">친구와의 일기장이 다 만들어졌어요!</div>
+                                <div className="done_explain">히스토리 캐비닛에서 확인해보세요</div>
+                            </div>
+                        <div className="img_box" style={{marginTop: "70px"}}>
+                            <img src={require('../../img/Diarys/done_envelope.png')} alt="envelope" className="envelope_img"/>
+                        </div>
+                        <div className="invitation">
+                            <div className="invitation_explain">
+                                <div style={{height:"100px"}}></div>
+                                <button className="invitation_btn" onClick={() => window.location.replace('/history')} style={{width: "150px", height: "40px", fontWeight:"500"}}>히스토리 캐비닛으로</button>
+                            </div>
+                        </div>
+
                     </>
                 )}
                 <div className="done_blank"></div>
