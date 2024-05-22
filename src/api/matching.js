@@ -32,7 +32,7 @@ export const postRandomMatching = async (data) => {
         const res = await axiosInstance.post('/matches/unknown', data);
         return res.data
     } catch (e) {
-        alert("매칭 전송 실패");
+        alert(e);
         return "fail"
     }
 }
