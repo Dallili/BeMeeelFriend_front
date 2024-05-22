@@ -84,11 +84,11 @@ const ReportGraph = ({graphData}) => {
             <div className="text_label">최근 일기 5개의 감정 데이터</div>
             <div className="chart">
                 {list.slice(0).reverse().map((it, idx) =>
-                    <div className="stick" id={idx} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} key={idx} onClick={onClick}>
-                        <div className="percent" id={idx} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} style={{backgroundColor:`${it.color}`, height:`calc(${it.sentiment} * 64px)`}}>
-                            <div className={["date", ` ${idx}`].join('')}>{it.emotion + it.date}</div>
+                        <div className="stick" id={idx} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} key={idx} onClick={onClick}>
+                            <div className="percent" id={idx} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} style={{backgroundColor:`${it.color}`, height:`calc(${it.sentiment} * 64px)`}}>
+                                <div className={["date", ` ${idx}`].join('')}>{it.emotion + it.date}</div>
+                            </div>
                         </div>
-                    </div>
                 )}
                 {list.length < 5 && remainStick()}
             </div>

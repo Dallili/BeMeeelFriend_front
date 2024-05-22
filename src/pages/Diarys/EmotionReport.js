@@ -1,9 +1,10 @@
-import '../../components/Diary/DiaryDone.scss';
+// import '../../components/Diary/DiaryDone.scss';
 import {useParams, useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getUserInfo} from "../../api/user";
 import {getRecentFive, getShortReport} from "../../api/report";
 import ReportGraph from "../../components/Diary/ReportGraph";
+import './EmotionReport.scss';
 
 const EmotionReport = () => {
     const {entryID} = useParams();
@@ -56,7 +57,6 @@ const EmotionReport = () => {
     }
 
     const goMain = () => window.location.replace("/");
-
 
     return (
         <div className="emotion_report">
