@@ -110,7 +110,7 @@ const HistoryCabinetPage = () => {
                                     <div className="diary_line">
                                         <img src={require('../../img/Main/book_line1.png')} alt="diary" className="line line1" />
                                         <div className="diary_line" style={{marginTop:"-120px", paddingLeft:"20px"}}>
-                                            <img src={require('../../img/Main/book_mask.png')} alt="bg" className="fill fill2" style={{filter:`opacity(.4) drop-shadow(0 0 0 ${diaryColor[2]}`}}/>
+                                            <img src={require('../../img/Main/book_mask.png')} alt="bg" className="fill fill2" style={{filter:`opacity(.8) drop-shadow(0 0 0 ${diaryColor[2]}`}}/>
                                             <div className="diary_line" onClick={clicked}>
                                                 <img src={require('../../img/Main/book_line.png')} alt="diary" className="line line2" />
                                             </div>

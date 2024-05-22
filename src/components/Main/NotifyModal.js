@@ -43,7 +43,7 @@ const NotifyModal = ({onClick}) => {
 
     return (
         <>
-        { notifyList[notifyList.length -1].notifyType === "REPLY" ?
+        { notifyList[notifyList.length -1].notifyType === "REPLY" || notifyList[notifyList.length -1].notifyType === "NEWDIARY" ?
                 <div className="notify_modal">
                     <div className="cancel_btn" onClick={replaceMain}>
                         <img src={require('../../img/cancel_btn.png')} alt="btn" />
@@ -57,7 +57,7 @@ const NotifyModal = ({onClick}) => {
                 </div>
                 :
                 <div className="notify_modal">
-                    <div className="cancel_btn" onClick={onClick}>
+                    <div className="cancel_btn" onClick={()=>window.location.replace('deactivated-diary')}>
                         <img src={require('../../img/cancel_btn.png')} alt="btn" />
                     </div>
                     <div className="notify_content">
