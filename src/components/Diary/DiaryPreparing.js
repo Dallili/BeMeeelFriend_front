@@ -43,28 +43,35 @@ const DiaryPreparing = ({who, diaryID, matchingID}) => {
         <div className="diaryPreparing">
             <div className="overlay"></div>
             <div className="done_popup">
-                <div className="done_title" style={{fontSize:"45px", marginTop: "100px"}}>일기장 준비 중...</div>
-                <div className="img_box" style={{marginTop:"30px"}}>
-                    <img src={require('../../img/Diarys/done_onprogress.png')} alt="done" className="done_img" />
-                </div>
+
                 { who === "stranger" ? (
                     <>
-                        <div className="done_explains" style={{marginTop:"90px"}}>
+                        <div className="done_title" style={{fontSize:"45px"}}>일기장 준비 중...</div>
+                        <div className="img_box" style={{marginTop:"-10px"}}>
+                            <img src={require('../../img/Diarys/done_onprogress.png')} alt="done" className="done_img" />
+                        </div>
+                        <div className="done_explains">
                             <div className="done_explain">조금만 기다려 주시면</div>
                             <div className="done_explain">마음에 쏙 드는 친구를 찾아드릴게요!</div>
                             <button className="invitation_btn" onClick={onUnknownDelete} style={{marginTop:"20px"}}>매칭 취소</button>
                         </div>
                     </>
                 ) : (
+                    <>
+                    <div className="done_title" style={{fontSize:"45px"}}>일기장 준비 중...</div>
+                    <div className="img_box" style={{marginTop:"-40px"}}>
+                        <img src={require('../../img/Diarys/done_onprogress.png')} alt="done" className="done_img" />
+                    </div>
                     <div className="invitation">
-                        <div className="invitation_explain">
+                        <div className="invitation_explain" style={{marginTop: "-20px"}}>
                             <div className="invitation_title">친구를 <span style={{color:"#227573", textDecoration:"#FC715F 5px underline"}}>초대하기</span> 위해서,</div>
                             <div className="invitation_text">아래의 초대 코드를 친구에게 공유해주세요.</div>
                             <input className="invitation_code" disabled="true" value={myInvitationCode} />
                             <button className="invitation_btn" onClick={handleCopy}>복사</button>
-                            <button className="invitation_btn" onClick={onKnownDelete} style={{marginTop:"20px"}}>매칭 취소</button>
+                            <button className="invitation_btn" onClick={onKnownDelete} style={{marginTop:"10px"}}>매칭 취소</button>
                         </div>
                     </div>
+                    </>
                 )}
                 <div className="doneCancel_btn">
                     <img src={require('../../img/cancel_btn.png')} alt="cancel" className="cancel_btn" onClick={goHistory}/>

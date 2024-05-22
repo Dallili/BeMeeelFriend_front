@@ -16,9 +16,9 @@
 .new_diary {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   position: relative;
   min-height: calc(var(--vh, 1vh) * 100 - 443px);
+  padding-top: 70px;
 
   .question_text {
     display: flex;
@@ -29,16 +29,18 @@
 
     @include notDesktop {
 
-      @include smallMobile {
-        padding: 35px 0;
-        font-size: 15px;
-      }
+      //@include smallMobile {
+      //  padding: 35px 0;
+      //  font-size: 15px;
+      //}
     }
   }
 
   .newDiary_btns {
     height: 130px;
     position: relative;
+    overflow: hidden;
+    padding-bottom: 120px;
 
     .newDiary_btn_L{
       @include diary_btn;
@@ -58,7 +60,7 @@
       border-bottom-left-radius: 10px;
       text-align: center;
       white-space: nowrap;
-      overflow: hidden;
+
     }
     .newDiary_btn_L_left {
       width: 65%;
@@ -80,8 +82,9 @@
     display: flex;
     justify-content: center;
     position: absolute;
+    left: 0;
     bottom: 0;
-    width: 500px;
+    width: 100%;
 
     @include notDesktop {
       @include mobile {
@@ -92,15 +95,12 @@
       }
     }
 
-
-
-
     .circle {
       display: flex;
       align-items: center;
       justify-content: center;
       position: absolute;
-      top: 0;
+      top: -70px;
       width: 140px;
       height: 140px;
       border-radius: 50%;
@@ -115,7 +115,6 @@
       align-items: center;
       justify-content: center;
       position: absolute;
-      top: 70px;
       height: auto;
       padding: 63px 50px;
       background-color: #FF8B7B;
