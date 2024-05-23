@@ -75,3 +75,32 @@ export const patchMemberInfo = async (data) => {
         alert("회원 정보 수정 오류");
     }
 }
+
+export const sendVerificationCode = async (data) => {
+    try{
+        const res = await axiosInstance.post('/members/signup/email', {
+            "email": data
+        });
+        return true
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+export const certificateCode = async (data) => {
+    try {
+        const res = await axiosInstance.post('/members/signup/email/verification', {
+            "code": data
+        });
+        // if (res.status === 421 || res.response.data.status === 420){
+        //     console.log(res.response.data.message)
+        //     return res.response.message
+        // } else {
+        //     return true
+        // }
+        return true
+    } catch (e) {
+        console.log(e.response.data.message)
+        console.log(e);
+    }
+}

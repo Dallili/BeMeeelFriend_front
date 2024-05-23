@@ -4,6 +4,7 @@ import {useState} from "react";
 import ProgressBar from "./components/ProgressBar";
 import SignupLabel from "./components/SignupLabel";
 import LongButton from "../LongButton";
+import {sendVerificationCode} from "../../api/user";
 
 const Certification = () => {
     const navigate = useNavigate();
@@ -23,12 +24,15 @@ const Certification = () => {
     };
 
     // const goCodeVerify = () => navigate('/signup/verify');
-    const goCodeVerify = () => {
+    const goCodeVerify = async () => {
         setUserInfo({
             ...userInfo,
             email:email
         })
-        navigate('/signup/detail');
+        const res = await sendVerificationCode(email);
+        if (res) {
+            navigate('/signup/verify');
+        }
     }
 
     return (

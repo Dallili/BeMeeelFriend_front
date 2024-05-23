@@ -4,26 +4,24 @@ import SignupLabel from "./components/SignupLabel";
 import LongButton from "../LongButton";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {certificateCode} from "../../api/user";
 
 const CodeCerification = () => {
     const navigate = useNavigate();
-    const goIdPassword = () => navigate('/signup/detail', { replace: true });
+    const goIdPassword = () => navigate('/signup/detail', {replace: true});
 
     const [done, isDone] = useState(false);
     const [input, setInput] = useState('');
     const [isTrue, setIsTrue] = useState(true);
     const [noticeText, setNoticeText] = useState("");
-    const correctCode = '12345678';
 
     const ButtonChange = (e) => {
         const text = e.target.value;
         setInput(text);
-        if(text.length < 8 ) {
+        if(text.length < 1 ) {
             isDone(false);
-        } else if (text.length === 8){
-            isDone(true);
         } else {
-            e.value = e.value.slice(0,8);
+            isDone(true);
         }
     };
 
@@ -39,13 +37,14 @@ const CodeCerification = () => {
         setTimeout(() => setIsTrue(true),4000);
     };
 
-    const codeCheck = () => {
-        if(input !== correctCode) {
-            setNoticeText("입력하신 인증 코드가 올바르지 않습니다.\n다시 한번 확인해주세요.");
+    const codeCheck = async () => {
+        const res = await certificateCode(input);
+        if (res) {
+            goIdPassword();
+        } else {
+            setNoticeText(res);
             setIsTrue(false);
             setTimeout(() => setIsTrue(true),3000);
-        } else {
-            goIdPassword();
         }
     };
 
@@ -56,8 +55,7 @@ const CodeCerification = () => {
             <div className="codeInput_box">
                 <input
                     className="code_input"
-                    maxLength='8'
-                    type="number"
+                    type="text"
                     value={input}
                     onChange={ButtonChange}
                 />
