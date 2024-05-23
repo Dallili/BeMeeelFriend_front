@@ -10,7 +10,7 @@ env:
   aws-region: us-east-2
   aws-s3-bucket: ${{ secrets.AWS_S3_BUCKET }}
   REACT_APP_SERVER_URL: ${{ secrets.REACT_APP_SERVER_URL }}
-REACT_APP_JAVASCRIPT_KEY: ${{ secrets.REACT_APP_JAVASCRIPT_KEY }}
+  REACT_APP_JAVASCRIPT_KEY: ${{ secrets.REACT_APP_JAVASCRIPT_KEY }}
 
 jobs:
   build:
