@@ -36,7 +36,7 @@ const Login = () => {
         } else {
             setLogin(res);
             const code =sessionStorage.getItem("code");
-            sessionStorage.clear();
+            sessionStorage.setItem("code", 'null');
             if (code && code !== 'null') {
                 window.location.replace(`/newdiary/register-code?value=${code}`);
             } else {
