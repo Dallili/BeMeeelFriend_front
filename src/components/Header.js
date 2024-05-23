@@ -1,8 +1,12 @@
 import './Header.scss';
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 
 const Header = ({text, type, style, onClick}) => {
     const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const param = searchParams.get("value");
+
     const goBack = () => {
         navigate(-1);
     };
@@ -23,15 +27,7 @@ const Header = ({text, type, style, onClick}) => {
                     <div className="text">{text}</div>
                     <div className="right_btn" onClick={onClick} style={style}>삭제</div>
                 </div>
-                ): type === "back" ? (
-                <div className="back">
-                    <div className="btn_container">
-                        <img src={require('../img/back_btn.png')} alt="backBtn" className="backBtn_img" onClick={goBack}/>
-                    </div>
-                    <div className="text">{text}</div>
-                    <div className="right_blank"></div>
-                </div>
-                ) : type === "backMain" ? (
+                ) : type === "backMain" || param !== "null" ? (
                 <div className="back">
                     <div className="btn_container">
                         <img src={require('../img/back_btn.png')} alt="backBtn" className="backBtn_img" onClick={goMain}/>
@@ -39,6 +35,14 @@ const Header = ({text, type, style, onClick}) => {
                     <div className="text">{text}</div>
                     <div className="right_blank"></div>
                 </div>
+                ): type === "back" ? (
+                    <div className="back">
+                        <div className="btn_container">
+                            <img src={require('../img/back_btn.png')} alt="backBtn" className="backBtn_img" onClick={goBack}/>
+                        </div>
+                        <div className="text">{text}</div>
+                        <div className="right_blank"></div>
+                    </div>
                 ): type === "backHis" ? (
                 <div className="back">
                     <div className="btn_container">

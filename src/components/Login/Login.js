@@ -3,8 +3,9 @@ import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import LongButton from "../LongButton";
 import {login} from "../../api/user";
-import {useSetRecoilState} from "recoil";
+import {useRecoilValue, useSetRecoilState} from "recoil";
 import {loginState} from "../../recoil/atoms/loginState";
+import {kakaoShareState} from "../../recoil/atoms/KakaoShareState";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -34,7 +35,13 @@ const Login = () => {
             alert("로그인 오류. 다시 시도해주세요.");
         } else {
             setLogin(res);
-            window.location.replace('/');
+            const code =sessionStorage.getItem("code");
+            sessionStorage.clear();
+            if (code && code !== 'null') {
+                window.location.replace(`/newdiary/register-code?value=${code}`);
+            } else {
+                window.location.replace('/');
+            }
         }
     }
 

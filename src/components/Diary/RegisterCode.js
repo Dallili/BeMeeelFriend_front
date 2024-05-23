@@ -1,13 +1,17 @@
 import "./WithSbNewDiary.scss";
 import CreateDiaryDone from "./CreateDiaryDone";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import NextBtn from "./components/NextBtn";
 import {patchMatchingCode} from "../../api/matching";
 import sendDiaryDone from "./SendDiaryDone";
+import {useSearchParams} from "react-router-dom";
 
 const RegisterCode = () => {
     const [diaryDone, setDiaryDone]= useState("");
     const [invitationCode, setInvitationCode] = useState("");
+
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [getCode, setCode] = useState(searchParams.get("value"));
 
     const showDiaryDone = () => {
         setDiaryDone("friend");
@@ -25,8 +29,12 @@ const RegisterCode = () => {
         }
     };
 
+    useEffect(() => {
+        setInvitationCode(getCode);
+    }, [getCode]);
+
     return (
-        <div className="register_code">'
+        <div className="register_code">
             <div className="instruction">
                 친구에게 공유 받은 초대 코드를 입력해주세요.
             </div>

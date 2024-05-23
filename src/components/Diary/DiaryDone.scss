@@ -146,9 +146,9 @@
 
         .invitation_code {
           width: 300px;
-          height: 80px;
+          height: 30px;
           margin-top: 10px;
-          margin-bottom: 15px;
+          margin-bottom: 10px;
           padding: 10px;
           border: none;
           border-radius: 10px;
@@ -329,4 +329,54 @@
   .right{
     text-align: center;
   }
+}
+
+#kakaotalk-sharing-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  background-image: url("https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.kakao_text {
+  width: 140px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: white;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+}
+//.absolute {
+//  position: absolute;
+//  right: 80px;
+//}
+
+.copy_btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  color: white;
+  background-color: #FE614C;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.match_cancel_btn {
+  width: 100px;
+  height: 35px;
+  border: none;
+  background-color: transparent;
+  text-decoration: underline 1px solid black;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
 }

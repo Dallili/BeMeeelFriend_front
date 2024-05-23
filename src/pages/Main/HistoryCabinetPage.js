@@ -155,7 +155,7 @@ const HistoryCabinetPage = () => {
                     </>
                 )}
                 { diaryPrepare && matchingID && <DiaryPreparing who="stranger" matchingID={matchingID}/>}
-                { diaryPrepare && diaryID && <DiaryPreparing diaryID={diaryID}/>}
+                { diaryPrepare && diaryID && <DiaryPreparing diaryID={diaryID} name={name}/>}
                 {notifyArrive === true && (
                     <NotifyModal onClick={notifyCheck}/>
                 )}

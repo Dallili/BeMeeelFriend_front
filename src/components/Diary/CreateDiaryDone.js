@@ -1,4 +1,5 @@
 import './DiaryDone.scss';
+import {shareKakao} from "../../api/kakaoShare";
 
 const CreateDiaryDone = ({who, stranger, diaryID, code}) => {
     const goMain = () => window.location.replace("/");
@@ -6,6 +7,10 @@ const CreateDiaryDone = ({who, stranger, diaryID, code}) => {
     const handleCopy = () => {
         navigator.clipboard.writeText(code);
     }
+
+    const onClickShareKakao = () => {
+        shareKakao(code);
+    };
 
     return (
         <div className="createDiaryDone">
@@ -56,9 +61,15 @@ const CreateDiaryDone = ({who, stranger, diaryID, code}) => {
                         <div className="invitation">
                                 <div className="invitation_explain">
                                     <div className="invitation_title">친구를 <span style={{color:"#227573", textDecoration:"#FC715F 5px underline"}}>초대하기</span> 위해서,</div>
-                                    <div className="invitation_text">아래의 초대 코드를 친구에게 공유해주세요.</div>
-                                    <input className="invitation_code" disabled="true" value={code} />
-                                    <button className="invitation_btn" onClick={handleCopy}>복사</button>
+                                    {/*<div className="absolute">*/}
+                                    {/*    */}
+                                    {/*</div>*/}
+                                    <div className="invitation_text">초대 코드를 친구에게 공유해주세요.</div>
+                                    <div style={{display: "flex", alignItems:"center", gap: "20px", marginTop:"20px"}}>
+                                        <button id="kakaotalk-sharing-btn" onClick={onClickShareKakao} />
+                                        <button className="copy_btn" onClick={handleCopy}>코드복사</button>
+                                    </div>
+                                    <input className="invitation_code" disabled="true" value={code} style={{display:"none"}}/>
                                 </div>
                         </div>
                                     <div className="done_blank"></div>
