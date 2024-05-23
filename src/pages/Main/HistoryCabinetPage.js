@@ -54,11 +54,14 @@ const HistoryCabinetPage = () => {
             alert("일기장 불러오기 오류");
         } else {
             const diaries = res.diaries;
-            const unMatched = res.unmatchedDiaries;
-            const total = [...diaries, ...unMatched];
-            console.log(total)
+            const known = res.unmatchedKnownDiaries;
+            const unMatched = res.unmatchedUnknownDiaries;
+            const total = [...diaries, ...unMatched, ...known];
+            const tempTotal = [...diaries, ...unMatched];
+            const tempColor = tempTotal.map((it) => it.color)
+            const otherColor = known.map((it) => it.color.slice(1, -1));
             setDiary(total);
-            setDiaryColor(total.map((it) => it.color.slice(1, -1)));
+            setDiaryColor([...otherColor, ...tempColor]);
             setDiaryName(total.map((it) => it.memberName === response.nickname ? it.partnerName :  it.memberName));
         }
     };
@@ -143,7 +146,7 @@ const HistoryCabinetPage = () => {
                                 <div key={index} className="diary_select"
                                      onClick={
                                     diary[index].partnerID === null || diary[index].diaryID === null ?
-                                    diary[index].color === "#000000" ?
+                                    diary[index].diaryID === null ?
                                         () => {no(); setDiaryPrepare(true); setMatchingID(diary[index].matchingID)}
                                         : () => {no(); setDiaryPrepare(true); setDiaryID(diary[index].diaryID)}
                                     : ()=> navigate(`/read-diary/${diary[index].diaryID}?type=history`)}>
