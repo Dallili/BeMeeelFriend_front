@@ -3,8 +3,13 @@ import {useEffect, useState} from "react";
 import {deleteMatching, getMatchingCode} from "../../api/matching";
 import {deleteDiary} from "../../api/diary";
 import {shareKakao} from "../../api/kakaoShare";
+import useModal from "../../hooks/useModal";
+import Modal from "../Modal";
+import DiaryModal from "./DiaryModal";
 
 const DiaryPreparing = ({who, diaryID, matchingID, name}) => {
+    const {open, close, isOpen} = useModal();
+
     const goHistory = () => window.location.replace('/history');
 
     const [myInvitationCode, setCode] = useState("");
@@ -58,8 +63,9 @@ const DiaryPreparing = ({who, diaryID, matchingID, name}) => {
                         <div className="done_explains">
                             <div className="done_explain">조금만 기다려 주시면</div>
                             <div className="done_explain">마음에 쏙 드는 친구를 찾아드릴게요!</div>
-                            <button className="match_cancel_btn" onClick={onUnknownDelete} style={{marginTop:"20px"}}>매칭 취소 하기</button>
+                            <button className="match_cancel_btn" onClick={open} style={{marginTop:"20px"}}>매칭 취소 하기</button>
                         </div>
+                        {isOpen && <DiaryModal text1="정말 매칭을 취소하시겠습니까?" btn="매칭 취소" onClick={close} onClick2={onUnknownDelete}/>}
                     </>
                 ) : (
                     <>
@@ -76,9 +82,10 @@ const DiaryPreparing = ({who, diaryID, matchingID, name}) => {
                                 <button className="copy_btn" onClick={handleCopy}>코드복사</button>
                             </div>
                             <input className="invitation_code" disabled="true" value={myInvitationCode} style={{display:"none"}}/>
-                            <button className="match_cancel_btn" onClick={onKnownDelete} style={{marginTop:"40px"}}>매칭 취소 하기</button>
+                            <button className="match_cancel_btn" onClick={open} style={{marginTop:"40px"}}>매칭 취소 하기</button>
                         </div>
                     </div>
+                        {isOpen && <DiaryModal text1="정말 매칭을 취소하시겠습니까?" btn="매칭 취소" onClick={close} onClick2={onKnownDelete}/>}
                     </>
                 )}
                 <div className="doneCancel_btn">

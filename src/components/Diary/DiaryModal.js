@@ -4,13 +4,13 @@ import '../Modal.scss';
 const DiaryModal = ({onClick, onClick2, text1, text2, text3, btn}) => {
     return (
         <div className="diary_modal">
-            <div className="overlay"></div>
+            <div className="overlay_diary"></div>
             <div className="modal">
                 <div className="modalCancel_btn">
                     <img onClick={onClick} src={require('../../img/cancel_btn.png')} alt="cancelBtn" className="modalCancel_img" />
                 </div>
                 <div className="modal_texts">
-                    <div className="modal_text_small" style={{marginBottom:"17px"}}>{text1}</div>
+                    <div className="modal_text_small" style={{marginBottom:"15px"}}>{text1}</div>
                     <div className="modal_text_small">{text2}</div>
                     <div className="modal_text_small">{text3}</div>
                 </div>

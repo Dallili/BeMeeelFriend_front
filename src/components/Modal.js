@@ -12,8 +12,8 @@ const Modal = ({message, close, btnText, btnText2, confirm, type}) => {
             <div className="modal_text">{message}</div>
             { type === "twoBtn" ? (
                 <div className="modal_btn">
-                    <ShortButton text={btnText} type="negative" />
-                    <ShortButton text={btnText2} type="positive" />
+                    <ShortButton text={btnText} onClick={close} type="negative" />
+                    <ShortButton text={btnText2} onClick={confirm} type="positive" />
                 </div>
                 ) : (
                 <div className="modal_btn">
