@@ -39,7 +39,7 @@ const CodeCerification = () => {
 
     const codeCheck = async () => {
         const res = await certificateCode(input);
-        if (res) {
+        if (res === true) {
             goIdPassword();
         } else {
             setNoticeText(res);
