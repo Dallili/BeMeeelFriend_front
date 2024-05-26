@@ -45,7 +45,7 @@ const ReadDiaryPage = () => {
                 if (type === "history") {
                     if (sent.length === 0) {
                         setContent([...sent, {
-                            "sendAt": `${finalToday},${new Date().toTimeString().split(' ')[0]}`,
+                            "sendAt": `${finalToday},${new Date().getHours()}:${new Date().getMinutes()}`,
                             "content": "아직 주고 받은 일기가 없습니다.",
                             "entryID": -1
                         }])
@@ -63,14 +63,14 @@ const ReadDiaryPage = () => {
                     setPageNum(sent.length);
                 } else if (sent.length > 0) {
                     setContent([...sent, {
-                        "sendAt": `${finalToday},${new Date().toTimeString().split(' ')[0]}`,
+                        "sendAt": `${finalToday},${new Date().getHours()}:${new Date().getMinutes()}`,
                         "content": "일기를 작성할 차례입니다.",
                         "entryID": -1
                     }]);
                     setPageNum(sent.length - 1);
                 } else {
                     setContent([{
-                        "sendAt": `${finalToday},${new Date().toTimeString().split(' ')[0]}`,
+                        "sendAt": `${finalToday},${new Date().getHours()}:${new Date().getMinutes()}`,
                         "content": "일기를 작성할 차례입니다.",
                         "entryID": -1
                     }]);
