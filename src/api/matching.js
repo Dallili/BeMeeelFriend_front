@@ -19,10 +19,13 @@ export const getMatchingCode = async (diaryID) => {
 export const patchMatchingCode = async (data) => {
     try {
         const res = await axiosInstance.patch(`/matches/?code=${data}`);
-        return res.data.state
+        if (res.data.state === "이미 매칭이 완료된 일기장입니다") {
+            return res.data.state
+        } else {
+            return "success"
+        }
     } catch (e) {
-        alert("코드 전송 실패");
-        return "fail"
+        return "코드 전송 실패"
     }
 }
 
