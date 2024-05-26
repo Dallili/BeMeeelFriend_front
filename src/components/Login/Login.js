@@ -31,9 +31,7 @@ const Login = () => {
             password:`${pw}`
         }
         const res = await login(data);
-        if (res === "fail") {
-            alert("로그인 오류. 다시 시도해주세요.");
-        } else {
+        if (res !== "fail") {
             setLogin(res);
             const code =sessionStorage.getItem("code");
             sessionStorage.setItem("code", 'null');

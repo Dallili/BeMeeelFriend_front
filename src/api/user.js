@@ -35,7 +35,8 @@ export const login = async (data) => {
         sessionStorage.setItem("userToken", token);
         return token;
     } catch(e) {
-        return "fail";
+        alert(e.response.data.message);
+        return "fail"
     }
 }
 
