@@ -12,13 +12,55 @@
 💬 기존에 존재하는 일기 서비스와는 다르게 익명의 유저와 일기를 공유할 수 있는 랜덤 매칭 기능을 제공하며 사용자들이 작성한 일기에 대한 감정 분석 레포트를 제공한다.
 
 ## 팀원 소개
+<table>
+    <tr height="160px">
+        <td align="center" width="200px">
+            <a href="https://github.com/idon1nab"><img height="150px" width="150px" src="https://avatars.githubusercontent.com/u/99960721?v=4"/></a>
+            <br />
+        </td>
+        <td align="center" width="200px">
+            <a href="https://github.com/rwaeng"><img height="150px" width="150px" src="https://avatars.githubusercontent.com/u/80890092?v=4"/></a>
+            <br />
+        </td>
+         <td align="center" width="200px">
+            <a href="https://github.com/crHwang0822"><img height="150px" width="150px" src="https://avatars.githubusercontent.com/u/87927105?v=4"/></a>
+            <br />
+        </td>
+    </tr>
+    <tr height="60px">
+        <td align="center">
+        <a>🦝 곽민지</a><br>
+          <span>백엔드</span><br>
+            <a href="https://github.com/idon1nab">:octocat: GitHub</a>
+            <br>
+        </td>
+        <td align="center">
+        <a>🐸 조아령</a><br>
+        <span>프론트엔드</span><br>
+            <a href="https://github.com/rwaeng">:octocat: GitHub</a>
+            <br />
+        </td>
+        <td align="center">
+        <a>🦦 황채린 (팀장)</a><br>
+        <span>백엔드</span><br>
+            <a href="https://github.com/crHwang0822">:octocat: GitHub</a>
+            <br />
+         </td>
+    </tr>
+</table>
 
-[백엔드 레포지토리 바로가기](https://github.com/Dallili)
+[백엔드 레포지토리 바로가기](https://github.com/Dallili/secretFriends-api)
 
 ## 배포 주소
 🔗 https://secret-friends.link
+<br>
+<br>
 
-테스트 계정
+**테스트 계정**<br>
+```
+heytwinkler@gmail.com
+test123!
+```
 
 ## 🚀 How to start
 ```
@@ -32,7 +74,7 @@ $ npm start
 ```
 // .env 
 REACT_APP_SERVER_URL=서버 주소
-REACT_APP_JAVASCRIPT_KEY=카카오 공유 키
+REACT_APP_JAVASCRIPT_KEY=카카오톡 공유 키
 ```
 
 ## ⚙️ 기술 스택
@@ -65,7 +107,7 @@ REACT_APP_JAVASCRIPT_KEY=카카오 공유 키
 
 📍 **일기장 생성**
 - 지인 매칭: 사용자는 친구를 초대하거나 초대받아 새로운 일기장 생성 가능
-- 랜덤 매칭: 매칭을 요청한 날짜와 사용자의 1,2,3 순위 관심사를 기반으로 한 랜덤 매칭 알고리즘을 통해 익명의 사용자와 일기장 생성 가능<br>
+- 랜덤 매칭: 매칭을 요청한 날짜와 사용자의 1, 2, 3순위 관심사를 기반으로 한 랜덤 매칭 알고리즘을 통해 익명의 사용자와 일기장 생성 가능<br>
   
 |  | 1 | 2 | 3 | 4 | 매칭 대기|
 |:-----:|---|---|---|---|---|
