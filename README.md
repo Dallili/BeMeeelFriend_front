@@ -145,8 +145,8 @@ REACT_APP_JAVASCRIPT_KEY=카카오톡 공유 키
 
 📍 **실시간 알림** <br>
 - [일기장 생성], [일기장 비활성화], [상대방으로부터 일기 답장] 이벤트 발생 시 해당 내용에 대한 실시간 푸시 알림 제공<br>
+- [React+Recoil+SSE(Server Sent Events)로 실시간 알림 구현하기 velog 정리](https://velog.io/@rwaeng/ReactRecoilSSEServer-Sent-Events%EB%A1%9C-%EC%8B%A4%EC%8B%9C%EA%B0%84-%EC%95%8C%EB%A6%BC-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)
 <img src="https://github.com/Dallili/BeMeeelFriend_front/assets/80890092/8d2c8da3-4c36-4bf1-86eb-6b410c3cd6b7.png" width="200"/>
-
 
 ## 디렉토리 구조
 ```
