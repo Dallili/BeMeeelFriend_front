@@ -52,7 +52,7 @@
 [백엔드 레포지토리 바로가기](https://github.com/Dallili/secretFriends-api)
 
 ## 배포 주소
-🔗 https://secret-friends.link
+🔗 secret-friends.link (2024.06. 서비스 종료)
 <br>
 <br>
 
